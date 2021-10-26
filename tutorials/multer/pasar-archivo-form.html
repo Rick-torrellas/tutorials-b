@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Pasar un archivo atravez de un formulario</h1>
+    <p><b>NOTA:</b>El nombre del name en la tag debe ser igual al usado en multer.single()</p>
+    <code>
+        const storage = multer.diskStorage({ <br>
+            destination: path.join(__dirname, '../nucleo/img/Actrices'), <br>
+            filename: (req, file, cb, filename) => { <br>
+                cb(null, path.basename(file.originalname , path.extname(file.originalname)) + '-' + imageCode + path.extname(file.originalname)); <br>
+            } <br>
+        })  <br>
+        app.use(multer({storage}).single('actrices')); <br>
+        &lt;input type="file" name="actrices" class="custom-file-input" id="inputGroupFile02"> <br>
+    </code>
+</body>
+</html>

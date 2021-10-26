@@ -1,0 +1,29 @@
+// plugins
+
+agregar multipes archivos
+plugins: [
+        new HtmlWebpackPlugin({
+            filename: 'index.html',
+            template: './src/index.html' 
+        }),
+        new HtmlWebpackPlugin({
+            filename: 'other-file.html',
+            template: './src/other-file.html',
+            chunks: [] // para evitar que inyecte nda en la pagina   
+        })
+    ]
+
+
+optimization: {
+    minimizer: {
+        new HtmlWebpackPlugin({
+            template: './src/index.html',
+            minify: {
+                removeAttributeQuotes: true,
+                collapseWhitespace: true,
+                removeComments: true
+            }
+        })
+    }
+}
+

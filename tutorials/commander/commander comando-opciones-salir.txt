@@ -1,0 +1,18 @@
+Como hacer que un opcion en comando se ejecute en vez del comando.
+
+En este ejemplo, solo la opcion -n sera ejecutada, el comando verify sera imnorado.
+
+Cnucleo
+.command('verify')
+.option('-n, --nalga','n',nalgas)
+.action(function(cmdObj) {
+  if (cmdObj.nalga !== undefined) {
+    console.log('BIEN');
+    exit();
+  }
+  if (init.verifyNucleo()) {
+    console.log('El nucleo esta instalado correctamente');
+  } else {
+    console.log('El nucleo no se encuentra instalado actualmente')
+  }
+})

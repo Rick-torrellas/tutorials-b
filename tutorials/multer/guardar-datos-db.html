@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Guardar los datos generados por multer en una base de datos</h1>
+    <div>
+        <h2>Mongoose</h2>
+        <code>
+            router.post('/upload', async (req, res) => { <br>
+                const image = new Image(); <br>
+                image.filename = req.file.filename; <br>
+                image.path = '/img/uploads/' + req.file.filename; <br>
+                image.originalname = req.file.originalname; <br>
+                image.mimetype = req.file.mimetype; <br>
+                image.size = req.file.size; <br>
+             <br>
+                await image.save(); <br>
+                res.redirect('/'); <br>
+            });
+        </code>
+    </div>
+</body>
+</html>

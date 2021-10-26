@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mejorar el rendimiento para Jugar</title>
+</head>
+<body>
+    <div>
+        <h1>Mejorar el rendimiento para Jugar</h1>
+<p>Fuente:</p>
+<a href="https://www.youtube.com/watch?v=5ePKxLUIK68&list=WL&index=113">
+    GUÍA COMPLETA de optimización para GAMING | WINDOWS 10 | 2020</a>
+        <ul>
+            <li> <a href="">Pre-Requisitos</a> </li>
+            <li> <a href="">Configuraciones</a> </li>
+            <li> <a href="">Configurar el Registro del Sistema</a> </li>
+            <li> <a href="">Configurar el CPU - QUICKCPU</a> </li>
+            <li> <a href=""></a> </li>
+        </ul>
+    </div>
+    <div>
+        <h2>Pre-Requisitos</h2>
+<ul>
+    <li>Actalizar Windows</li>
+    <li>Crear un punto de Respaldo</li>
+    <li>Borrar losarchivos temporales</li>
+    <li>Limpiar los discos duros, sobre todo el C:, click derecho sobre el disco - Propiedades - General - Limpiar el Disco </li>
+    <li><p>Deter todos los servicios que se inician, al iniciar windows:</p>
+        <p>En win+r colocar: msconfig - servicios - ocultar todos los servicios de windows - desabilitar todos</p> 
+<p></p>
+    </li>
+</ul>
+<div>
+    <h2>Configuraciones</h2>
+    <p>Inicio - Configuraciones</p>
+    <ul>
+        <b><p>Sistema</p></b>
+        <li>
+            <p>Notificaciones y Acciones</p>
+            <p>Desactivarlo todo o dejar solo lo que te importe, tambien puedes activar manualmente el modo de concentracion antes de Jugar</p>
+        </li>
+        <li>
+            <b>
+                <p>Asistente de Concentracion</p>
+            </b>
+            <p>Desactivar completamente este servicio</p>
+        </li>
+        <li>
+            <b>
+                <p>Almacenamiento</p>
+            </b>
+            <p>Desactivar en caso de que la pc sea muy mala.</p>
+        </li>
+        <li>
+            <b>
+                <p>Timeline</p>
+            </b>
+            <p>Desactivar el mostrar sugerencias en el timeline</p>
+        </li>
+    </ul>
+    </li>
+    <ul>
+    <b>
+        <p>Juegos</p>
+    </b>
+    <li>
+        <b>
+            <p>Barra de juegos</p>
+        </b>
+        <p>Desactivar</p>
+    </li>
+    <li>
+        <b>
+            <p>Modo de Juego</p>
+        </b>
+        <p>
+            Este apartado es dependiendo si te sirve o no, algunas personas si les sirve a otras no, probar.
+        </p>
+    </li>
+    </ul>
+    <ul>
+    <b>
+        <p>Privacidad</p>
+        <p>Aqui se descativa casi todo en <b>Permisos de Windows</b>, si te pones a ver de cerca es solo el feedback qu le haces a windows hacerca de las apps, etc.</p>
+    </b>
+    <li>
+        <b>
+            <p>Sistema de Archivos - File System</p>
+            <p>Desactivar ya que parentemente causa que los juegos se congelen</p>
+        </b>
+    </li>
+    </ul>
+</div>
+<div>
+    <h2>Editar el Registro de Windows</h2>
+    <p>Direccion</p>
+    <code>Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile\Tasks\Games</code>
+    <p>Vamos a cambiar los siguientes archivos</p>
+    <p>CPU priority <code>8</code></p>
+    <p>Priority <code>6</code></p>
+    <p>Direccion</p>
+    <code>Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Multimedia\SystemProfile</code>
+    <p>Si no exise crear el siguiente archivo, Valordword (32 bytes)</p>
+    <p>SystemResponsiveness <code>0</code></p>
+</div>
+<div>
+    <h2>Configurar el CPU - QUICKCPU</h2>
+    <a href="https://coderbag.com/product/quickcpu">sofware</a>
+    <h5>Core parking index</h5>
+    <p>Subirlo al 100%</p>
+    <p>Esto hace que todos los nucleos del procesador esten activos, ya que algunos procesadores van activando y desactivando nucleos todo el tiempo, y esto puede causar un impacto en el equipo.</p>
+    <h5>Turbo bust index</h5>
+    <p>Al 100%</p>
+    <h5>Frecuency scaling index</h5>
+    <p>Al 100%</p>
+    <h5>System power plan</h5>
+    <p>Alto Rendimiento</p>
+    <h5>System Memory</h5>
+    <p>Limpiar</p>
+    <p>Esto es por si hay memoria por ahi trancada o algo asi :D</p>
+</div>
+<div>
+    <h2>Tron scripts</h2>
+    <p>Fuente: <a href="https://www.reddit.com/r/TronScript/">Go</a></p>
+    <p>Este es un centro multitarea, son scripts bat con funcionalidades para el rendimiento y limpieza del pc.</p>
+    <p>Tiene dos maneras de ejecutarce, por partes o todo de golpe, el punto de tener 2s maneras, es que tal vez nada mas necesites una de las opciones y sobre todo por que todo el proceso puede llegar a tardar mucho tiempo.</p>
+    <p>Un pequeño resumen de lo que trae es.</p>
+    <ul>
+        <li>Crea un punto de restauacion</li>
+        <li>Limpieza de archivos temporales</li>
+        <li>ELimina programas imnecesarios</li>
+        <li>Desinfectar el equipo con un antivirus</li>
+        <li>Reparar el sistema por si falta algo</li>
+        <li>Parchear programas o por si falta algo en el sistema</li>
+        <li>Optimizar disco duros</li>
+        <li>Te manda todo lo que hice en un log</li>
+    </ul>
+</div>
+    </div>
+</body>
+</html>

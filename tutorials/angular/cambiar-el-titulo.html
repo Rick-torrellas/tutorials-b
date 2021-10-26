@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Cambiar el titulo en una aplicacion en Angular</h1>
+    <h2>app.module.ts</h2>
+    <p>Lo primero que hay que hacer es importar el componente de titulo al module.ts el cual se encuentra en <b>src/app/app.module.ts</b></p>
+    <code>
+        import { BrowserModule, Title }  from '@angular/platform-browser'; <br>
+        @NgModule({ <br>
+            providers: [ <br>
+    Title <br>
+  ], <br>
+}) <br>
+</code>
+    <h2>tu-componente.component.ts</h2>
+    <p>Vamos a importarlo y usar los metodos disponibles, no se tiene que usar ajuro en ngOnInit()</p>
+   <code>
+    import { Title }     from '@angular/platform-browser'; <br>
+    public constructor(private titleService: Title ) { } <br>
+    ngOnInit() { <br>
+        this.titleService.setTitle( newTitle ); <br>
+      } <br>
+   </code>
+</body>
+</html>

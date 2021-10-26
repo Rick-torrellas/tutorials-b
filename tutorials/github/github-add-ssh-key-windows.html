@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Generating a new SSH key</h2>
+    <p>Open Git Bash.</p>
+    <code>ssh-keygen -t ed25519 -C "your_email@example.com"</code>
+    <h2>Adding your SSH key to the ssh-agent</h2>
+    <code>eval "$(ssh-agent -s)"</code><br>
+    <code>ssh-add ~/.ssh/id_ed25519</code>
+    <h2>Adding a new SSH key to your GitHub account</h2>
+    <code>clip &lt; ~/.ssh/id_ed25519.pub</code>
+    <p>In the upper-right corner of any page, click your profile photo, then click Settings.</p>
+    <p>In the user settings sidebar, click SSH and GPG keys.</p>
+    
+</body>
+</html>

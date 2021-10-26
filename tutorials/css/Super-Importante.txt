@@ -1,0 +1,11 @@
+Comportamiento de Selector CSS
+
+Se pueden colocar 3s selectores espesificando asi la desendencia y usar por ejemplo un selector en el segundo selector.
+
+.Castle div:hover p {
+box-shadow: 0px 0px rgba(188, 80, 0), 3px 3px inset;
+}
+
+Aqui si se posiciona en esa divicion los p hijos de estas dos diviciones se colocara un box-shadow sobre los p
+
+Y  HASTA 4 MIENTRAS SERESPETEN LOS SELECTORES

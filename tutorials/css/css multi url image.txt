@@ -1,0 +1,3 @@
+Al utilizar 2s url dentro de la funcion URL para imagen, en vez de crear otra alternativa de formato para la misma iamgen, colocara ambas imagenes al mismo tiempo xD
+
+  background-image: url(img_flwr.gif), url(paper.gif);

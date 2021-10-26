@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+        <h2>*ngIf</h2>
+        <p>Esta directiva esrtuctural funciona muy parecido al if de javascript, la diferencia aqui es que este condicionara si se mostrara o no el contenido, el if se va puede ayudar de varios componentes, como el ng-template, ng-container, ngTemplateOutlet, los cuales ayudan a crear y encapsular contenido dependendo de la condicion, tambien puede guardar el resultado de la condicional en una variable con as y se puede tambien usar una sentencia else que servira para renderizar un ng-template y un then en caso de querer espesificar donde ir en caso de la condicion sea correcta.</p>
+        <p>La diferente entre usar este y el attributo bidding [hidden]="condicion", es que con ngIf el elemento no es renrerizado, mientras que con el atributo lo que logramos que no se muestre pero sigue existiendo.</p>
+        <p>Muy importante es importante recordar que se puede usar el if para comparar string con ''.
+            pepito: string='vaginas'; </p>
+        <code>&lt;p class="blockquote text-center" *ngIf="pepito == 'vagina'">&lt;/p></code>
+        <h3>Ejemplo Basico</h3>
+        <code>
+            &lt;div *ngIf="condicion.length > 0"> <br>
+                &lt;p>Contenido a mostrar si la condicion es true&lt;/p> <br>
+            &lt;/div> <br>
+        </code>
+        <h4>Con un else</h4>
+        <code>
+            &lt;div *ngIf="condicion; else nalga"> <br>
+                &lt;p>Contenido a mostrar si la condicion es true&lt;/p> <br>
+            &lt;/div> <br>
+            &lt;ng-template #nalga> <br>
+                &lt;p>Contenido se mostrara en caso de ser false&lt;/p> <br>
+                &lt;/ng-template> <br>
+        </code>
+        <h4>Un ng-template con un if</h4>
+        <code>
+            &lt;ng-template [ngIf]="condition">&lt;div>Content to render when condition is true.&lt;/div>&lt;/ng-template>
+        </code>
+        <h4>Con un else y un then</h4>
+        <code>
+            &lt;div *ngIf="condition; then thenBlock else elseBlock">&lt;/div> <br>
+&lt;ng-template #thenBlock>Content to render when condition is true.&lt;/ng-template> <br>
+&lt;ng-template #elseBlock>Content to render when condition is false.&lt;/ng-template> <br>
+        </code>
+        <h4>Guardando el resultado de la condicion en una variable</h4>
+        <code>
+            &lt;div *ngIf="condition as value; else elseBlock">{{value}}&lt;/div> <br>
+&lt;ng-template #elseBlock>Content to render when value is null.&lt;/ng-template> <br>
+        </code>
+        <h4>Usando el ng-container</h4>
+        <p>
+            Este nos permite encapsular un condicion y dentro colocar otra directiva de estructura, y tambien nos permite colocar un ngTemplateOutlet, para referenciar un ng-template y asi re utilizarlo.</p>
+            <h4>Usando ng-container</h4>
+            &lt;ng-container *ngIf="condicion; else nalga"> <br>
+                &lt;div *ngFor="let culo of culos"> <br>
+                    {{culo.shape}} <br>
+                &lt;/div> <br>
+            &lt;/ng-container> <br>
+            &lt;ng-template #nalga> <br>
+                &lt;p>Contenido se mostrara en caso de ser false&lt;/p> <br>
+            &lt;/ng-template> <br>
+            <h4>Usando ngTemplateOutlet</h4>
+            <p>Esto renrerizara el ng-template</p>
+            <code>
+                &lt;ng-container *ngTemplateOutlet="nalga">&lt;/ng-container> <br>
+                &lt;ng-template #nalga> <br>
+                    &lt;p>Contenido se mostrara en caso de ser false</p> <br>
+                &lt;/ng-template> <br>
+            </code>
+    </div>
+    <div id="div2">
+        <h2>*ngFor</h2>
+        <p>Esta sirve para interar en un array on un objeto y asi crear elementos en la plantilla.</p>
+        <code>
+            &lt;div *ngFor="let nalga of nalgas"> <br>
+                &lt;p>{{nalga.name}}&lt;/p> <br>
+            &lt;/div> <br>
+        </code>
+    </div>
+    <div id="div3">
+        <h2>*ngSwitch </h2>
+        <code>&lt;div [ngSwitch]="condicion"> <br>
+            &lt;p [*ngSwitchCase="1"]>&lt;/p> <br>
+            &lt;p [*ngSwitchCase="2"]>&lt;/p> <br>
+            &lt;p [*ngSwitchCase="3"]>&lt;/p> <br>
+            &lt;p [*ngSwitchCase="4"]>&lt;/p> <br>
+            &lt;p [*ngSwitchCase="5"]>&lt;/p> <br>
+        &lt;/div> <br>
+    </code>
+    </div>
+</body>
+</html>

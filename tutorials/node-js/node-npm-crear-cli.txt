@@ -1,0 +1,29 @@
+## crear un cli con node
+
+Primero espesificar en el package.json un objeto llamado bin, esto funciona muy parecido a los scrips del package.json.
+"bin": {"comando": "./src/comando.js","backup": "./comandos/comando.js"}.
+
+El cli va a responder a comando [parametros] o backup.
+
+En windows para que funcione hay que instalarlo globalmente -g.
+
+IMPORTANTE: en cada archivo que ejecutemos en el cli debe llevar al princiipio este shebang, para que capte los parametros.
+
+#!/usr/bin/env node
+
+
+## Como ejecutar .js con node nativo en windows
+
+Para hacerlo hay que buscar: "Choose default apps by file type" o su equivalente en español, buscas el .js y escojes node.
+
+## Como hacer que node capte los argumentos que le pasamos, al ejecutar en el bin en el package.json. 
+
+Si nosotros tratamos de ejecutar un archivo .js , espesificado en la opcion bin en el package.json, lo que va a pasar es que no va reconocer los parametros. Para solucionarlo hay que colocar en cada archivo que ejecutemos en el cli, al princiipio este shebang, para que capte los parametros.
+
+#!/usr/bin/env node
+const program = require('commander');
+
+program.version('0.0.1');
+
+
+program.parse(process.argv);

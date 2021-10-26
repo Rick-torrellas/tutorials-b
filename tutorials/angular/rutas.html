@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Rutas</h1>
+  <div>
+    <p>Se pueden definir las rutas en angular de 3s maneras:</p>
+    <p>1 - Directamente en el app-module.ts:</p>
+    <p>2 - Se puede crear un archivo especial: puedes usar ng g module nombre-module</p>
+    <p>3 - Dejar que angular lo cree por ti:</p>
+    <p>En las 3s se va respetar el mismo principio.</p>
+    <code>
+      import { NgModule } from '@angular/core'; <br>
+      import { Routes, RouterModule } from '@angular/router'; <br>
+       <br>
+       <br>
+      const routes: Routes = []; <br>
+       <br>
+      @NgModule({ <br>
+        imports: [RouterModule.forRoot(routes)], <br>
+        exports: [RouterModule] <br>
+      }) <br>
+      export class AppRoutingModule { } <br>
+    </code>
+    <p>Y por ultimo en la parte del imports del app-module.ts:</p>
+    <p>Hay que agregar el archivo con las rutas o directo si se hace directo</p>
+    <code>
+RouterModule.forRoot(appRoutes)
+    </code>
+  </div>
+</body>
+</html>
+
+
+
+

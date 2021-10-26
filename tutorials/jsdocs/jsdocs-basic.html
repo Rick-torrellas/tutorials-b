@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Jsdocs Basics</h1>
+    <h2>Documentar una variable</h2>
+    <pre><code>
+        /**
+ * carajo vagina pelua {@tutorial como}
+ * @module nalga
+ */
+/**
+ * @type {number}
+ */
+
+const vagina = 3;
+    </code></pre>
+    <h2>Array</h2>
+    <pre><code>
+        /**
+ * Culo
+ * @description Una descripcion de paleta
+ * @type {string[]}
+ * @example
+ * // returns 2
+ * globalNS.method1(5, 10); 
+ */
+
+const paleta = ['grande','ergonomico']
+    </code></pre>
+    <h2>Objeto</h2>
+    <pre><code>
+        /**
+ * @type {{name: string, ocupation: string, color: number|string,obj: {name: string}}}
+ * @description some descrip
+ */
+
+const obj = {
+    name: 'ss',
+    ocupation: 'fa',
+    color: 3,
+    obj: {
+        name: 'jai'
+    }
+}
+    </code></pre>
+    <h2>Funciones</h2>
+    <pre><code>
+        /**
+ * @description description
+ * @param {{name: string}} chao Ola
+ * @param {string} ola  SOP
+ * @returns {string}
+ */
+
+function ola(ola,chao) {
+    return 'OLA';
+}
+    </code></pre>
+    <h2>Class</h2>
+    <pre><code>
+        /**
+ * Alguna Descripcion
+ */
+class nani {
+    /**
+     * dsd
+     * Referencia @see {@link objeto} 
+     * @param {string} ola Un saludo
+     * @param {string} sempai Para un maestro
+     */
+    constructor(ola,sempai) {
+        this.ola = ola;
+        this.sempai = sempai;
+    }
+    /**
+     * 
+     * @returns {string}
+     */
+    acion() {
+        return 'JAI';
+    }
+}
+    </code></pre>
+    <h2>custom types</h2>
+    <pre><code>
+        /**
+ * @type {User}
+ */
+const objeto = {
+    id: 2,
+    name: 'dasdas',
+    age: 3
+}
+    </code></pre>
+    <p>custom-types/js</p>
+    <pre><code>
+        /**
+ * User
+ * @typedef {Object} User Modelo de usuario
+ * @property {number} id El ide del usuario
+ * @property {string} name El nombre del usuario    
+ * @property {number} [age] [Optional] La edad del usuario
+ * 
+ */
+    </code></pre>
+    <h2>Home page</h2>
+    <p>Para rellenar esta pagina se puede usar el readme. en el jsdoc.json</p>
+    <pre><code>
+        "opts": {
+            "readme": "./README.md"
+          }
+    </code></pre>
+</body>
+</html>

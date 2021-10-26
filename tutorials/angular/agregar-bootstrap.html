@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Para instalar bootstrap en tu proyecto de angular, se puede hacer de las maneras tradicionles, ya sea con la CDN, o descargando los archivos manualmente, pero la manera mas practica es instalarlo con <b>npm</b>.</p>
+    <h3>npm</h3>
+    <h3>Instalar bootstrap</h3>
+    <code>
+        npm i bootstrap
+    </code>
+    <h3>Instalar jquery</h3>
+    <code>
+        npm i jquery
+    </code>
+    <h3>Instalar popper.js</h3>
+    <code>npm i @popperjs/core</code>
+<p>Ahora bien, para implementar bootstrap en tu proyecto, se puede hacer de la manera convencional, en tu index.html, y la otra desde angular.json.</p>
+    <h3>Aplicar bootsrap manera convencional</h3>
+    <code>
+        &lt;head> <br>
+            &lt;link rel="stylesheet" href="node_modules\bootstrap\dist\css\bootstrap.min.css"> <br>
+        &lt;/head> <br>
+        &lt;body> <br>
+&lt;script src="node_modules\jquery\dist\jquery.min.js">&lt;/script> <br>
+&lt;script src="node_modules\@popperjs\core\dist\umd\popper.min.js">&lt;/script> <br>
+&lt;script src="node_modules\bootstrap\dist\js\bootstrap.min.js">&lt;/script> <br>
+        &lt;/body> <br>
+    </code>
+    <h3>Aplicar bootsrap en angular.json</h3>
+    <code>
+        "styles": [ <br>
+        "src/styles.css", <br>
+        "./node_modules/bootstrap/dist/css/bootstrap.min.css" <br>
+      ], <br>
+      "scripts": [ <br>
+        "./node_modules/jquery/dist/jquery.min.js", <br>
+        "./node_modules/@popperjs/core/dist/umd/popper.min.js", <br>
+        "./node_modules/bootstrap/dist/js/bootstrap.min.js" <br>
+      ] <br>
+    </code>
+</body>
+</html>

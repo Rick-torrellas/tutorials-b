@@ -1,0 +1,30 @@
+## optimize-css-assets-webpack-plugin
+It will search for CSS assets during the Webpack build and will optimize \ minimize the CSS (by default it uses cssnano but a custom CSS processor can be specified).
+
+NOTA: dice que solo trabaja con webpack 4 para abajo :C
+
+npm install --save-dev optimize-css-assets-webpack-plugin
+
+var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
+## documentacion
+
+plugins: [
+new ExtractTextPlugin('styles.css'),
+    new OptimizeCssAssetsPlugin({
+      assetNameRegExp: /\.optimize\.css$/g,
+      cssProcessor: require('cssnano'),
+      cssProcessorPluginOptions: {
+        preset: ['default', { discardComments: { removeAll: true } }],
+      },
+      canPrint: true
+    })
+]
+
+## probar en un video de youtube lo vi asi.
+
+optimazation: {
+    minimizer: [
+        new OptimizeCssAssetsPlugin()
+    ]
+}

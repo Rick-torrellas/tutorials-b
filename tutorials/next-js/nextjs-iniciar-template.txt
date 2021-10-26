@@ -1,0 +1,5 @@
+Para crear un proyecto en next, usando otro de ejemplo, como un template.
+
+creo que el repositorio no tiene que ser necesariamente un template.
+
+yarn create next-app -e https://github.com/Rick-torrellas/template-next-a

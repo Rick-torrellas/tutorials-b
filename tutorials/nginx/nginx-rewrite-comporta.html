@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Efecto del %1 en rewrite</h1>
+    <code>rewrite ^/cinco(.*) $1 break;</code>
+    <div>
+        <p>Nota: Si escribes "/%1", entonces agregara un "/" a lo que sea que escribas despues del "cinco", por ejemplo si escribes localhost/cinco/puta, la peticion seria "//puta", te verias forzado a escribir "localhost/cincoputa", y la peticion seria "/puta", igual pasa con "%1/", la peticion seria "puta/".</p>
+        <p>Pero si dejas en blanco el "$1", no podras acceder a la direccion "cinco" por ejemplo, por es como si estuvieras enviando una peticion en blanco.</p>
+        <p>Conclucion: El dilema esta en el "/", supongo que abra una manera de controlar este comportamiento con una condicional o algo,</p>
+    </div>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+ 

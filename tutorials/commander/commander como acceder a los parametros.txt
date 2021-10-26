@@ -1,0 +1,19 @@
+Para acceder a las opciones de un comando se puede hacer de 2s maneras "cmdObj" y "options"
+
+cmdObjs
+
+program
+  .command('rm <dir>')
+  .option('-r, --recursive', 'Remove recursively')
+  .action(function (dir, cmdObj) {
+    console.log('remove ' + dir + (cmdObj.recursive ? ' recursively' : ''))
+  })
+
+options
+
+program
+  .command('show')
+  .option('-a,--action <action>')
+  .action((options) => {
+    console.log(options.action);
+  });

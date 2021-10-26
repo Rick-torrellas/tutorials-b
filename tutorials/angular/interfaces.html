@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <h1>Interfaces</h1>
+  <p>El concepto de interfaces viene de typescript y se resumen en defnir un modelo de que esperar del dato, si va a hacr una string o un string de array, etc. hasta las funciones, definiendo los valores de los parametro o algo asi. Este concepto es muy parecido al de las clases y tienen sus pequeñas diferencias.</p>
+  <p>Para crear una interface, puedes hacerlo con el comando:</p>
+  <code>ng g interface &lt;interface-name></code> <br>
+  <code>interface Cliente { <br>
+    nombre: String; <br>
+    cif: String; <br>
+    direccion: String; <br>
+    creado: Date; <br>
+  } <br></code>
+  <p>Para usar la interface es tan sensillo como hacer esto:</p>
+  <code>
+    let cliente: Cliente; <br>
+cliente = { <br>
+  nombre: 'EscuelaIT', <br>
+  cif: 'ESB123', <br>
+  direccion: 'C/ de arriba, 1', <br>
+  creado: new Date(Date.now()) <br>
+}; <br>
+  </code>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

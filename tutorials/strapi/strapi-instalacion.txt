@@ -1,0 +1,21 @@
+# instalar stapi
+
+npx create-strapi-app app-name 
+
+# Usando mysql
+
+* crear un usuario con contrasena 
+
+* crear una tabla
+    create database demodb;
+
+* mostrar las tablas
+    show databases
+
+* mostrar el usuario root
+select user, plugin from mysql.user where user in ('root');
+
+* cambiar el metodo de autentificacion.
+
+alter user 'root'@'localhost' identified with mysql_native_password by 'contrasena'
+

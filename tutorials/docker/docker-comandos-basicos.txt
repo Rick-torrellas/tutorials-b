@@ -1,0 +1,5 @@
+* pull - Pâra intalar una imagen
+
+* images - para ver todas las iamgenes intaladas en la pc
+
+* run - para ejecutar la imagen

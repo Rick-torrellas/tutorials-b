@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Supongamos que clonaste un proyecto, pero esto nada mas te permite clonar una rama, pero quieres traertelas todas, la manera correcta seria sincronizando ramas que vamos a clonar.</p>
+    <p>First, clone a remote Git repository and cd into it:</p>
+    <code>
+$ git clone git://example.com/myproject <br>
+$ cd myproject <br>
+    </code>
+    <p>Next, look at the local branches in your repository:</p>
+    <code>
+        $ git branch <br>
+* master <br>
+    </code>
+    <p>But there are other branches hiding in your repository! You can see these using the -a flag:</p>
+    <code>
+        $ git branch -a <br>
+* master <br>
+  remotes/origin/HEAD <br>
+  remotes/origin/master <br>
+  remotes/origin/v1.0-stable <br>
+  remotes/origin/experimental <br>
+    </code>
+    <p>If you just want to take a quick peek at an upstream branch, you can check it out directly:</p>
+    <code>$ git checkout origin/experimental</code>
+    <p>But if you want to work on that branch, you'll need to create a local tracking branch which is done automatically by:</p>
+    <code>$ git checkout experimental</code>
+    <p>and you will see</p>
+    <code>
+        Branch experimental set up to track remote branch experimental from origin. <br>
+Switched to a new branch 'experimental' <br>
+    </code>
+    <p>That last line throws some people: "New branch" - huh? What it really means is that the branch is taken from the index and created locally for you. The previous line is actually more informative as it tells you that the branch is being set up to track the remote branch, which usually means the origin/branch_name branch</p>
+    <p>Now, if you look at your local branches, this is what you'll see:</p>
+    <code>
+        $ git branch <br>
+* experimental <br>
+  master <br>
+    </code>
+    <p>You can actually track more than one remote repository using git remote.</p>
+    <code>
+        $ git remote add win32 git://example.com/users/joe/myproject-win32-port <br>
+$ git branch -a <br>
+* master <br>
+  remotes/origin/HEAD <br>
+  remotes/origin/master <br>
+  remotes/origin/v1.0-stable <br>
+  remotes/origin/experimental <br>
+  remotes/win32/master <br>
+  remotes/win32/new-widgets <br>
+    </code>
+</body>
+</html>

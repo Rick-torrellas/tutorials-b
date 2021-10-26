@@ -1,0 +1,27 @@
+## mini css extract plugin
+
+sirve para extraer el codigo de css, y colocarlo en su propio archivo.
+
+npm install mini-css-extract-plugin
+
+NOTA: NO usar este plugin junto con "style-loader"
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+plugins: [
+    new MiniCssExtractPlugin({  
+        filename: 'bundles.css'
+    })
+]
+
+module: {
+rules: [
+        {
+            test: /\.css$/,
+            use: '[
+                {loader: MiniCssExtractPlugin.loader},
+                {loader: 'css-loader'}
+            ]'
+        }
+    ]
+}

@@ -1,0 +1,12 @@
+<code>
+    FROM python:alpine3.13 <br>
+RUN mkdir /app <br>
+WORKDIR /app <br>
+COPY . /app <br>
+RUN apk add --no-cache build-base libffi-dev libxml2-dev libxslt-dev <br>
+RUN /usr/local/bin/python -m pip install --upgrade pip <br>
+RUN /usr/local/bin/python --version <br>
+RUN pip3 install --no-cache-dir -r requirements.txt <br>
+RUN chmod +x ./*.py <br>
+ENTRYPOINT ["/app/theHarvester.py"] <br>
+</code>

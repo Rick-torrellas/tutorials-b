@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>server - Pasar parametros a un midleware</h1>
+    <h2>ruta</h2>
+    <code>
+        router.route('/tutoriales/:tutorial') <br>
+.get(crud.render.tutorial(Tutorial,'express/tutoriales/')); <br>
+    </code>
+    <h2>controlador</h2>
+    <code>
+        tutoriales: (Tutorial,path) => { <br>
+            return async (req,res) => { <br>
+                const query = req.body.tutorial; <br>
+                const tutoriales = await Tutorial.find(); <br>
+                const tutorial = await Tutorial.find( <br>
+                    {$text: { <br>
+                        $search: query <br>
+                    } <br>
+                }, <br>
+                { <br>
+                    score: {$meta: 'textScore'} <br>
+                } <br>
+                ).sort({ <br>
+                    score: {$meta: 'textScore'} <br>
+                }); <br>
+                console.log('crud.query.tutoriales'); <br>
+                res.render(path,{tutorial,tutoriales}); <br>
+            } <br>
+        }  <br>
+    </code>
+</body>
+</html>

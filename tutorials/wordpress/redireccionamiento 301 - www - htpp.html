@@ -1,0 +1,60 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <article>
+            <h1>redireccionamiento 301 www | htpp</h1>
+            <div>
+                <p>Para evitar que se metan en nuestra web, sin htpps, y que creen una vercion diferente de la web sin el www, estos son los unicos codigos que funcionan, ya que los otros no redireccionan, bloquean el htpp pero no redirecciona y el otro redicciona pero lo hace como 4 veces, y realintiza la web</p>
+                <div>
+                    <h2>http - https</h2>
+                    <p>De http a https / de https a http. Si tienes una web y acabas de instalar el certificado SSL es conveniente que toda tu web se muestre con https. Para ello debes incluir en tu htacces esta regla:</p>
+                    <code>
+                        &lt;IfModule mod_rewrite.c> <br>
+                            RewriteCond %{HTTPS} off <br>
+                            RewriteRule (.*) https://www.ejemplo.com/$1 [R=301,L,QSA] <br>
+                        &lt;/IfModule> <br>
+                    </code>
+                    <p>Si por el contrario, tenías tu web bajo el protocolo https pero has decidido quitarlo, debes redirigir a tu web en versión http. Para ello introduce:</p>
+                    <code>
+                        &lt;IfModule mod_rewrite.c> <br>
+                            RewriteCond %{HTTPS} on <br>
+                            RewriteRule (.*) http://www.ejemplo.com/$1 [R=301,L,QSA] <br>
+                            &lt;/IfModule> <br>
+                    </code>
+                </div>
+                <div>
+                    <h2>sin www a www</h2>
+                    <p>-Si quieres redireccionar de una versión sin www a una versión con www, deberás utilizar esta regla en el htaccess:</p>
+                    <code>
+                        &lt;IfModule mod_rewrite.c> <br>
+                            RewriteCond %{HTTP_HOST} ^ejemplo.com [NC] <br>
+                            RewriteRule (.*) http://www.ejemplo.com/$1 [R=301,L,QSA] <br>
+                            &lt;/IfModule> <br>
+                    </code>
+                    <p>-Si quieres redireccionar de una versión con www a una sin www:</p>
+                    <code>
+                        &lt;IfModule mod_rewrite.c> <br>
+                            RewriteCond %{HTTP_HOST} ^www.ejemplo.com [NC] <br>
+                            RewriteRule (.*) http://ejemplo.com/$1 [R=301,L,QSA] <br>
+                            &lt;/IfModule> <br>
+                    </code>
+                </div>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+                <p></p>
+            </div>
+        </article>
+    </body>
+    </html>

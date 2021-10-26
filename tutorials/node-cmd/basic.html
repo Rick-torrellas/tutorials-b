@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Ejemplos Basicos</h2>
+    <code>
+        var cmd=require('node-cmd'); <br>
+  <br>
+    cmd.get( <br>
+        'pwd', <br>
+        function(err, data, stderr){ <br>
+            console.log('the current working dir is : ',data) <br>
+        } <br>
+    ); <br>
+  <br>
+    cmd.run('touch example.created.file'); <br>
+  <br>
+    cmd.get( <br>
+        'ls', <br>
+        function(err, data, stderr){ <br>
+            console.log('the current dir contains these files :\n\n',data) <br>
+        } <br>
+    ); <br>
+  <br>
+    cmd.get( <br>
+        ` <br>
+            git clone https://github.com/RIAEvangelist/node-cmd.git <br>
+            cd node-cmd <br>
+            ls <br>
+        `, <br>
+        function(err, data, stderr){ <br>
+            if (!err) { <br>
+               console.log('the node-cmd cloned dir contains these files :\n\n',data) <br>
+            } else { <br>
+               console.log('error', err) <br>
+            } <br>
+  <br>
+        } <br>
+    ); <br>
+    </code>
+</body>
+</html>

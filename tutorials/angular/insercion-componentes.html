@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Vinculo entre Componentes</h1>
+<div id="div1">
+    <h2>Colocar un componente dento de otro</h2>
+    <p>En este ejemplo se colara un componente dentro de otro, creando una relacion padre hijo, el componente padre a su vez podra pasarle informacion</p>
+    <p>Para lograr esto siemplemente hay que llamar el elemento hijo dentro del template del elemento padre</p>
+    <code>
+    &lt;h2>Elemento padre&lt;/h2> <br>
+    &lt;app-hijo>&lt;/app-hijo> <br>
+    &lt;p>Contenido del elemento padre&lt;/p> <br>
+    </code>
+</div>
+<div id="div2">
+    <h2>Input</h2>
+    <h3>Pasar informacion de un componente padre a un hijo</h3>
+    <p>TODO: Probar no se si funciona</p>
+    <p>Lo primer es importar en el @angular/core</p>
+    <code>import {Input} from '@angular/core';</code>
+    <p>Ahora se tendra que usar el derorado input para declarar la variable dentro del componente.</p>
+    <code>
+        export class HijoComponent {<br>
+            @Input('vagina') pussy = "peluah";
+            @Input() propiedad_uno = string; <br>
+            @Input() propiedad_dos = string; <br>
+            }<br>
+    </code>
+    <p>Para referenciarlo en la plantilla se usa interpolacion normal</p>
+    <code>
+        &lt;p>{{pussy}}&lt;/p>
+    </code>
+    <p>Y para pasar el valor desde un componente padre</p>
+    <code>
+        &lt;app-hijo [vagina]="Hairy">&lt;/app-hijo>
+    </code>
+    <p>Para ello hay que cargar el componente de angular para eso en el componente hijo, luego dentro de la clase del componente hay que crear variables con una propiedad especial:</p>
+</div>
+
+<div id="div3">
+    <h2>Output</h2>
+    <h3>Pasar informacion de un componente hijo a un padre</h3>
+    <p>TODO: Probar no se si funciona</p>
+    <p>El output funciona un poco diferente al input, este necesita ser emitido por un evento o un listener no se si son lo mismo, para ello vamos a importar tanto el Output,EventEmitter del @angular/core</p>
+    <p>lo primero usar el decorador y instanciar la variable que vamos a crear con el objeto EventEmitter.</p>
+    <code>
+        @Output() nalga = new EventEmitter();
+        &lt;a (click)="cambiar()">Click&lt;/a>
+        cambiar() { <br>
+            this.nalga.emit("Dato emitido"); <br>
+           } <br>
+    </code>
+    <p>Para hacer referencia de ese dato en el elemento padre, anteriormente se creo un evento llamado cambio, y se activa en la funcion padre por medio de una funcion.</p>
+    <code> &lt;app-hijo (cambio)='funCambiar($event)'>&lt;/app-hijo></code>
+    <p>Creamos la funcion que recive los datos en el componente padre
+        </p>
+        <code>datoHijo: string ='Sin datos';</code> <br>
+        <code>
+            funCambiar(e) { <br>
+                this.datoHijo = e; <br>
+                } <br>
+                &lt;p>{{datoHijo}}&lt;/p>
+        </code>
+</div>
+</body>
+</html>

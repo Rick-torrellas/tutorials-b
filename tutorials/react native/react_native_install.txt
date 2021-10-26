@@ -1,0 +1,8 @@
+Instalation
+
+npm -g expo-cli // Para manejar el proyecto de react native
+
+expo init proyect-name // Para crear aplicacion
+
+expo start // Para inciciar la aplicacion
+

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>variable globales</h1>
+<code>
+    printenv - pára ver as variables globales <br>
+    echo $PATH - para ver solo una variable <br>
+    printenv | grep PATH - para hacer una busqueda en el resultado del comando <br>
+    export - para exportar variables glogables <br>
+</code>
+<h2>Hubicacion variables globales</h2>
+<code>~/.bashrc</code>
+<p>dentro el archivo, en el final:</p>
+<code>export varname='mi var content'</code>
+<h2>para agregar contenido dentro de una variable ya existente</h2>
+<code>export NALGA=$var:/usr/share/themes</code>
+<h2>usar una variable dentro de otra</h2>
+<code>export nalga=%NALGA/theme-vlue</code>
+<h2>crear arrays </h2>
+<code>
+    myvar=(frist second 'string corta') <br>
+ <br>
+    echo $(myvar[*]) <br>
+    echo $(myvar[2]) <br>
+</code>
+</body>
+</html>

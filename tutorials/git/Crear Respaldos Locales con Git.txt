@@ -1,0 +1,21 @@
+Lo primero que hay que saber, es que hay 2s tipos de init, el de trabajo "git init", y el desnudo git init --bare.
+
+El git de trabajo, se usa para justamente trabajr sobre el proyecto, para hacer cambios, etc.
+
+El git desnudo esta diseñado, solo para recibir informacion, pero no la muestra, no puedes ni manipularla con git, solo puedes hacer git log.
+
+Con git no puedes hacer una copia instantanea de un proyecto, como vendria a ser una copia convencional, de echo para que tomarse la molestia entonces. Git utiliza el coando push para poder sacar la informaciond ela fuente, pero pide que se haga en un git desnudo, se puede configurar para que no sea asi 'git config receive.denyCurrentBranch updateInstead' o 'git config receive.denyCurrentBranch ignore'. 
+
+Para crear el git desnudo basta con ir a donde quieres crear la opia copia maestra, OJO el directorio siempre debe terminar en .git o si no lo reconocera, luego iniciar un:
+
+git init --bare folder.git
+
+Listo ya tenemos nuestro direcotrio especial para copias, y vamos al direcotrio maestro añadimos la copia
+
+git remote add copia file://directorio/de/copia.git
+
+y ya con esta configuracion podemos mandar informacion siempre que queramos.
+
+Cual es el chiste de esto, la carpeta copia, pesara menos que la original, sera una copia intacable, asi que se asegura su integridad, y tambien en seguridad, la personas no sabran su contenido, incluso asbiendo git, ademas lo mas importante, se podran hacer copias de esta, las que se quiera.
+
+Para clonar de la copia, es necesario iniciar el git en el lugar donde se quiera hacer la copia, pero no crear la carpeta, dejar ese trabajo a git, si por ejemplo queremos ponerlo en el escritorio decimos, c:\..\desktop\copia, por que si creas la carpeta y lo intentas clonear, lo clonara desde la carpeta quedara desktop/copia/copia :D, o si creas la carpeta y luego clonas no podras por que ya existe la carpeta. :D.

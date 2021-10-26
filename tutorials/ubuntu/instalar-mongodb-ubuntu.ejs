@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h2>Instalar Mongodb</h2>
+        <p>Siempre es recomendable visitar la documentacion oficial en este caso, por que la manera de hacerlo puede cambiar con el tiempo: https://docs.mongodb.com/manual/tutorial/install-mongodb-on-ubuntu/ , pero para la fecha esta es la manera</p>
+        <ul>
+            <li><p>Ingresar el siguiente comando: deberia salir un Ok como respuesta</p><code>wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add -</code><p>En caso de error se puede usar los siguientes comandos</p><code>
+              sudo apt-get install gnupg <br>
+              wget -qO - https://www.mongodb.org/static/pgp/server-4.2.asc | sudo apt-key add - <br>
+            </code></li>
+            <li><p>Ahora colocaremos el siguiente codigo:</p>
+            <code>echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.2 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.2.list</code></li>
+            <li><p>Ahora este:</p>
+            <code>sudo apt-get update</code></li>
+            <li><p>Y finalmente:</p>
+            <code>sudo apt-get install -y mongodb-org</code></li>
+        </ul>  
+      </div>
+      <div>
+        <h2>Verificar el estado de Mongodb</h2>
+          <code>sudo service mongod status</code>
+    </div>
+    <div>
+        <h2>Activar Mongodb</h2>
+        <code>sudo service mongod start</code>
+    </div>
+</body>
+</html>

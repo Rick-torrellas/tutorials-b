@@ -1,0 +1,10 @@
+acuerdate que para crear un bundle, hay que importar todas las conecciones y los archivos que se van a incrustrar, la idea es hacer un solo archivo, js que contenga todos los demas, tanto otros js como css.
+
+import {showAlert } from './messages';
+
+import  "./styles.css";
+import $ from 'jquery';
+import uuid from 'uuid/v4';
+
+
+/*some-code*/

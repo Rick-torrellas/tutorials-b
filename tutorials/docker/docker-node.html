@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Construir una imagen con node</h1>
+    <ul>
+        <li>Crear un <b>Dockerfile</b></li>
+        <li><p>Docker File</p>
+        <pre><code>
+            FROM node:12
+            WORKDIR /app
+            COPY package*.json ./
+            RUN npm install
+            COPY . .
+            CMD ["npm", "run", "dev"]
+        </code></pre></li>
+        <li><p>Crear un dockerignore</p>
+        <pre><code>
+            node_modules
+            npm-debug.log
+        </code></pre>
+        </li>
+        <li><p>Creacion de la imagen</p>
+        <pre><code>
+            docker build -t nombre-app
+        </code></pre>
+        </li>
+        <li><p>Ejecutar la imagen</p>
+        <pre><code>
+            //interactivo
+            docker run -it -p 4000:3000 nombre-app
+            //servicio
+            docker run -d -p 4000:3000 nombre-app
+        </code></pre>
+        </li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>

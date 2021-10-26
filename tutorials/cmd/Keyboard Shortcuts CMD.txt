@@ -1,0 +1,46 @@
+Wix+X+C - Abrir la consola en modo normal
+
+Win+X+A - Abrir la consola como administrador
+
+F7 - Te muestra un historial con todos los comandos que has usado en la seccion WOW!!
+
+Alt+F7 - Borra el historial de comandos
+
+F9 - Para seleccionar un comando, segun el numero que aparece en el historial
+
+Ctrl+A - Seleciona todo el texto del prompt, si le vuelves a dar te seleciona toda vaina
+
+Tab - Para completar la carpeta que estas escribiendo
+
+Escape - Para borrar el comando que estas escribiendo
+
+Crtl+Z Todo lo que este escrito despues de esto, sera ignorado por la consola
+
+Shift+F10 - Para iniciar la consola antes que se inicie windows, osea en el boot,etc.
+
+Ctrl+Click derecho/izquierdo - Sirve como una especie de copiado y pegado, lo que subrayes con el click izquierdo sera copiado y con el derecho pegado
+
+
+
+Alt+Enter - Para ir de pantalla completa a pantalla normal
+
+Shift+Inicio/End - Para selecionar todo el comando que estes escribiendo y si lo vuelves a pulsar selecionas el promt tambien y con el final lo contrario
+
+Cntrl+inicio/fin - Para entre el inicio y el final de la session
+
+Ctrl+Click derecho/izquierdo - Sirve como una especie de copiado y pegado, lo que subrayes con el click izquierdo sera copiado y con el derecho pegado
+
+Cntrl+arriba/abajo - Para navegar entre arriba y abajo
+
+Shift+Click derecho/izquierdo - Muy parecido que con cntrl, pero en este caso es para desplasarte en el prompt, lo que subrayes con el click isquierdo, luego con el click derecho te podras mover. -yoda-
+
+Shift+Arriba/Abajo - Va subrayando las lineas completas, mientras vallas subiendo.
+
+Crtl+Shift+Inicio/Final - Seleciona toda verga hasta el inicio de la consola o lo contrario
+
+F8 - Tiene pinta de ser importante - Move backward in the command history to commands matching the current command. This is useful if you want to type part of a command you’ve used several times and then scroll back in your history to find the exact command you want to repeat - 
+
+
+
+
+

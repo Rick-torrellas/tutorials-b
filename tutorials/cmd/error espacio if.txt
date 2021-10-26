@@ -1,0 +1,33 @@
+Si colocas espacios en blanco dentro de un if, esto causara que se salga automaticamente del batch, este comportamiento no es normal en un batch, tu puedes colocar espacios tranquilamente como en el segundo ejemplo, no dara error y no mostrara los espacios en el batch
+
+ejm 1
+f /i exist %xampp% (
+:: NALGA
+
+	echo     El programa xampp esta instalado correctamente
+)else (echo No se consiguio el programa xampp)
+
+ejm2 
+
+
+
+
+
+
+
+
+
+
+
+
+
+echo HOLA
+
+
+
+
+
+
+
+
+echo NALGA

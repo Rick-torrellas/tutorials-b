@@ -1,0 +1,19 @@
+primero debemos importar nuestros archivos html al bundle que vamos a crear.
+
+import '../users.html';
+
+
+dentr de las reglas vamos a colorcar.
+
+
+
+test: /\.html$/,
+            use: [
+                {
+                    loader: 'file-loader',
+                    options: {
+                        name: '[name].[ext]'
+                    }
+                },
+                exclude: path.resolve(__dirname+'/src/index.html') // esto es para excluir el archivo princupal, que estemos agregamos de por si, con nuestro plugin de html, yo lo que creo que pasa, es que js, va a inyectar los html.
+            ]

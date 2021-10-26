@@ -1,0 +1,3 @@
+Map auto referenciarse
+
+No se puede usar el vlaor de una propiedad dentro de un mapa, pero si se puede usar la propiedad de otro objeto.

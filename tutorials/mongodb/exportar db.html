@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Exportar una base de datos desde Mongodb</h1>
+    <h2>mongodump</h2>
+    <p>Exportar una base de datos, que se encuentra dentro de Mongodb, a un lugar.</p>
+    <div>
+        <h2>Forma basica</h2>
+        <code>mongodump</code>
+        <p>De esta manera realizara un respaldo de todas las bases de datos, por defecto lo hara en el directorio actual, en una carpeta llamada dump/</p>
+    </div>
+    <div>
+        <h2>Parametros mas importantes</h2>
+        <div>
+            <h3>-d,--db</h3>
+            <p>El nombre de la base de datos que quieres exportar, si no se espesifica copia todas las bases de datos.</p>
+            <code>mongodump -d=vagina</code>
+        </div>
+        <div>
+            <h3>--collection,-c</h3>
+            <p>Espesica la coleccion que quieres exportar, si no espesifica se exportaran todas las colecciones, me imagino que para usar esta opcion se debe espesificar una base de datos.</p>
+            <code>mongodump -d=vagina -c=vaginas-peludas</code>
+        </div>
+        <div>
+            <h3>--gzip</h3>
+            <p>Si quieres que las colecciones exportadas esten comprimidas en rar</p>
+            <code>mongodump --gzip</code>
+        </div>
+        <div>
+            <h3>--out</h3>
+            <p>La ruta donde quieres que se coloque la exportacion, si esta opcion no es dada, se exportara en una carpeta llamada dump, en el directorio actual.</p>
+            <code>mongodump --out=database/vagina/</code>
+        </div>
+        <div>
+            <h3>--host</h3>
+            <p>La direccion ip y el puerto, donde vamos a hacer el respaldo.</p>
+            <code>mongodump --host=ip:puerto <br>   
+                mongodump --host=190.79.76.206:27017 (el puerto por defecto) <br>   
+            </code>
+        </div>
+        <div>
+            <h3>--username,-u</h3>
+            <p>El usuario de mongo, en caso de tener uno</p>
+            <code></code>
+        </div>
+        <div>
+            <h3>--password,-p</h3>
+            <p>La contraseña del usuario de mongo, en caso de tener uno.</p>
+            <code></code>
+        </div>
+        <div>
+            <h2>--authenticationDatabase</h2>
+            <p>Espesifica la base de datos donde fue creado el usuario para la autentificacion.</p>
+            <code>
+                --authenticationDatabase "basedatos"
+            </code>
+        </div>
+    </div>
+</body>
+</html>

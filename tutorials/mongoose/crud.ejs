@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>CRUD</h1>
+    <nav>
+        <div>
+            <h2>mongoose</h2>
+            <div><a href="#div1">Create</a></div>
+            <div><a href="#div2">Read</a></div>
+            <div><a href="#div3">Update</a></div>
+            <div><a href="#div4">Delete</a></div>
+        </div>
+    </nav>
+    <div id="div1">
+        <h2>Create</h2>
+        <code>
+            crudCtrl.createArt = async (req,res) => { <br>
+                const articulo = new Articulos({ <br>
+                    titulo: req.body.titulo, <br>
+                    urlImg:  req.body.urlImg, <br>
+                    urlPage:  req.body.urlPage, <br>
+                    descripcion:  req.body.descripcion, <br>
+                    categoria_titulo: req.body.categoria_titulo <br>
+                }); <br>
+                try { <br>
+                    await articulo.save(); <br>
+                console.log(chalk.bold.green('[NUEVO ARTICULO CREADO]')); <br>
+                res.json(articulo); <br>
+                } catch (error) { <br>
+                    console.log(chalk.bold.red(`[ERROR ENCONTRADO]: ${chalk.white('createArt')}`)); <br>
+                    console.log(error); <br>
+                    res.send('[ERROR ENCONTRADO]: createArt'); <br>
+                } <br>
+            }; <br>
+        </code>
+    </div>
+    <div id="div2">
+        <h2>Read</h2>
+        <h2>Read All</h2>
+        <code>
+            crudCtrl.catGetAll = async (req,res) =>{ <br>
+                try { <br>
+                    const categorias = await  Categoria.find(); <br>
+                console.log(chalk.bold.green('[CATEGORIAS ENCONTRADAS]')); <br>
+                    res.json(categorias);    <br>
+                } catch (error) { <br>
+                    console.log(chalk.bold.red(`[ERROR ENCONTRADO]: ${chalk.white('catGetAll')}`)); <br>
+                    console.log(error);    <br>
+                    res.send('[ERROR ENCONTRADO]: catGetAll'); <br>
+                } <br>
+                 <br>
+            } <br>
+            <h2>Read One</h2>
+            <code>
+                crudCtrl.artByCat = async (req,res) => { <br>
+                    try {  <br>
+                        const articulo = await Articulos.find({categoria_titulo: req.params.categoria_titulo}); <br>
+                    console.log(chalk.bold.green('[ARTICULOS ENCONTRADOS]')); <br>
+                        res.json(articulo); <br>
+                    } catch (error) { <br>
+                        console.log(chalk.bold.red(`[ERROR ENCONTRADO]: ${chalk.white('artByCat')}`)); <br>
+                        console.log(error); <br>
+                        res.send('[ERROR ENCONTRADO]: artByCat'); <br>
+                    } <br>
+                    <br>
+                } <br>
+            </code>
+        </code>
+    </div>
+    <div id="div3">
+        <h2>Upgrade</h2>
+        <code>
+            crudCtrl.updateCat = async (req,res)=>{ <br>
+                const {id} = req.params; <br>
+                const object = { <br>
+                    titulo:req.body.titulo, <br>
+            descripcion:  req.body.descripcion, <br>
+            conclucion: req.body.conclucion, <br>
+            url_image: req.body.url_image, <br>
+            shortDescripcion: req.body.shortDescripcion <br>
+                }; <br>
+                try { <br>
+                    await Categoria.findByIdAndUpdate(id, {$set: object}); <br>
+                    console.log(chalk.bold.green('[CATEGORIA ACTUALIZADA]')); <br>
+                res.json({status: 'Categoria Actualizada'}); <br>
+                } catch (error) { <br>
+                    console.log(chalk.bold.red(`[ERROR ENCONTRADO]: ${chalk.white('updateCat')}`)); <br>
+                    console.log(error); <br>
+                    res.send('[ERROR ENCONTRADO]: updateCat'); <br>
+                } <br>
+                 <br>
+            } <br>
+        </code>
+    </div>
+    <div id="div4">
+        <h2>Delete</h2>
+        <code>
+            crudCtrl.deleteArt = async (req,res) => { <br>
+                try { <br>
+                    await Articulos.findByIdAndDelete(req.params.id); <br>
+                    console.log(chalk.bold.green('[ARTICULO ELIMINADO]')); <br>
+                    res.json({status: 'Articulo Eliminado :D'});    <br>
+                } catch (error) { <br>
+                    console.log(chalk.bold.red(`[ERROR ENCONTRADO]: ${chalk.white('deleteArt')}`)); <br>
+                    console.log(error); <br>
+                    res.send('[ERROR ENCONTRADO]: deleteArt'); <br>
+                }   <br>
+            } <br>
+        </code>
+    </div>
+</body>
+</html>

@@ -1,0 +1,121 @@
+<h2>Crear un archivo aparte para las rutas</h2>
+<p><b>index.js</b></p>
+<code>
+    const express = require('express'); <br>
+const app = require('./routes'); <br>
+ <br>
+ <br>
+// start <br>
+app.listen(app.get('port'), () => { <br>
+    console.log(`Server on port ${app.get('port')} - http://localhost:${app.get('port')}`); <br>
+}); <br>
+</code>
+<p><b>config.js</b></p>
+<code>
+    const express = require('express'); <br>
+    const morgan = require('morgan'); <br>
+     <br>
+    const path = require('path'); <br>
+     <br>
+    // intializations <br>
+    const app = express(); <br>
+    require('./database'); <br>
+     <br>
+    // settings <br>
+    require('dotenv').config(); <br>
+    app.set('views', path.join(__dirname, './views')); <br>
+    app.set('view engine', 'ejs'); <br>
+     <br>
+    app.set('port', process.env.PORT || 3000); <br>
+     <br>
+    // middlewares <br>
+    app.use(morgan('dev')); <br>
+    // TODO: que es eso de urlencoded <br>
+    app.use(express.urlencoded({extended: false})); <br>
+     <br>
+    // Global variables <br>
+     <br>
+    // static files <br>
+    app.use(express.static(__dirname+'./../.nucleo')); <br>
+     <br>
+    module.exports = app; <br>
+</code>
+<p><b>routes.js</b></p>
+<code>
+    const express = require('express'); <br>
+const app = require('./config'); <br>
+ <br>
+// routes <br>
+app.use('/', require('./routes/t')); <br>
+app.use('/content/lenguaje-corporal/', require('./routes/content/lenguaje-corporal')); <br>
+ <br>
+app.use('/content/asanas/', require('./routes/content/asanas')); <br>
+app.use('/content/gastronomia', require('./routes/content/gastronomia')); <br>
+app.use('/content/git', require('./routes/content/git')); <br>
+app.use('/content/powershell', require('./routes/content/powershell')); <br>
+app.use('/content/seo', require('./routes/content/seo')); <br>
+app.use('/content/wordpress', require('./routes/content/wordpress')); <br>
+app.use('/content/ubuntu',require('./routes/content/ubuntu')); <br>
+app.use('/content/angular', require('./routes/content/angular')); <br>
+app.use('/content/chalk', require('./routes/content/chalk')); <br>
+app.use('/content/cmd', require('./routes/content/cmd')); <br>
+app.use('/content/commander', require('./routes/content/commander')); <br>
+app.use('/content/conventional-commits', require('./routes/content/conventional-commits')); <br>
+app.use('/content/dnstwist', require('./routes/content/dnstwist')); <br>
+app.use('/content/docker', require('./routes/content/docker')); <br>
+app.use('/content/dom', require('./routes/content/dom')); <br>
+app.use('/content/dotenv', require('./routes/content/dotenv')); <br>
+app.use('/content/ejs', require('./routes/content/ejs')); <br>
+app.use('/content/exiftool', require('./routes/content/exiftool')); <br>
+app.use('/content/express', require('./routes/content/express')); <br>
+app.use('/content/eyewitness', require('./routes/content/eyewitness')); <br>
+app.use('/content/firebase', require('./routes/content/firebase')); <br>
+app.use('/content/google-chrome', require('./routes/content/google-chrome')); <br>
+app.use('/content/guidra', require('./routes/content/guidra')); <br>
+app.use('/content/heroku', require('./routes/content/heroku')); <br>
+app.use('/content/html', require('./routes/content/html')); <br>
+app.use('/content/http', require('./routes/content/http')); <br>
+app.use('/content/http-server', require('./routes/content/http-server')); <br>
+app.use('/content/i-ching', require('./routes/content/i-ching')); <br>
+app.use('/content/javascript', require('./routes/content/javascript')); <br>
+app.use('/content/jquery', require('./routes/content/jquery')); <br>
+app.use('/content/json', require('./routes/content/json')); <br>
+app.use('/content/jsonwebtoken', require('./routes/content/jsonwebtoken')); <br>
+app.use('/content/magia', require('./routes/content/magia')); <br>
+app.use('/content/markdown', require('./routes/content/markdown')); <br>
+app.use('/content/megatools', require('./routes/content/megatools')); <br>
+app.use('/content/mongodb', require('./routes/content/mongodb')); <br>
+app.use('/content/mongodb-atlas', require('./routes/content/mongodb-atlas')); <br>
+app.use('/content/mongoose', require('./routes/content/mongoose')); <br>
+app.use('/content/morgan', require('./routes/content/morgan')); <br>
+app.use('/content/mudras', require('./routes/content/mudras')); <br>
+app.use('/content/multer', require('./routes/content/multer')); <br>
+app.use('/content/node-js', require('./routes/content/node-js')); <br>
+app.use('/content/node-cmd', require('./routes/content/node-cmd')); <br>
+app.use('/content/npm', require('./routes/content/npm')); <br>
+app.use('/content/npx', require('./routes/content/npx')); <br>
+app.use('/content/nvm', require('./routes/content/nvm')); <br>
+app.use('/content/phoneinfoga', require('./routes/content/phoneinfoga')); <br>
+app.use('/content/photon', require('./routes/content/photon')); <br>
+app.use('/content/php', require('./routes/content/php')); <br>
+app.use('/content/proxychains', require('./routes/content/proxychains')); <br>
+app.use('/content/semantic-versioning', require('./routes/content/semantic-versioning')); <br>
+app.use('/content/sherlock', require('./routes/content/sherlock')); <br>
+app.use('/content/sitemap', require('./routes/content/sitemap')); <br>
+app.use('/content/sql', require('./routes/content/sql')); <br>
+app.use('/content/steghide', require('./routes/content/steghide')); <br>
+app.use('/content/sublist3r', require('./routes/content/sublist3r')); <br>
+app.use('/content/theharvester', require('./routes/content/theharvester')); <br>
+app.use('/content/timeago-js', require('./routes/content/timeago-js')); <br>
+app.use('/content/typescript', require('./routes/content/typescript')); <br>
+app.use('/content/util', require('./routes/content/util')); <br>
+app.use('/content/uuid', require('./routes/content/uuid')); <br>
+app.use('/content/vbscript', require('./routes/content/vbscript')); <br>
+app.use('/content/windows', require('./routes/content/windows')); <br>
+app.use('/content/winrar', require('./routes/content/winrar')); <br>
+app.use('/content/workout', require('./routes/content/workout')); <br>
+//app.use('/porno',routes.porno); <br>
+app.use('/text',require('./routes/text')); <br>
+ <br>
+module.exports = app; <br>
+</code>

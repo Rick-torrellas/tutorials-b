@@ -1,0 +1,15 @@
+<p>Para pasar argumentos cundo inicias un archivo de node</p>\
+<code>const process = require('process'); <br>
+    // print process.argv <br>
+process.argv.forEach((val, index) => { <br>
+  console.log(`${index}: ${val}`); <br>
+}); <br>
+</code>
+<p>resultado</p>
+<p>
+    0: /usr/local/bin/node <br>
+1: /Users/mjr/work/node/process-args.js <br>
+2: one <br>
+3: two=three <br>
+4: four <br>
+</p>

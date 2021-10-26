@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <p>Las enviroments variables son variables que estaran activadas segun sea su entorno de ejecucion, para produccion o desarrollo.</p>
+  <p>Para configurar estas variable hace falta ir a la raiz del proyecto eh ir a la carpeta: src/environments.
+    Ahi encontraras dos archivos environment.prod - environment.</p>
+    <p>Esto creara un objeto con las propiedades que quieras usar en la aplicacion.
+      Tambien se puede crear otros objetos fuera del objeto que te dan por defecto, para luego exportarlo normalmente.</p>
+      <code>
+        export const environment = { <br>
+          production: true <br>
+        }; <br>
+        export const Nalga  = {nombre: "Pedro Ramirez"} <br>
+      </code>
+      <p>
+        Importante: El nuevo objeto que cree, tiene que ser creado en los dos eviroments o si no sera leido.
+        Nota: Es importante tener los mismos valores en ambos archivos, puede afectar ciertos procesos que necesiten esos valores.
+      </p>
+      <p>Para importarlos a un componente o lo que sea:</p>
+      <code>
+        import {environment,Nalga} from '../../../environments/environment';
+      </code>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

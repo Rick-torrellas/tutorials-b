@@ -1,0 +1,19 @@
+En el package.json, se puede  ejecutar un comandos antes que otro como requisito. usando la palabra pre. ejmplo.
+
+"jabon": "echo Como estas",
+"prejabon": "echo Ola"
+
+Al ejecutar jabon, va a ejecutar prejabon primero.
+
+-----
+
+Tambien se pueden hacer cadenas de comandos.
+
+"jabon": "echo Como estas",
+"prejabon": "npm run nalga",
+"nalga": "echo nalga",
+"prenalga": "echo barbaro"
+
+Nota: no funciona el preprejabon.
+
+

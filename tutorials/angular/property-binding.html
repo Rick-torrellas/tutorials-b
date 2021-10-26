@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>Primero hay que aclarar 1 concepto, hay que saber que existen attributos html y propiedades del DOM.</p>
+    <p>Los valores de los atributos html no se pueden cambiar durante la ejecucion solo cuando se escribe el html, en cambio las propiedades que referencian a ese atributo en el dom si se pueden cambiar.</p>
+    <p>Cuando hablamos de binding propiedades, hablamos de usar la interpocalacion para asignale un valor a ese atributo. En este caso se cambia es la propiedad del dom no el atributo html.</p>
+    <p>Para lograr el binding colocamos la siguiente syntax:</p>
+    <p>&lt;p [id]="myId">Hola&lt;/p></p>
+    <p>Tambien hay que recordar que esta exprecion tambien se puede usar como una condicional, por ejemplo se podria decir myId.length == 0, en caso de un array o un objeto y aplicarlo en caso de tener un length. </p>
+</body>
+</html>

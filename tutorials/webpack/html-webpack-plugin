@@ -1,0 +1,11 @@
+convertir y procesar archivos html
+
+npm i html-webpack-plugin
+
+note: este plugin se encarga de enlazar el blundle.js generado por webpack, asi que ya no seria necesario
+
+plugins: [
+        new HtmlWebpackPlugin({
+            template: './src/index.html' 
+        })
+    ]

@@ -1,0 +1,15 @@
+Si quieres ejecutar codigo de manera libre con ``, no se podra hacer ni con get o con run.
+
+cmd.run(`
+megacopy -u ${user} -p ${pass} --local "${file}" --remote "${remotePath.m+file}"
+`); 
+
+cmd.run(
+`
+megacopy -u ${user} -p ${pass} --local "${file}" --remote "${remotePath.m+file}"
+`
+);
+
+Esto no se ejecutara, la unica manera de lograrlo:
+
+cmd.run(`megacopy -u ${user} -p ${pass} --local "${file}" --remote "${remotePath.m+file}"`);

@@ -1,0 +1,15 @@
+<code>
+    # req.body.undefined <br>
+    # body-parser <br>
+    # express <br>
+</code>
+<p>Hace poco me estaba dando un fallo muy raro. donde estaba enviano data a una ruta, pero no le llegaba nada, ose el post se mandaba y todo correcto, pero a la hora de usar la data mandada. req.body.algo siempre me dada undefined, el problema es que ahora express no tiene body-parser, que creo que es el encargado de llenar ese objeto, hay que instalarlo manualmente.+</p>
+<p><b>Solucion</b></p>
+<code>
+    npm install body-parser <br>
+ <br>
+    var bodyParser = require('body-parser') <br>
+     <br>
+    app.use(bodyParser.urlencoded({ extended: false }))  <br>
+    app.use(bodyParser.json()) // opcional <br>
+</code>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Primeros con typescript</h1>
+    <p>Vamos a empezar construyendo una simple aplicacion web con typescript.</p>
+<nav>
+    <a href="#div-1">Instalando typscript</a>
+    <br>
+    <a href="#div-2">Construyendo tu primer archivo typescript</a>
+    <br>
+    <a href="#div-3">Compilado tu codigo</a>
+    <br>
+    <a href="#div-4">Type annotations</a>
+    <br>
+    <a href="#div-5">Interfaces</a>
+    <br>
+    <a href="#div-6">Classes </a>
+    <br>
+    <a href="#div-7">Corriendo tu web app con Typescript</a>
+</nav>
+<div id="di-1">
+    <h2>Instalando typescript</h2>
+<p>Existen dos maneras principales de obtener las herramientas de Typescript.</p>
+    <ul>
+        <li>Via npm (El controlador de paquetes de Node.js)</li>
+        <li>Instalado el plugin de typescript para visual studio</li>
+    </ul>
+    <p>Visual Studio 2017 and Visual Studio 2015 Update 3 include TypeScript by default. If you didn’t install TypeScript with Visual Studio, you can still download it.</p>
+    <p>Para los usuarios de NPM</p>
+    <code>
+    npm install -g typescript   
+    </code>
+</div>
+<div id="di-2">
+    <h2>Construyendo tu primer archivo con typescript</h2>
+    <p>En tu editor, coloca el siguiente codigo javascript en greeter.ts:</p>
+    <code>
+    function greeter(person) { <br>
+    return "Hello, " + person; <br>
+} <br>
+ <br>
+let user = "Jane User"; <br>
+ <br>
+document.body.textContent = greeter(user);  <br>   
+    </code>
+</div>
+<div id="di-3">
+    <h2>Compilando tu codigo</h2>
+    <p>Nosotros usamos una extencion .ts, pero el codigo es javascript. Tamien puedes copiar/pegar todo el archivo y copiarlo en una app javascript.</p>
+    <p>EN la linea de comandos, ejecuta el copilador de typescript:</p>
+    <code>tsc greeter.ts</code>
+    <p>El resultado seria un archivo greeter.js que contiene el mismo javascript que tu colocaste. Vamos a pdoer usar typescript en nuestra aplicacion Javascript.</p>
+    <p>Ahora podemos tomar ventaja de algunas de las herramientas que typescript titne. Añadir tpye annotations (: string) al argumento de la funcion 'person' como se muestra aqui:</p>
+    <code>
+    function greeter(person: string) { <br>
+    return "Hello, " + person; <br>
+} <br>
+ <br>
+let user = "Jane User"; <br>
+ <br>
+document.body.textContent = greeter(user);   <br>  
+    </code>
+</div>
+<div id="di-4">
+    <h2>Type annotations</h2>
+    <p>Type annotations in TypeScript are lightweight ways to record the intended contract of the function or variable. In this case, we intend the greeter function to be called with a single string parameter. We can try changing the call greeter to pass an array instead:</p>
+    <code>
+    function greeter(person: string) { <br>
+    return "Hello, " + person; <br>
+} <br>
+ <br>
+let user = [0, 1, 2]; <br>
+ <br>
+document.body.textContent = greeter(user);   <br> 
+    </code>
+    <p>Re-compiling, you’ll now see an error:</p>
+    <code>error TS2345: Argument of type 'number[]' is not assignable to parameter of type 'string'.</code>
+    <p>error TS2345: Argument of type 'number[]' is not assignable to parameter of type 'string'.</p>
+    <p>Notice that although there were errors, the greeter.js file is still created. You can use TypeScript even if there are errors in your code. But in this case, TypeScript is warning that your code will likely not run as expected.</p>
+</div>
+<div id="di-5">
+    <h2>Interfaces</h2>
+    <p>Let’s develop our sample further. Here we use an interface that describes objects that have a firstName and lastName field. In TypeScript, two types are compatible if their internal structure is compatible. This allows us to implement an interface just by having the shape the interface requires, without an explicit implements clause.</p>
+    <code>
+    interface Person { <br>
+    firstName: string; <br>
+    lastName: string; <br>
+} <br>
+ <br>
+function greeter(person: Person) { <br>
+    return "Hello, " + person.firstName + " " + person.lastName; <br>
+} <br>
+ <br>
+let user = { firstName: "Jane", lastName: "User" }; <br>
+ <br>
+document.body.textContent = greeter(user);   <br>  
+    </code>
+</div>
+<div id="di-6">
+    <h2>Classes</h2>
+    <p>Finalmente, vamos a extender el ejemplo una ultima vez con clases. Typescript soporta nuevas caracteristicas en javascript, como soporte para la programacion orientada a objetos.</p>
+    <p>Aqui vamos a crear una clase a Student con un constructor y unos pocos campos publicos. Nota que clases y interfaces se juntan bien, dejando al programador decidir el nivel adecuado de abstraccion.</p>
+    <p>El uso de argumentos publicos al constructor es un atajo que nos permite crear automaticamente propiedades con ese nombre.</p>
+    <code>
+    class Student { <br>
+    fullName: string; <br>
+    constructor(public firstName: string, public middleInitial: string, public lastName: string) { <br>
+        this.fullName = firstName + " " + middleInitial + " " + lastName; <br>
+    } <br>
+} <br>
+ <br>
+interface Person { <br>
+    firstName: string; <br>
+    lastName: string; <br>
+} <br>
+ <br>
+function greeter(person: Person) { <br>
+    return "Hello, " + person.firstName + " " + person.lastName; <br>
+} <br>
+ <br>
+let user = new Student("Jane", "M.", "User"); <br>
+ <br>
+document.body.textContent = greeter(user);    <br> 
+    </code>
+    <p>Ejecuta tsc greeter.ts y veras que el javascript es igual al codigo anterior. Classes in TypeScript are just a shorthand for the same prototype-based OO that is frequently used in JavaScript.</p>
+</div>
+<div id="di-7">
+    <h2>Abriendo tu pagina app con typescript</h2>
+    <p>Ahora escribe lo siguiente en greeter.html</p>
+    <code>
+    &lt;!DOCTYPE html> <br>
+&lt;html> <br>
+    &lt;head>&lt;title>TypeScript Greeter&lt;/title>&lt;/head> <br>
+    &lt;body> <br>
+        &lt;script src="greeter.js">&lt;/script> <br>
+    &lt;/body> <br>
+&lt;/html> <br>
+    </code>
+    <p>Abre greeter-html en el navegador para correr el primer ejemplo de tu aplicacion web typescript!</p>
+    <p>Optional: Open greeter.ts in Visual Studio, or copy the code into the TypeScript playground. You can hover over identifiers to see their types. Notice that in some cases these types are inferred automatically for you. Re-type the last line, and see completion lists and parameter help based on the types of the DOM elements. Put your cursor on the reference to the greeter function, and hit F12 to go to its definition. Notice, too, that you can right-click on a symbol and use refactoring to rename it.</p>
+    <p>The type information provided works together with the tools to work with JavaScript at application scale. For more examples of what’s possible in TypeScript, see the Samples section of the website.</p>
+</div>
+</body>
+</html>

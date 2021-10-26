@@ -1,0 +1,9 @@
+transformacion de EMAscrip5 a 4, mimifica, elimina los comentarios,  
+
+en caso de no tener un webpack.config.js
+
+webpack -d app.js -o output.js
+
+si tienes un archivo de webpack.config.js
+
+webpack -d 

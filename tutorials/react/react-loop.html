@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>users-data</h2>
+    <code>
+        const data = [ <br>
+{ <br>
+    title: '', <br>
+    desc: '', <br>
+    npmClone: '', <br>
+    gitClone: '', <br>
+    gitRepo: '', <br>
+    npmRepo: '', <br>
+    docs: '', <br>
+    logoPath: '' <br>
+}, <br>
+{ <br>
+    title: '', <br>
+    desc: '', <br>
+    npmClone: '', <br>
+    gitClone: '', <br>
+    gitRepo: '', <br>
+    npmRepo: '', <br>
+    docs: '', <br>
+    logoPath: '' <br>
+}, <br>
+]; <br>
+ <br>
+export default data; <br>
+    </code>
+    <code>
+        import users from "./users-data";  <br>
+        {users.map(userz => { <br>
+            return ( <br>
+                &lt;div>{userz.title}&lt;/div> <br>
+            ) <br>
+        })  <br>
+        } <br>
+    </code>
+</body>
+</html>

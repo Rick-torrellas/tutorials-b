@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Crear subdocumentos</h1>
+    <div>
+        <h2>Crear el moddelo</h2>
+        <code>
+            const contenidoSchema = new Schema({ <br>
+                titulo: {type: String}, <br>
+                nalga: { <br>
+                    titulo: {type: String}, <br>
+                    cuca: {type: String} <br>
+                } <br>
+            } , { <br>
+                timestamps: true <br>
+            }); <br>
+        </code>
+    </div>
+    <div>
+        <h2>Usar el modelo</h2>
+        <code>
+            crud.createT = async (req,res) => { <br>
+                const t = new T(); <br>
+                t.titulo = req.body.titulo; <br>
+                t.nalga.titulo =  req.body.nalga; <br>
+                t.nalga.cuca = req.body.nalgaCuca <br>
+             <br>
+                try { <br>
+                    await t.save();   <br>
+                    res.redirect('/'); <br>
+                } catch (err) { <br>
+                    return handleError(err); <br>
+                } <br>
+                 <br>
+            } <br>
+            <hr>
+            &lt;input type="text" name="titulo" placeholder="Nombre" class="form-control"> <br>
+        &lt;/div> <br>
+        &lt;div class="form-group"> <br>
+&lt;input type="text" name="nalga" placeholder="nalga.titulo" class="form-control"> <br>
+                                    &lt;/div> <br>
+&lt;div class="form-group"> <br>
+&lt;input type="text" name="nalgaCuca" placeholder="cuca" class="form-control"> <br>
+        </code>
+    </div>
+    <div>
+        <h2>Renderzar contenido</h2>
+        <div>
+            <h2>ejs</h2>
+            &lt;h5 class="card-title">&lt;%= ts.titulo %>&lt;/h5> <br>
+            &lt;p>&lt;%= ts.nalga.titulo %>&lt;/p> <br>
+            &lt;p>&lt;%= ts.nalga.cuca %>&lt;/p> <br>
+        </div>
+    </div>
+</body>
+</html>

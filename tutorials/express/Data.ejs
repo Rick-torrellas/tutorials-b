@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Data</h1>
+    <p>Enviar y Recibir informacion</p>
+    <nav>
+        <div><a href="#div1">Recivir Data</a></div>
+        <div><a href="#div2">Enviar Data</a></div>
+    </nav>
+    <div id="div1">
+        <h2>Recivir Data</h2>
+        <code>
+            router.post('/upload', async (req, res) => { <br>
+                const image = new Image(); <br>
+                image.title = req.body.title; <br>
+                image.description = req.body.description; <br>
+                image.filename = req.file.filename; <br>
+                image.path = '/img/uploads/' + req.file.filename; <br>
+                image.originalname = req.file.originalname; <br>
+                image.mimetype = req.file.mimetype; <br>
+                image.size = req.file.size; <br>
+            }); <br>
+        </code>
+    </div>
+    <div id="div2">
+        <h2>Enviar data</h2>
+        <code>
+            crudCtrl.catGetAll = async (req,res) =>{ <br>
+                try { <br>
+                    const categorias = await  Categoria.find(); <br>
+                console.log(chalk.bold.green('[CATEGORIAS ENCONTRADAS]')); <br>
+                    res.json(categorias);    <br>
+                } catch (error) { <br>
+                    console.log(chalk.bold.red(`[ERROR ENCONTRADO]: ${chalk.white('catGetAll')}`)); <br>
+                    console.log(error);    <br>
+                    res.send('[ERROR ENCONTRADO]: catGetAll'); <br>
+                } <br>
+                 <br>
+            } <br>
+        </code>
+    </div>
+</body>
+</html>

@@ -1,0 +1,6 @@
+Si tienes 2s elses termiando una cadena de ifs, al colocar un comentario entre ellas producira un error y se saldra del batch de una 
+
+)else (echo La ruta mysql se encuentra DESABILITADA)
+:: Final del if de segundo nivel 
+)else (echo No se consiguio el programa xampp)
+:: Final del if central

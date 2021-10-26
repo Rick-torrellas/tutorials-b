@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Configuraciones Generales</h1>
+    <h2>Instalacion</h2>
+    <code>npm i -g http-server</code>
+    <p>Esto es para crear un log y no se si tambien sea para correr el server en el puerto 80</p>
+    <code>http-server dist/ -p 80 > ./output.log &</code>
+    <h2>Detener el Server</h2>
+    <p>Para detener el server hace falta buscar el pid del servidor con</p>
+    <code>ps -eaf | grep http-server</code>
+    <p>Ya con el pid matamos el proceso</p>
+    <code>kill 2140</code>
+</body>
+</html>

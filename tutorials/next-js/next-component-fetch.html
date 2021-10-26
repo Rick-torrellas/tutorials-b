@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Fetch data a un componente en next</h1>
+    <p>Este es un componente fuera la carpeta pages</p>
+    <pre><code>
+        import {useEffect,useState} from "react";
+export default function App() {
+    const [__categories,categories] = useState(null);
+    const [__subcategories,subcategories] = useState(null);
+    useEffect(() => {
+      async function fetchData() {
+        const _categories = await axios.get(`${config.apiUrl}/categories`);
+        const _subcategories = await axios.get(`${config.apiUrl}/sub-categories`);
+        categories(_categories);
+        subcategories(_subcategories);
+      }
+      fetchData();
+    },[])
+    return (
+        <>
+        </>
+    )
+}
+    </code></pre>
+</body>
+</html>

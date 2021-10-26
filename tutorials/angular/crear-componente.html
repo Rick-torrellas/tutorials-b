@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Crear un componente</h1>
+    <p>Para crear nuevos componentes se tienen que crear dentro de app</p>
+    <p>nombre-componente.component.ts</p>
+    <p>siempre se empieza cargando el core de angular</p>
+    <code>
+        import { Component } from '@angular/core'; <br>
+        @Component({ <br>
+            selector: 'mi-componente', <br>
+            template: ` <br>
+            &lt;p>codigo html&lt;/p> <br>
+        `  <br>
+            templateUrl: 'archivo-html.component.html' <br>
+        }) <br>
+        export class Micomponente{ <br>
+            constructor() { <br>
+            console.log("Componente cargado"); <br>
+        } <br>
+        } <br>
+    </code>
+    <p>para cargar este nuevo componente hay que primero, importarlo en app.modulo.ts</p>
+    <code>
+        import { Micomponente } from './componentes/mi-componente/mi-componente.component' <br>
+ <br>
+@NgModule({ <br>
+  declarations: [ <br>
+  AppComponent, <br>
+  Micomponente <br>
+] <br>
+}) <br>
+    </code>
+    <p>Luego para utilizar tu componente en app.component.html</p>
+    <p>se usa dentro del codigo html con el nombre que le pusiste</p>
+    <code>&lt;mi-componente>&lt;/mi-componente></code>
+    <p>Para usar las propiedades de una clasepor ejemplo, dentro del html, se puede usar con binding interpolation angular, con lo que se puede aregar propiedades y metodos. asi.</p>
+    <code>{{ propiedad }} <br>
+        {{ metodo }}</code>
+        <p>para hacer automaticamente todo lo que acabamos de ver, podemos simplemente usar el siguiente comando.</p>
+        <code>ng g component vaginas	/mi-componente <br>
+            ng g c vaginas	/mi-componente <br>
+        </code>
+</body>
+</html>

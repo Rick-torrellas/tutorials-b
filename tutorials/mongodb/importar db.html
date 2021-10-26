@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Importar base de datos a Mongodb</h1>
+    <h2>mongorestore</h2>
+    <p>Importa una/s base de datos que tengas al sistema de Mongodb.</p>
+    <div>
+        <h2>Manera basica</h2>
+        <code>mongorestore  dump/</code>
+        <p>Esto importa todas las bases de datos que tengas en la carpeta dump/, el nombre que se le pondra es el nombre de la carpeta contedora de la db. creo :D</p>
+        <div>
+            <h2>--host</h2>
+            <p>La ip y el puerto donde se encuentra el sitema mongodb, donde vas a colocar la db</p>
+            <code>mongorestore --host=ip:puerto dump/</code>
+        </div>
+        <div>
+            <h2>--username,-u</h2>
+            <p>EL usuario del sistema de mongodb.</p>
+            <code></code>
+        </div>
+        <div>
+            <h2>--password,-p</h2>
+            <p>La contraseña del usuario del sistema de mongodb.</p>
+            <code></code>
+        </div>
+        <div>
+            <h2>--db,-d</h2>
+            <p>El nombre de la base de datos que vas a realizar la importacion, no se usarlo el todo, osea si funciona,pero me muestra un mensaje diciendome que pronto va a hacer decapricado y que use --nsInclude.</p>
+            <p>NOTA: En este caso vamos a seleccionar la base de datos que vamos a importar</p>
+            <code>mongorestore -d=vaginas dump/nalga</code>
+        </div>
+        <div>
+            <h2>--collection,-c</h2>
+            <p>Espesifica la coleccion que va a ser importada</p>
+            <code>mongorestore --db=reporting --collection=employeesalaries dump/test/salaries.bson</code>
+        </div>
+        <div>
+            <h2>--gzip</h2>
+            <p>Importa base de datos comprimidas en rar.</p>
+            <code></code>
+        </div>
+        <div>
+            <h2>--authenticationDatabase</h2>
+            <p>Espesifica la base de datos donde fue creado el usuario para la autentificacion.</p>
+            <code>
+                --authenticationDatabase "basedatos"
+            </code>
+        </div>
+    </div>
+</body>
+</html>

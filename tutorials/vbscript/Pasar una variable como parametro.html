@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Pasar una variable como un parametro a un programa</h1>
+    <p>En este caso pasaremos el valor de una vatiable como parametro a un batch.</p>
+    <code>
+        Set objParametros = WScript.Arguments <br>
+id = objParametros.Item(0) <br>
+objshell.run "escrip.cmd "  & id & ""  ,vbhide   <br>
+    </code>
+</body>
+</html>

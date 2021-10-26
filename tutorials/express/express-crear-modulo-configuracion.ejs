@@ -1,0 +1,50 @@
+<p><b>config.js</b></p>
+<p>Se tiene que exportar solo la constante app.</p>
+<code>
+    require('dotenv').config(); <br>
+const express = require('express'); <br>
+const morgan = require('morgan'); <br>
+const uuid = require('uuid/v4'); <br>
+const { format } = require('timeago.js'); <br>
+// intializations <br>
+const app = express(); <br>
+const path = require('path'); <br>
+ <br>
+// settings <br>
+app.set('views', path.join(__dirname, 'views')); <br>
+app.use(express.json()); <br>
+app.set('view engine', 'ejs'); <br>
+app.set('port', process.env.PORT || 3000); <br>
+ <br>
+// middlewares <br>
+app.use(morgan('dev')); <br>
+ <br>
+// Global variables <br>
+app.use((req, res, next) => { <br>
+    app.locals.format = format; <br>
+    next(); <br>
+}); <br>
+ <br>
+// routes <br>
+app.use('/porno', require('./routes/porno')); <br>
+ <br>
+// static files <br>
+app.use(express.static(path.join(__dirname, '../.nucleo'))); <br>
+ <br>
+module.exports = app; <br>
+</code>
+<p><b>index.js</b></p>
+<p>Luego en el index , se crea esa varaible y se iguala al modulo config.</p>
+<code>
+    const chalk = require('chalk'); <br>
+const app = require('./config') <br>
+const adress = `http://localhost:${app.get('port')}`; <br>
+ <br>
+require('./database'); <br>
+ <br>
+// start <br>
+app.listen(`${app.get('port')}`, () => { <br>
+    console.log(`Server on port ${app.get('port')} ${chalk.yellow(adress)} `); <br>
+    console.log(chalk.yellow(adress+'/porno')); <br>
+}); <br>
+</code>

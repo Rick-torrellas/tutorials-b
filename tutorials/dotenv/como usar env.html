@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Como usar env</h1>
+    <p>Basico</p>
+    <ul>
+        <li>Primero tienes que crear un archivo .env en la raiz de tu proyecto, creo que puede ser cualquier cosa .env pero, puedes solo colocar .env</li>
+        <li>Lo siguiente es en cada lugar donde quieras que exista esa variable, tienes que agregar <br>
+        <code> require('dotenv').config();</code></li>
+        <li><p>La manera de editar este archivo .env sera:</p>
+        <code>
+            DB_HOST=localhost <br>
+DB_USER=root <br>
+DB_PASS=s1mpl3 <br>
+        </code></li>
+        <li>Para utilzar la variable: <br><code>process.env.variable</code></li>
+    </ul>
+</body>
+</html>

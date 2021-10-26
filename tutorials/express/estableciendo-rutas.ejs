@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Establecer varias rutas para renderizar contenido</h1>
+    <p>Express no trae consigo una manera de poder renderizar el contenido de manera dinamica o multiple por defecto, para esto se pueden usar dos estratejias, se puede usar solo una carpeta muy grande donde colocar todas las vistas, o se puede usar una ruta y apartir de esta guiarnos a buscar las demas rutas.</p>
+    <div>
+        <h2>Usar solo una carpeta</h2>
+        <p>Puedes colocar todas las vistas en una sola carpeta, de manera que puedas tener varios proyectos que puedes renderizar segun la ruta</p>
+    </div>
+    <h3>Estableciendo la ruta para las vistas</h3>
+    <p><b>NOTA:</b> la ruta debe terminar en /, si no no funcionara.</p>
+    <code>
+        app.set('views', path.join(__dirname, './../../contenido/'));
+    </code>
+    <h3>Renderizando el contenido</h3>
+    <code>
+        crud.renderHome = async (req, res) => { <br>
+            const ts = await T.find(); <br>
+            res.render('t-ejs/views/index', { ts }); <br>
+        } <br>
+    </code>
+    <div>
+        <h2>Usar una ruta base</h2>
+        <p>Tambien puedes indicar una ruta, y luego usar esa ruta para guarte a las demas rutas por ejemplo</p>
+        <code>
+            app.set('views', path.join(__dirname, './../../contenido/')); <br>
+          <br>
+            crud.renderHome = async (req, res) => { <br>
+                const ts = await T.find(); <br>
+                res.render('../t-ejs/views/index', { ts }); <br>
+            } <br>
+        </code>
+        <p>En este caso el contenido no se encuentra en la carpeta contenido, se encuentra en una llamada t-ejs, que esta a lado de contenido.</p>
+    </div>
+</body>
+</html>

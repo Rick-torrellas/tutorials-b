@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <p>nginx sends the same HTTP request to your node.js web apps which results into a 404 error. Why? Because, your node.js web application serves requests from / not from /blog and /mail. But, nginx is sending requests to /blog and /mail.</p>
+        <p>To fix this issue, we need rewrite the URL so that it matches the URL you can serve on your node.js applications.</p>
+        <p>To correctly rewrite URLs change your config file to match the following snippet:</p>
+        <p>This rewrite commands are simple regular expressions that transform strings like /blogWHAT_EVER and /mailWHAT_EVER to /WHAT_EVER in the HTTP requests.</p>
+        <code>
+            server { <br>
+                listen       ...; <br>
+                ... <br>
+                location / { <br>
+                    proxy_pass http://127.0.0.1:8080; <br>
+                } <br>
+                 <br>
+                location /blog { <br>
+                    rewrite ^/blog(.*) /$1 break; <br>
+                    proxy_pass http://127.0.0.1:8181; <br>
+                } <br>
+             <br>
+                location /mail { <br>
+                    rewrite ^/mail(.*) /$1 break; <br>
+                    proxy_pass http://127.0.0.1:8282; <br>
+                } <br>
+                ... <br>
+            } <br>
+        </code>
+    </div>
+</body>
+</html>

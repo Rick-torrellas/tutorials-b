@@ -1,0 +1,12 @@
+<code>
+    const tcontent= {} <br>
+    tcontent.originalname = locals.req_file_originalname; <br>
+    tcontent.mimetype = locals.req_file_mimetype; <br>
+    tcontent.size = locals.req_file_size; <br>
+    tcontent.filename = locals.req_file_filename; <br>
+    await Tcontent.findOneAndUpdate({folder: locals.folder},{tcontent: tcontent},{new:true},(error,data)=>{ <br>
+        if (error) { <br>
+            console.log(error) <br>
+        }  <br>
+    });  <br>
+</code>

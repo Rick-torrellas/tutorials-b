@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h2>Confgurar mongodb para permitir conecciones remotas</h2>
+        <ul>
+            <li>
+                <p>Vamos a editar un archivo de configuracion</p>
+                <code>sudo nano /etc/mongod.conf</code>
+            </li>
+            <li>
+                <p>Vamos a buscar donde dice</p>
+                <code>
+                    Network interfaces
+                    net:
+                    bindIp: 127.0.0.1,la-ip-donde-esta-la-db
+                </code>
+            </li>
+            <li>
+                <p>Luego reiniciamos mongo</p>
+                <code>sudo service mongod restart</code>
+            </li>
+        </ul>
+    </div>
+</body>
+</html>

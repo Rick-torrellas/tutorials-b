@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejecutar un bath invisiblemente hablando</h1>
+    <p>Con este codigo se logra ejecutar un batch de forma que no se vea la consola de ejecucion, cabe destacar que el wscript.shell sirve para ejecutar todo tipo de programa y que la caracteristica de "invisibilidad" se lo da el atributo <b>vbhide</b></p>
+    <code>
+        set objshell = createobject("wscript.shell") <br>
+        objshell.run "escrip.cmd "  & id & ""  ,vbhide  <br>
+    </code>
+    <p>Tambien se podria usar esta syntaxis, es lo mismo</p>
+    <code>
+set WshShell = WScript.CreateObject("WScript.Shell") <br>
+Return = WshShell.Run("cmd.exe /C pm2 start G:\taller\x\x-apirest\src --name x",0,true) <br>
+    </code>
+</body>
+</html>

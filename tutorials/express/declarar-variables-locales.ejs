@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h1>Declarar variables locales</h1>
+        <p>En express se pueden declarar las variables locales de variables manerias.</p>
+        <h4>Variables estaticas</h4>
+        <p>Esto significa casi como si fueran constantes, estan se crean y luego no cambian mas, utiles en algunas ocaciones.</p>
+        <code>
+            app.locals.variables = 'varlor';
+        </code>
+        <h4>Varables Dinamicas</h4>
+        <p>Esto quiere decir que el valor puede ir cambiado dependiendo de la operacion que sea igualado, puede ser el resultado de una busqueda a una base de datos, en este caso se igualo a un modulo de node "timeago.js".</p>
+        <code>
+            const { format } = require('timeago.js'); <br>
+            app.use((req, res, next) => { <br>
+                app.locals.format = format; <br>
+                next(); <br>
+            }); <br>
+        </code>
+        <p>Creo que para poder usar estas variables, tan solo tienes que usar la variable "format". (INVESTIGAR)</p>
+    </div>
+</body>
+</html>

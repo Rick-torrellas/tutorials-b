@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>mongo Operaciones Basicas</h1>
+    <article>
+        <h2>Operaciones basicas</h2>
+        <div>
+            <h2>Crear db</h2>
+            <p>Solo hace falta posicioarte en ella, se creara automanticamente sin estar creada previamente.</p>
+            <code>use base-datos</code>
+        </div>
+        <div>
+            <h2>Crear coleccion o tabla</h2>
+            <p>Son como las tablas de SQL</p>
+            <code>db.nombre-tabla.save({id: 1, nombre: "el coño de tu madre", guebonada: "algo"})</code>
+        </div>
+        <div>
+            <h2>Mostrar colecciones</h2>
+            <p></p>
+            <code>show collections</code>
+        </div>
+        <div>
+            <h2>Mostrar usuarios</h2>
+            <code>show users</code>
+        </div>
+        <div>
+            <h2>Mostrar registros de una coleccion</h2>
+            <p>Con este te muestra todas las colecciones que coincidan con ese criterio.</p>
+            <code>db.coleccion.find()</code>
+            <p>Para encontrar uno o varios valores</p>
+            <code>
+                db.tabla.find({nombre: "nalga","guebonada":"pija"})
+            </code>
+        </div>
+        <div>
+            <h2>Eliminar una coleccion</h2>
+            <code>db.nombre-coleccion.drop()</code>
+        </div>
+        <div>
+            <h2>Remover documentos de una coleccion</h2>
+            <p>Remueve todos los documentos dentro de una query</p>
+            <code>
+                db.products.remove({ _id: 1, category: "café", status: "A" })
+            </code>
+        </div>
+    </article>
+</div>
+</body>
+</html>

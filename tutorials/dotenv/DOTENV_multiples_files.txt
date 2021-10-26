@@ -1,0 +1,4 @@
+Se pueden usar varios archivos .env en un mismo proyecto.
+
+require('dotenv').config({path: config.app.path+'/coreserver.env'});
+require('dotenv').config({path: config.app.path+'/.env'});

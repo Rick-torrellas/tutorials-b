@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renderizar</title>
+</head>
+<body>
+    <h1>Renderizar</h1>
+    <nav>
+        <div><a href="#div1">Renderizar y Enviar un objeto</a></div>
+        <div><a href="#div2">Renderizar y Enviar un array de objetos</a></div>
+        <div><a href="#div3">Renderizar plantilla</a></div>
+        <div><a href="#div4">Renderizar contenido en EJS</a></div>
+        <div><a href="#div5">Renderizar Angular</a></div>
+        <div><a href="#div6"></a></div>
+        <div><a href="#div7"></a></div>
+        <div><a href="#div8"></a></div>
+        <div><a href="#div9"></a></div>
+        <div><a href="#div10"></a></div>
+        <div><a href="#div11"></a></div>
+        <div><a href="#div12"></a></div>
+        <div><a href="#div13"></a></div>
+        <div><a href="#div14"></a></div>
+        <div><a href="#div15"></a></div>
+    </nav>
+    <div id="div1">
+        <h2>Enviar un objeto</h2>
+        <code>
+            router.get('/image/:id', async (req, res) => { <br>
+                const { id } = req.params; <br>
+                const image = await Image.findById(id); <br>
+                res.render('profile', { image }); <br>
+            }); <br>
+        </code>
+    </div>
+    <div id="div2">
+        <h2>Enviar un Array de objetos</h2>
+        <code>
+            router.get('/', async (req, res) => { <br>
+                const images = await Image.find(); <br>
+                res.render('index', { images }); <br>
+            }); <br>
+        </code>
+    </div>
+    <div id="div3">
+        <h2>Renderizar Plantilla</h2>
+        <p></p>
+        <code>
+            router.get('/', async (req, res) => { <br>
+                res.render('index'); <br>
+            }); <br>
+        </code>
+    </div>
+    <div id="div4">
+        <h2>Renderizar contenido en EJS</h2>
+        <code>
+            app.set('views', path.join(__dirname, 'public')); <br>
+    app.set('view engine', 'ejs'); <br>
+     <br>
+    app.get("/", function(req,res) { <br>
+        res.render("index"); <br>
+    }); <br>
+        </code>
+    </div>
+    <div id="div5">
+        <h2>Renderizar proyectos de Angular</h2>
+        <p>Para renderizar proyectos en angular es recomendable usar esta ruta</p>
+        <code>
+            router.get('*', render.client);
+        </code>
+        <p>Osea es mejor direccionar todas las rutas a la aplicacion de angular, asi el se encarga de manejar las rutas, por que si no, solo podras acceder a la ruta inicial de app, desde el UrL, y si intentas ingresar a algunas de las rutas, creadas en angular, te dara error.</p>
+    </div>
+    <div id="div6">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div7">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div8">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div9">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div10">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div11">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div12">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div13">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div14">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div15">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+</body>
+</html>

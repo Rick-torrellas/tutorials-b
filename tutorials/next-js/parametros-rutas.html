@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Routas Parametros</h1>
+    <h2>Client</h2>
+    <pre>
+        <code>
+            import { useRouter } from 'next/router';
+            const Post = () => {
+                const router = useRouter()
+                const { pid } = router.query
+              
+                return &lt;>Post: {pid}&lt;p>
+              }
+        </code>
+    </pre>
+    <h2>server</h2>
+    <pre><code>
+        export async function getServerSideProps(context) {
+            const { id } = context.query;
+        }
+    </code></pre>
+    <p>Estas dos maneras son las usadas para pasar parametros entre las rutas, las dos tipos de rutas sirven.</p>
+    <p>A predefined route: /about?name=test</p>
+    <p>A dynamic route: /blog/[my-post]</p>
+</body>
+</html>

@@ -1,0 +1,1551 @@
+<html>
+<head></head>
+<body>
+   <article>
+       <div>
+           <h1>Fundamentos de Git</h1>
+           <nav>
+             <a href="#div-1">Obteniendo un repositorio Git</a> <br>
+             <ul>
+<li><a href="#div-1-1">Inicializando un repositorio en un directorio existente</a></li>
+<li><a href="#div-1-2">Clonando un repositorio existente</a></li>
+             </ul>
+            <a href="#div-2">Guardando cambios en el Repositorio</a> <br>
+  <ul>
+    <li><a href="#div-2-1">Revisando el Estado de tus Archivos</a></li>
+    <li><a href="#div-2-2">Rastrear Archivos Nuevos</a></li>
+    <li><a href="#div-2-3">Preparar Archivos Modificados</a></li>
+    <li><a href="#div-2-5">Estado Abreviado</a></li>
+    <li><a href="#div-2-4">Ignorar Archivos</a></li>
+    <li><a href="#div-2-9">Ver los Cambios Preparados y No Preparados</a></li>
+    <li><a href="#div-2-6">Confirmar tus Cambios</a></li>
+    <li><a href="#div-2-10">Saltar el Área de Preparación</a></li>
+    <li><a href="#div-2-7">Eliminar Archivos</a></li>
+    <li><a href="#div-2-8">Cambiar el Nombre de los Archivos</a></li>
+  </ul>
+  <div><a href="#div-3">Ver el Historial de Confirmaciones</a> <br>
+    <ul>
+      <li><a href="#div-3-1">Limitar la Salida del Historial</a></li>
+    </ul>
+  </div>
+  <div>
+    <a href="#div-4">Deshacer Cosas</a> <br>
+    <ul>
+      <li><a href="#div-4-1">Deshacer un Archivo Preparado</a></li>
+      <li><a href="#div-4-2">Deshacer un Archivo Modificado</a></li>
+    </ul>
+  </div>
+  <div>
+    <a href="#div-5">Trabajar con Remotos</a> <br>
+  </div>
+  <ul>
+    <li><a href="#div-5-1">Ver Tus Remotos</a></li>
+    <li><a href="#div-5-2">Añadir Repositorios Remotos</a></li>
+    <li><a href="#div-5-3">Traer y Combinar Remotos</a></li>
+    <li><a href="#div-5-4">Enviar a Tus Remotos</a></li>
+    <li><a href="#div-5-5">Inspeccionar un Remoto</a></li>
+    <li><a href="#div-5-6">Eliminar y Renombrar Remotos</a></li>
+  </ul><br>
+  <div>
+    <a href="#div-6">Etiquetado</a> <br>
+  </div>
+  <ul>
+    <li><a href="#div-6-1">Listar Tus Etiquetas</a></li>
+    <li><a href="#div-6-2">Crear Etiquetas</a></li>
+    <li><a href="#div-6-3">Etiquetas Anotadas</a></li>
+    <li><a href="#div-6-4">Etiquetas Ligeras</a></li>
+    <li><a href="#div-6-5">Etiquetado Tardío</a></li>
+    <li><a href="#div-6-6">Compartir Etiquetas</a></li>
+    <li><a href="#div-6-7">Sacar una Etiqueta</a></li>
+  </ul>
+  <div>
+    <a href="#div-7">Alias de Git</a> <br>
+  </div>
+           </nav>
+           <p>Si pudieras leer solo un capítulo para empezar a trabajar con Git, este es el capítulo que debes leer.
+Este capítulo cubre todos los comandos básicos que necesitas para hacer la gran mayoría de cosas a
+las que eventualmente vas a dedicar tu tiempo mientras trabajas con Git. Al final del capítulo,
+deberás ser capaz de configurar e inicializar un repositorio, comenzar y detener el seguimiento de
+archivos, y preparar (stage) y confirmar (commit) cambios. También te enseñaremos a configurar
+Git para que ignore ciertos archivos y patrones, cómo enmendar errores rápida y fácilmente, cómo
+navegar por la historia de tu proyecto y ver cambios entre confirmaciones, y cómo enviar (push) y
+recibir (pull) de repositorios remotos.</p>
+       </div>
+       <div id="div-1">
+           <h2>Obteniendo un repositorio Git</h2>
+           <p>Puedes obtener un proyecto Git de dos maneras. La primera es tomar un proyecto o directorio
+existente e importarlo en Git. La segunda es clonar un repositorio existente en Git desde otro
+servidor.</p>
+           <div id="div-1-1">
+               <h3>Inicializando un repositorio en un directorio existente</h3>
+               <p>Si estás empezando a seguir un proyecto existente en Git, debes ir al directorio del proyecto y usar
+el siguiente comando:</p>
+               <code>$ git init</code>
+               <p>Esto crea un subdirectorio nuevo llamado .git, el cual contiene todos los archivos necesarios del
+repositorio – un esqueleto de un repositorio de Git. Todavía no hay nada en tu proyecto que esté
+bajo seguimiento. Puedes revisar Los entresijos internos de Git para obtener más información
+acerca de los archivos presentes en el directorio .git que acaba de ser creado</p>
+               <p>Si deseas empezar a controlar versiones de archivos existentes (a diferencia de un directorio vacío),
+probablemente deberías comenzar el seguimiento de esos archivos y hacer una confirmación
+inicial. Puedes conseguirlo con unos pocos comandos git add para especificar qué archivos quieres
+controlar, seguidos de un git commit para confirmar los cambios:</p>
+               <code>
+$ git add *.c <br>
+$ git add LICENSE <br>
+$ git commit -m 'initial project version' <br>
+               </code>
+               <p>Veremos lo que hacen estos comandos más adelante. En este momento, tienes un repositorio de Git
+con archivos bajo seguimiento y una confirmación inicial.</p>
+           </div>
+           <div id="div-1-2">
+               <h3>Clonando un repositorio existente</h3>
+               <p>Si deseas obtener una copia de un repositorio Git existente — por ejemplo, un proyecto en el que te
+gustaría contribuir — el comando que necesitas es git clone. Si estás familizarizado con otros
+sistemas de control de versiones como Subversion, verás que el comando es "clone" en vez de
+23
+"checkout". Es una distinción importante, ya que Git recibe una copia de casi todos los datos que
+tiene el servidor. Cada versión de cada archivo de la historia del proyecto es descargada por defecto
+cuando ejecutas git clone. De hecho, si el disco de tu servidor se corrompe, puedes usar cualquiera
+de los clones en cualquiera de los clientes para devolver el servidor al estado en el que estaba
+cuando fue clonado (puede que pierdas algunos hooks del lado del servidor y demás, pero toda la
+información acerca de las versiones estará ahí) — véase Configurando Git en un servidor para más
+detalles.
+</p>
+               <p>Puedes clonar un repositorio con git clone [url]. Por ejemplo, si quieres clonar la librería de Git
+llamada libgit2 puedes hacer algo así:</p>
+               <code>$ git clone https://github.com/libgit2/libgit2
+</code>
+               <p>Esto crea un directorio llamado libgit2, inicializa un directorio .git en su interior, descarga toda la
+información de ese repositorio y saca una copia de trabajo de la última versión. Si te metes en el
+directorio libgit2, verás que están los archivos del proyecto listos para ser utilizados. Si quieres
+clonar el repositorio a un directorio con otro nombre que no sea libgit2, puedes especificarlo con
+la siguiente opción de línea de comandos:</p>
+               <code>$ git clone https://github.com/libgit2/libgit2 mylibgit</code>
+               <p>Ese comando hace lo mismo que el anterior, pero el directorio de destino se llamará mylibgit.</p>
+               <p>Git te permite usar distintos protocolos de transferencia. El ejemplo anterior usa el protocolo
+https://, pero también puedes utilizar git:// o usuario@servidor:ruta/del/repositorio.git que
+utiliza el protocolo de transferencia SSH. En Configurando Git en un servidor se explicarán todas
+las opciones disponibles a la hora de configurar el acceso a tu repositorio de Git, y las ventajas e
+inconvenientes de cada una</p>
+           </div>
+       </div>
+       <div id="div-2">
+           <h2>Guardando cambios en el Repositorio</h2>
+           <p>Ya tienes un repositorio Git y un checkout o copia de trabajo de los archivos de dicho proyecto. El
+siguiente paso es realizar algunos cambios y confirmar instantáneas de esos cambios en el
+repositorio cada vez que el proyecto alcance un estado que quieras conservar.</p>
+           <p>Recuerda que cada archivo de tu repositorio puede tener dos estados: rastreados y sin rastrear. Los
+archivos rastreados (tracked files en inglés) son todos aquellos archivos que estaban en la última
+instantánea del proyecto; pueden ser archivos sin modificar, modificados o preparados. Los
+archivos sin rastrear son todos los demás - cualquier otro archivo en tu directorio de trabajo que no
+estaba en tu última instantánea y que no está en el área de preparación (staging area). Cuando
+clonas por primera vez un repositorio, todos tus archivos estarán rastreados y sin modificar pues
+acabas de sacarlos y aun no han sido editados</p>
+           <p>Mientras editas archivos, Git los ve como modificados, pues han sido cambiados desde su último
+commit. Luego preparas estos archivos modificados y finalmente confirmas todos los cambios
+preparados, y repites el ciclo</p>
+           <img src="" title="Figure 8. El ciclo de vida del estado de tus archivos.">
+           <div id="div-2-10">
+             <h3>Saltar el Área de Preparación</h3>
+             <p>
+              A pesar de que puede resultar muy útil para ajustar los commits tal como quieres, el área de preparación es a veces un paso más complejo de lo que necesitas para tu flujo de trabajo. Si quieres saltarte el área de preparación, Git te ofrece un atajo sencillo. Añadiendo la opción -a al comando git commit harás que Git prepare automáticamente todos los archivos rastreados antes de confirmarlos, ahorrándote el paso de git add:
+             </p>
+             <code>
+              $ git status
+             </code>
+             <p>Fíjate que en este caso no fue necesario ejecutar git add sobre el archivo CONTRIBUTING.md antes de confirmar.</p>
+           </div>
+           <div id="div-2-5">
+             <h3>Estado Abreviado</h3>
+             <p>Si bien es cierto que la salida de git status es bastante explícita, también es verdad que es muy extensa. Git ofrece una opción para obtener un estado abreviado, de manera que puedas ver tus cambios de una forma más compacta. Si ejecutas git status -s o git status --short, obtendrás una salida mucho más simplificada.</p>
+             <code>
+              $ git status -s <br>
+              M README <br>
+             MM Rakefile <br>
+             A  lib/git.rb <br>
+             M  lib/simplegit.rb <br>
+             ?? LICENSE.txt <br>
+             </code>
+             <p>Los archivos nuevos que no están rastreados tienen un ?? a su lado, los archivos que están preparados tienen una A y los modificados una M. El estado aparece en dos columnas - la columna de la izquierda indica el estado preparado y la columna de la derecha indica el estado sin preparar. Por ejemplo, en esa salida, el archivo README está modificado en el directorio de trabajo pero no está preparado, mientras que lib/simplegit.rb está modificado y preparado. El archivo Rakefile fue modificado, preparado y modificado otra vez por lo que existen cambios preparados y sin preparar.</p>
+           </div>
+           <div id="div-2-1">
+               <h3>Revisando el Estado de tus Archivos</h3>
+               <p>La herramienta principal para determinar qué archivos están en qué estado es el comando git
+status. Si ejecutas este comando inmediatamente después de clonar un repositorio, deberías ver
+algo como esto:
+</p>
+               <code>
+               $ git status <br>
+On branch master <br>
+nothing to commit, working directory clean  <br>
+               </code>
+               <p>Esto significa que tienes un directorio de trabajo limpio - en otras palabras, que no hay archivos
+rastreados y modificados. Además, Git no encuentra archivos sin rastrear, de lo contrario
+aparecerían listados aquí. Finalmente, el comando te indica en cuál rama estás y te informa que no
+ha variado con respecto a la misma rama en el servidor. Por ahora, la rama siempre será “master”,
+que es la rama por defecto; no le prestaremos atención de momento. Ramificaciones en Git tratará
+en detalle las ramas y las referencias.</p>
+               <p>Supongamos que añades un nuevo archivo a tu proyecto, un simple README. Si el archivo no
+existía antes y ejecutas git status, verás el archivo sin rastrear de la siguiente manera:
+</p>
+               <code>
+               $ echo 'My Project' > README  <br>
+$ git status <br>
+On branch master <br>
+Untracked files: <br>
+  (use "git add &lt;file>..." to include in what will be committed) <br>
+  README <br>
+nothing added to commit but untracked files present (use "git add" to track) <br>
+               </code>
+               <p>Puedes ver que el archivo README está sin rastrear porque aparece debajo del encabezado
+“Untracked files” (“Archivos no rastreados” en inglés) en la salida. Sin rastrear significa que Git ve archivos que no tenías en el commit anterior. Git no los incluirá en tu próximo commit a menos que
+se lo indiques explícitamente. Se comporta así para evitar incluir accidentalmente archivos
+binarios o cualquier otro archivo que no quieras incluir. Como tú sí quieres incluir README, debes
+comenzar a rastrearlo.</p>
+           </div>
+           <div id="div-2-2">
+               <h2>Rastrear Archivos Nuevos</h2>
+               <p>Para comenzar a rastrear un archivo debes usar el comando git add. Para comenzar a rastrear el
+archivo README, puedes ejecutar lo siguiente:
+</p>
+               <code>$ git add README</code>
+               <p>Ahora si vuelves a ver el estado del proyecto, verás que el archivo README está siendo rastreado y
+está preparado para ser confirmado:
+</p>
+               <code>
+               $ git status <br>
+On branch master <br>
+Changes to be committed: <br>
+  (use "git reset HEAD &lt;file>..." to unstage) <br>
+  new file: README <br>
+               </code>
+               <p>Puedes ver que está siendo rastreado porque aparece luego del encabezado “Cambios a ser
+confirmados” (“Changes to be committed” en inglés). Si confirmas en este punto, se guardará en el
+historial la versión del archivo correspondiente al instante en que ejecutaste git add.
+Anteriormente cuando ejecutaste git init, ejecutaste luego git add (files) - lo cual inició el
+rastreo de archivos en tu directorio. El comando git add puede recibir tanto una ruta de archivo
+como de un directorio; si es de un directorio, el comando añade recursivamente los archivos que
+están dentro de él</p>
+           </div>
+           <div id="div-2-3">
+           <h2>Preparar Archivos Modificados</h2>
+           <p>Vamos a cambiar un archivo que esté rastreado. Si cambias el archivo rastreado llamado
+“CONTRIBUTING.md” y luego ejecutas el comando git status, verás algo parecido a esto:</p>
+           <code>
+           $ git status <br>
+On branch master <br>
+Changes to be committed: <br>
+  (use "git reset HEAD &lt;file>..." to unstage) <br>
+  new file: README <br>
+Changes not staged for commit: <br>
+  (use "git add &lt;file>..." to update what will be committed) <br>
+  (use "git checkout -- &lt;file>..." to discard changes in working directory) <br>
+  modified: CONTRIBUTING.md <br>
+           </code>
+           <p>Ambos archivos están preparados y formarán parte de tu próxima confirmación. En este momento,
+supongamos que recuerdas que debes hacer un pequeño cambio en CONTRIBUTING.md antes de
+confirmarlo. Abres de nuevo el archivo, lo cambias y ahora estás listos para confirmar. Sin
+embargo, ejecutemos git status una vez más:</p>
+           <code>
+           $ vim CONTRIBUTING.md
+$ git status <br>
+On branch master <br>
+Changes to be committed: <br>
+  (use "git reset HEAD &lt;file>..." to unstage) <br>
+  new file: README <br>
+  modified: CONTRIBUTING.md <br>
+Changes not staged for commit: <br>
+  (use "git add &lt;file>..." to update what will be committed) <br>
+  (use "git checkout -- &lt;file>..." to discard changes in working directory) <br>
+  modified: CONTRIBUTING.md     <br>   
+           </code>
+           <p>¡¿Pero qué…?! Ahora CONTRIBUTING.md aparece como preparado y como no preparado. ¿Cómo es
+posible? Resulta que Git prepara un archivo de acuerdo al estado que tenía cuando ejecutas el
+comando git add. Si confirmas ahora, se confirmará la versión de CONTRIBUTING.md que tenías la
+última vez que ejecutaste git add y no la versión que ves ahora en tu directorio de trabajo al
+ejecutar git status. Si modificas un archivo luego de ejecutar git add, deberás ejecutar git add de
+nuevo para preparar la última versión del archivo:</p>
+           <code>
+           $ git add CONTRIBUTING.md <br>
+$ git status <br>
+On branch master <br>
+Changes to be committed: <br>
+  (use "git reset HEAD &lt;file>..." to unstage) <br>
+  new file: README <br>
+  modified: CONTRIBUTING.md <br>
+           </code>
+           </div>
+    <div>
+        <p>Si bien es cierto que la salida de git status es bastante explícita, también es verdad que es muy
+extensa. Git ofrece una opción para obtener un estado abreviado, de manera que puedas ver tus
+cambios de una forma más compacta. Si ejecutas git status -s o git status --short, obtendrás una
+salida mucho más simplificada.
+</p>
+        <code>
+        $ git status -s <br>
+ M README <br>
+MM Rakefile <br>
+A lib/git.rb <br>
+M lib/simplegit.rb <br>
+?? LICENSE.txt <br>
+        </code>
+        <p>Los archivos nuevos que no están rastreados tienen un ?? a su lado, los archivos que están preparados tienen una A y los modificados una M. El estado aparece en dos columnas - la columna
+de la izquierda indica el estado preparado y la columna de la derecha indica el estado sin preparar.
+Por ejemplo, en esa salida, el archivo README está modificado en el directorio de trabajo pero no está
+preparado, mientras que lib/simplegit.rb está modificado y preparado. El archivo Rakefile fue
+modificado, preparado y modificado otra vez por lo que existen cambios preparados y sin preparar</p>
+    </div>   
+    <div id="div-2-4">
+    <h2>Ignorar Archivos</h2>
+        <p>A veces, tendrás algún tipo de archivo que no quieres que Git añada automáticamente o más aun,
+que ni siquiera quieras que aparezca como no rastreado. Este suele ser el caso de archivos
+generados automáticamente como trazas o archivos creados por tu sistema de compilación. En
+estos casos, puedes crear un archivo llamado .gitignore que liste patrones a considerar. Este es un
+ejemplo de un archivo .gitignore:</p>
+        <code>
+        $ cat .gitignore <br>
+*.[oa] <br>
+*~ <br>
+        </code>
+        <p>La primera línea le indica a Git que ignore cualquier archivo que termine en “.o” o “.a” - archivos
+de objeto o librerías que pueden ser producto de compilar tu código. La segunda línea le indica a
+Git que ignore todos los archivos que terminen con una tilde (~), la cual es usada por varios editores
+de texto como Emacs para marcar archivos temporales. También puedes incluir cosas como trazas,
+temporales, o pid directamente; documentación generada automáticamente; etc. Crear un archivo
+.gitignore antes de comenzar a trabajar es generalmente una buena idea, pues así evitas confirmar
+accidentalmente archivos que en realidad no quieres incluir en tu repositorio Git.
+</p>
+        <p>Las reglas sobre los patrones que puedes incluir en el archivo .gitignore son las siguientes:</p>
+        <ul>
+            <li>Ignorar las líneas en blanco y aquellas que comiencen con #.</li>
+            <li>Aceptar patrones glob estándar.
+</li>
+            <li>Los patrones pueden terminar en barra (/) para especificar un directorio.</li>
+            <li> Los patrones pueden negarse si se añade al principio el signo de exclamación (!)</li>
+        </ul>
+        <p>Los patrones glob son una especie de expresión regular simplificada usada por los terminales. Un
+asterisco (*) corresponde a cero o más caracteres; [abc] corresponde a cualquier caracter dentro de
+los corchetes (en este caso a, b o c); el signo de interrogación (?) corresponde a un caracter
+cualquiera; y los corchetes sobre caracteres separados por un guión ([0-9]) corresponde a
+cualquier caracter entre ellos (en este caso del 0 al 9). También puedes usar dos asteriscos para
+indicar directorios anidados; a/**/z coincide con a/z, a/b/z, a/b/c/z, etc.</p>
+        <p>Aquí puedes ver otro ejemplo de un archivo .gitignore:</p>
+        <code>
+        # ignora los archivos terminados en .a <br>
+*.a <br>
+# pero no lib.a, aun cuando había ignorado los archivos terminados en .a en la línea
+anterior <br>
+!lib.a <br>
+# ignora unicamente el archivo TODO de la raiz, no subdir/TODO <br>
+/TODO <br>
+# ignora todos los archivos del directorio build/ <br>
+build/ <br>
+# ignora doc/notes.txt, pero no este: doc/server/arch.txt <br>
+doc/*.txt <br>
+# ignora todos los archivos .txt del directorio doc/ <br>
+doc/**/*.txt <br>       
+        </code>
+        <p>GitHub mantiene una extensa lista de archivos .gitignore adecuados a docenas de
+proyectos y lenguajes en https://github.com/github/gitignore, en caso de que quieras
+tener un punto de partida para tu proyecto</p>
+    </div> 
+<div id="div-2-9">
+    <h2>Ver los Cambios Preparados y No Preparados</h2>
+    <p>Si el comando git status es muy impreciso para ti - quieres ver exactamente que ha cambiado, no
+solo cuáles archivos lo han hecho - puedes usar el comando git diff. Hablaremos sobre git diff
+más adelante, pero lo usarás probablemente para responder estas dos preguntas: ¿Qué has
+cambiado pero aun no has preparado? y ¿Qué has preparado y está listo para confirmar? A pesar
+de que git status responde a estas preguntas de forma muy general listando el nombre de los
+archivos, git diff te muestra las líneas exactas que fueron añadidas y eliminadas, es decir, el
+parche.
+</p>
+    <p>Supongamos que editas y preparas el archivo README de nuevo y luego editas CONTRIBUTING.md pero
+no lo preparas. Si ejecutas el comando git status, verás algo como esto:
+</p>
+    <code>
+    $ git status <br>
+On branch master <br>
+Changes to be committed: <br>
+  (use "git reset HEAD &lt;file>..." to unstage) <br>
+  new file: README <br>
+Changes not staged for commit: <br>
+  (use "git add &lt;file>..." to update what will be committed) <br>
+  (use "git checkout -- &lt;file>..." to discard changes in working directory) <br>
+  modified: CONTRIBUTING.md   <br>
+    </code>
+    <p>Para ver qué has cambiado pero aun no has preparado, escribe git diff sin más parámetros:
+</p>
+    <code>
+    $ git diff <br>
+diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md <br>
+index 8ebb991..643e24f 100644 <br>
+--- a/CONTRIBUTING.md <br>
++++ b/CONTRIBUTING.md <br>
+@@ -65,7 +65,8 @@ branch directly, things can get messy <br>.
+ Please include a nice description of your changes when you submit your PR; <br>
+ if we have to read the whole diff to figure out why you're contributing
+ in the first place, you're less likely to get feedback and have your change <br>
+-merged in.
++merged in. Also, split your changes into comprehensive chunks if you patch is
++longer than a dozen lines.
+ If you are starting to work on a particular area, feel free to submit a PR
+ that highlights your work in progress (and note in the PR title that it's
+    </code>
+    <p>Este comando compara lo que tienes en tu directorio de trabajo con lo que está en el área de
+preparación. El resultado te indica los cambios que has hecho pero que aun no has preparado.</p>
+    <p>Si quieres ver lo que has preparado y será incluido en la próxima confirmación, puedes usar git
+diff --staged. Este comando compara tus cambios preparados con la última instantánea
+confirmada.
+</p>
+    <code>
+    $ git diff --staged  <br>
+diff --git a/README b/README <br>
+new file mode 100644 <br>
+index 0000000..03902a1 <br>
+--- /dev/null <br>
++++ b/README <br>
+@@ -0,0 +1 @@ <br>
++My Project    <br>  
+    </code>
+    <p>Es importante resaltar que al llamar a git diff sin parámetros no verás los cambios desde tu
+última confirmación - solo verás los cambios que aun no están preparados. Esto puede ser confuso
+porque si preparas todos tus cambios, git diff no te devolverá ninguna salida.</p>
+    <p>Pasemos a otro ejemplo, si preparas el archivo CONTRIBUTING.md y luego lo editas, puedes usar git
+diff para ver los cambios en el archivo que ya están preparados y los cambios que no lo están. Si
+nuestro ambiente es como este:</p>
+    <code>
+    $ git add CONTRIBUTING.md <br>
+$ echo 'test line' >> CONTRIBUTING.md <br>
+$ git status <br>
+On branch master <br>
+Changes to be committed: <br>
+  (use "git reset HEAD &lt;file>..." to unstage) <br>
+  modified: CONTRIBUTING.md <br>
+Changes not staged for commit: <br>
+  (use "git add &lt;file>..." to update what will be committed) <br>
+  (use "git checkout -- &lt;file>..." to discard changes in working directory) <br>
+  modified: CONTRIBUTING.md <br>
+    </code>
+    <p>Puedes usar git diff para ver qué está sin preparar</p>
+    <code>
+    $ git diff <br>
+diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md
+index 643e24f..87f08c8 100644 <br>
+--- a/CONTRIBUTING.md <br>
++++ b/CONTRIBUTING.md <br>
+@@ -119,3 +119,4 @@ at the <br>
+ ## Starter Projects <br>
+ See our [projects <br>
+list](https://github.com/libgit2/libgit2/blob/development/PROJECTS.md). <br>
++# test line <br>  
+    </code>
+    <p>y git diff --cached para ver que has preparado hasta ahora (--staged y --cached son sinónimos):</p>
+    <code>
+    $ git diff --cached <br>
+diff --git a/CONTRIBUTING.md b/CONTRIBUTING.md <br>
+index 8ebb991..643e24f 100644 <br>
+--- a/CONTRIBUTING.md <br>
++++ b/CONTRIBUTING.md <br>
+@@ -65,7 +65,8 @@ branch directly, things can get messy. <br>
+ Please include a nice description of your changes when you submit your PR;
+ if we have to read the whole diff to figure out why you're contributing
+ in the first place, you're less likely to get feedback and have your change <br>
+-merged in. <br>
++merged in. Also, split your changes into comprehensive chunks if you patch is
++longer than a dozen lines. <br>
+ If you are starting to work on a particular area, feel free to submit a PR
+ that highlights your work in progress (and note in the PR title that it's <br>
+    </code>
+    <p>A lo largo del libro, continuaremos usando el comando git diff de distintas
+maneras. Existe otra forma de ver estas diferencias si prefieres utilizar una interfaz
+gráfica u otro programa externo. Si ejecutas git difftool en vez de git diff, podrás
+ver los cambios con programas de este tipo como Araxis, emerge, vimdiff y más.
+Ejecuta git difftool --tool-help para ver qué tienes disponible en tu sistema.
+</p>
+</div>   
+<div id="div-2-6">
+    <h2>Confirmar tus Cambios</h2>
+    <p>Ahora que tu área de preparación está como quieres, puedes confirmar tus cambios. Recuerda que
+cualquier cosa que no esté preparada - cualquier archivo que hayas creado o modificado y que no
+hayas agregado con git add desde su edición - no será confirmado. Se mantendrán como archivos
+modificados en tu disco. En este caso, digamos que la última vez que ejecutaste git status
+verificaste que todo estaba preparado y que estás listo para confirmar tus cambios. La forma más
+sencilla de confirmar es escribiendo git commit:</p>
+    <code>$ git commit</code>
+    <p>Al hacerlo, arrancará el editor de tu preferencia. (El editor se establece a través de la variable de
+ambiente $EDITOR de tu terminal - usualmente es vim o emacs, aunque puedes configurarlo con el
+editor que quieras usando el comando git config --global core.editor</p>
+    <p>El editor mostrará el siguiente texto (este ejemplo corresponde a una pantalla de Vim):</p>
+    <code>
+    # Please enter the commit message for your changes. Lines starting <br>
+# with '#' will be ignored, and an empty message aborts the commit. <br>
+# On branch master <br>
+# Changes to be committed: <br>
+# new file: README <br>
+# modified: CONTRIBUTING.md <br>
+# <br>
+~ <br>
+~ <br>
+~ <br>
+".git/COMMIT_EDITMSG" 9L, 283C <br>
+    </code>
+    <p>Puedes ver que el mensaje de confirmación por defecto contiene la última salida del comando git
+status comentada y una línea vacía encima de ella. Puedes eliminar estos comentarios y escribir tu
+mensaje de confirmación, o puedes dejarlos allí para ayudarte a recordar qué estás confirmando.
+(Para obtener una forma más explícita de recordar qué has modificado, puedes pasar la opción -v a
+git commit. Al hacerlo se incluirá en el editor el diff de tus cambios para que veas exactamente qué
+cambios estás confirmando). Cuando sales del editor, Git crea tu confirmación con tu mensaje
+(eliminando el texto comentado y el diff).
+</p>
+    <p>Otra alternativa es escribir el mensaje de confirmación directamente en el comando commit
+utilizando la opción -m:</p>
+    <code>
+    $ git commit -m "Story 182: Fix benchmarks for speed" <br>
+[master 463dc4f] Story 182: Fix benchmarks for speed <br>
+ 2 files changed, 2 insertions(+) <br>
+ create mode 100644 README <br>
+    </code>
+    <p>¡Has creado tu primera confirmación (o commit)! Puedes ver que la confirmación te devuelve una
+salida descriptiva: indica cuál rama has confirmado (master), que checksum SHA-1 tiene el commit
+(463dc4f), cuántos archivos han cambiado y estadísticas sobre las líneas añadidas y eliminadas en el
+commit.
+</p>
+    <p>Recuerda que la confirmación guarda una instantánea de tu área de preparación. Todo lo que no
+hayas preparado sigue allí modificado; puedes hacer una nueva confirmación para añadirlo a tu
+historial. Cada vez que realizas un commit, guardas una instantánea de tu proyecto la cual puedes
+usar para comparar o volver a ella luego.</p>
+</div>
+    <div>
+        <p>A pesar de que puede resultar muy útil para ajustar los commits tal como quieres, el área de
+preparación es a veces un paso más complejo de lo que necesitas para tu flujo de trabajo. Si quieres
+saltarte el área de preparación, Git te ofrece un atajo sencillo. Añadiendo la opción -a al comando
+git commit harás que Git prepare automáticamente todos los archivos rastreados antes de
+confirmarlos, ahorrándote el paso de git add:</p>
+        <code>
+        $ git status <br>
+On branch master <br>
+Changes not staged for commit: <br>
+  (use "git add &lt;file>..." to update what will be committed) <br>
+  (use "git checkout -- &lt;file>..." to discard changes in working directory) <br>
+  modified: CONTRIBUTING.md <br>
+no changes added to commit (use "git add" and/or "git commit -a") <br>
+$ git commit -a -m 'added new benchmarks' <br>
+[master 83e38c7] added new benchmarks <br>
+ 1 file changed, 5 insertions(+), 0 deletions(-)  <br>  
+        </code>
+        <p>Fíjate que en este caso no fue necesario ejecutar git add sobre el archivo CONTRIBUTING.md antes de
+confirmar.
+</p>
+    </div>
+    <div id="div-2-7">
+    <h2>Eliminar Archivos</h2>
+        <p>Para eliminar archivos de Git, debes eliminarlos de tus archivos rastreados (o mejor dicho,
+eliminarlos del área de preparación) y luego confirmar. Para ello existe el comando git rm, que
+además elimina el archivo de tu directorio de trabajo de manera que no aparezca la próxima vez
+como un archivo no rastreado.</p>
+        <p>Si simplemente eliminas el archivo de tu directorio de trabajo, aparecerá en la sección “Changes
+not staged for commit” (esto es, sin preparar) en la salida de git status:
+</p>
+        <code>
+        $ rm PROJECTS.md <br>
+$ git status <br>
+On branch master <br>
+Your branch is up-to-date with 'origin/master'. <br>
+Changes not staged for commit: <br>
+  (use "git add/rm &lt;file>..." to update what will be committed) <br>
+  (use "git checkout -- &lt;file>..." to discard changes in working directory) <br>
+  deleted: PROJECTS.md <br>
+no changes added to commit (use "git add" and/or "git commit -a")    <br>    
+        </code>
+        <p>Ahora, si ejecutas git rm, entonces se prepara la eliminación del archivo:</p>
+        <code>
+        $ git rm PROJECTS.md <br>
+rm 'PROJECTS.md' <br>
+$ git status <br>
+On branch master <br>
+Changes to be committed: <br>
+  (use "git reset HEAD &lt;file>..." to unstage) <br>
+  deleted: PROJECTS.md <br>
+        </code>
+        <p>Con la próxima confirmación, el archivo habrá desaparecido y no volverá a ser rastreado. Si
+modificaste el archivo y ya lo habías añadido al índice, tendrás que forzar su eliminación con la
+opción -f. Esta propiedad existe por seguridad, para prevenir que elimines accidentalmente datos
+que aun no han sido guardados como una instantánea y que por lo tanto no podrás recuperar luego
+con Git</p>
+        <p>
+        Otra cosa que puedas querer hacer es mantener el archivo en tu directorio de trabajo pero
+eliminarlo del área de preparación. En otras palabras, quisieras mantener el archivo en tu disco
+duro pero sin que Git lo siga rastreando. Esto puede ser particularmente útil si olvidaste añadir algo
+en tu archivo .gitignore y lo preparaste accidentalmente, algo como un gran archivo de trazas a un
+montón de archivos compilados .a. Para hacerlo, utiliza la opción --cached:
+        </p>
+        <code>
+        $ git rm --cached README        
+        </code>
+        <p>
+        Al comando git rm puedes pasarle archivos, directorios y patrones glob. Lo que significa que
+puedes hacer cosas como        
+        </p>
+        <code>
+        $ git rm log/\*.log
+        </code>
+        <p>
+        Fíjate en la barra invertida (\) antes del asterisco *. Esto es necesario porque Git hace su propia
+expansión de nombres de archivo, aparte de la expansión hecha por tu terminal. Este comando
+elimina todos los archivo que tengan la extensión .log dentro del directorio log/. O también puedes
+hacer algo como:        
+        </p>
+        <code>$ git rm \*~</code>
+        <p>Este comando elimina todos los archivos que acaben con ~</p>
+    </div>
+    <div id="div-2-8">
+        <h2>Cambiar el Nombre de los Archivos</h2>
+        <p>Al contrario que muchos sistemas VCS, Git no rastrea explícitamente los cambios de nombre en
+archivos. Si renombras un archivo en Git, no se guardará ningún metadato que indique que
+renombraste el archivo. Sin embargo, Git es bastante listo como para detectar estos cambios luego
+que los has hecho - más adelante, veremos cómo se detecta el cambio de nombre.
+</p>
+        <p>Por esto, resulta confuso que Git tenga un comando mv. Si quieres renombrar un archivo en Git,puedes ejecutar algo como</p>
+        <code>$ git mv file_from file_to</code>
+        <p>y funcionará bien. De hecho, si ejecutas algo como eso y ves el estado, verás que Git lo considera
+como un renombramiento de archivo:
+</p>
+        <code>
+        $ git mv README.md README
+$ git status
+On branch master
+Changes to be committed:
+  (use "git reset HEAD &lt;file>..." to unstage)
+  renamed: README.md -> README      
+        </code>
+        <p>Sin embargo, eso es equivalente a ejecutar algo como esto:</p>
+        <code>
+        $ mv README.md README <br>
+$ git rm README.md <br>
+$ git add README <br>     
+        </code>
+        <p>Git se da cuenta que es un renombramiento implícito, así que no importa si renombras el archivo
+de esa manera o a través del comando mv. La única diferencia real es que mv es un solo comando en
+vez de tres - existe por conveniencia. De hecho, puedes usar la herramienta que quieras para
+renombrar un archivo y luego realizar el proceso rm/add antes de confirmar</p>
+    </div>
+       </div>
+       <div id="div-3">
+           <h2>Ver el Historial de Confirmaciones</h2>
+           <p>Después de haber hecho varias confirmaciones, o si has clonado un repositorio que ya tenía un
+histórico de confirmaciones, probablemente quieras mirar atrás para ver qué modificaciones se
+han llevado a cabo. La herramienta más básica y potente para hacer esto es el comando git log.
+</p>
+           <p>Estos ejemplos usan un proyecto muy sencillo llamado “simplegit”. Para clonar el proyecto, ejecuta:</p>
+           <code>git clone https://github.com/schacon/simplegit-progit</code>
+           <p>Cuando ejecutes git log sobre este proyecto, deberías ver una salida similar a esta:</p>
+           <code>
+           $ git log <br>
+commit ca82a6dff817ec66f44342007202690a93763949 <br>
+Author: Scott Chacon &lt;schacon@gee-mail.com> <br>
+Date: Mon Mar 17 21:52:11 2008 -0700 <br>
+  changed the version number <br>
+commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7 <br>
+Author: Scott Chacon &lt;schacon@gee-mail.com> <br>
+Date: Sat Mar 15 16:40:33 2008 -0700 <br>
+  removed unnecessary test <br>
+commit a11bef06a3f659402fe7563abf99ad00de2209e6 <br>
+Author: Scott Chacon &lt;schacon@gee-mail.com> <br>
+Date: Sat Mar 15 10:31:28 2008 -0700 <br>
+  first commit <br>
+           </code>
+           <p>Por defecto, si no pasas ningún parámetro, git log lista las confirmaciones hechas sobre ese
+repositorio en orden cronológico inverso. Es decir, las confirmaciones más recientes se muestran al
+principio. Como puedes ver, este comando lista cada confirmación con su suma de comprobación
+SHA-1, el nombre y dirección de correo del autor, la fecha y el mensaje de confirmación.</p>
+           <p>El comando git log proporciona gran cantidad de opciones para mostrarte exactamente lo que
+buscas. Aquí veremos algunas de las más usadas.</p>
+           <p>Una de las opciones más útiles es -p, que muestra las diferencias introducidas en cada
+confirmación. También puedes usar la opción -2, que hace que se muestren únicamente las dos
+últimas entradas del historial:</p>
+           <code>
+           $ git log -p -2 <br>
+commit ca82a6dff817ec66f44342007202690a93763949 <br>
+Author: Scott Chacon &lt;schacon@gee-mail.com> <br>
+Date: Mon Mar 17 21:52:11 2008 -0700 <br>
+  changed the version number <br>
+diff --git a/Rakefile b/Rakefile <br>
+index a874b73..8f94139 100644 <br>
+--- a/Rakefile <br>
++++ b/Rakefile <br>
+@@ -5,7 +5,7 @@ require 'rake/gempackagetask' <br>
+ spec = Gem::Specification.new do |s| <br>
+  s.platform = Gem::Platform::RUBY <br>
+  s.name = "simplegit" <br>
+- s.version = "0.1.0" <br>
++ s.version = "0.1.1" <br>
+  s.author = "Scott Chacon" <br>
+  s.email = "schacon@gee-mail.com" <br>
+  s.summary = "A simple gem for using Git in Ruby code." <br>
+commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7 <br>
+Author: Scott Chacon &lt;schacon@gee-mail.com> <br>
+Date: Sat Mar 15 16:40:33 2008 -0700 <br>
+  removed unnecessary test <br>
+diff --git a/lib/simplegit.rb b/lib/simplegit.rb <br>
+index a0a60ae..47c6340 100644 <br>
+--- a/lib/simplegit.rb <br>
++++ b/lib/simplegit.rb <br>
+@@ -18,8 +18,3 @@ class SimpleGit <br>
+  end <br>
+ end <br>
+- <br>
+-if $0 == __FILE__ <br>
+- git = SimpleGit.new <br>
+- puts git.show <br>
+-end <br>
+\ No newline at end of file <br>
+           </code>
+           <p>Esta opción muestra la misma información, pero añadiendo tras cada entrada las diferencias que le
+corresponden. Esto resulta muy útil para revisiones de código, o para visualizar rápidamente lo que
+ha pasado en las confirmaciones enviadas por un colaborador. También puedes usar con git log
+una serie de opciones de resumen. Por ejemplo, si quieres ver algunas estadísticas de cada
+confirmación, puedes usar la opción --stat:
+</p>
+           <code>$ git log --stat <br>
+commit ca82a6dff817ec66f44342007202690a93763949 <br>
+Author: Scott Chacon &lt;schacon@gee-mail.com> <br>
+Date: Mon Mar 17 21:52:11 2008 -0700 <br>
+  changed the version number <br>
+ Rakefile | 2 +- <br>
+ 1 file changed, 1 insertion(+), 1 deletion(-) <br>
+commit 085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7 <br>
+Author: Scott Chacon &lt;schacon@gee-mail.com> <br>
+Date: Sat Mar 15 16:40:33 2008 -0700 <br>
+  removed unnecessary test <br>
+ lib/simplegit.rb | 5 ----- <br>
+ 1 file changed, 5 deletions(-) <br>
+commit a11bef06a3f659402fe7563abf99ad00de2209e6 <br>
+Author: Scott Chacon &lt;schacon@gee-mail.com> <br>
+Date: Sat Mar 15 10:31:28 2008 -0700 <br>
+  first commit <br>
+ README | 6 ++++++ <br>
+ Rakefile | 23 +++++++++++++++++++++++ <br>
+ lib/simplegit.rb | 25 +++++++++++++++++++++++++ <br>
+ 3 files changed, 54 insertions(+)</code>
+           <p>Como puedes ver, la opción --stat imprime tras cada confirmación una lista de archivos
+modificados, indicando cuántos han sido modificados y cuántas líneas han sido añadidas y
+eliminadas para cada uno de ellos, y un resumen de toda esta información.</p>
+           <p>Otra opción realmente útil es --pretty, que modifica el formato de la salida. Tienes unos cuantos
+estilos disponibles. La opción oneline imprime cada confirmación en una única línea, lo que puede
+resultar útil si estás analizando gran cantidad de confirmaciones. Otras opciones son short, full y
+fuller, que muestran la salida en un formato parecido, pero añadiendo menos o más información,
+respectivamente:</p>
+           <code>
+           $ git log --pretty=oneline <br>
+ca82a6dff817ec66f44342007202690a93763949 changed the version number <br>
+085bb3bcb608e1e8451d4b2432f8ecbe6306e7e7 removed unnecessary test <br>
+a11bef06a3f659402fe7563abf99ad00de2209e6 first commit <br>
+           </code>
+           <p>La opción más interesante es format, que te permite especificar tu propio formato. Esto resulta
+especialmente útil si estás generando una salida para que sea analizada por otro programa —como
+especificas el formato explícitamente, sabes que no cambiará en futuras actualizaciones de Git—</p>
+           <code>
+$ git log --pretty=format:"%h - %an, %ar : %s" <br>
+ca82a6d - Scott Chacon, 6 years ago : changed the version number <br>
+085bb3b - Scott Chacon, 6 years ago : removed unnecessary test <br>
+a11bef0 - Scott Chacon, 6 years ago : first commit <br>
+           </code>
+           <p>Opciones útiles de git log --pretty=format lista algunas de las opciones más útiles aceptadas por
+format.</p>
+<table id="rpretty_format" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 1. Opciones útiles de <code>git log --pretty=format</code>
+</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Opción</th>
+<th class="tableblock halign-left valign-top">Descripción de la salida</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%H</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hash de la confirmación</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%h</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hash de la confirmación abreviado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%T</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hash del árbol</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%t</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hash del árbol abreviado</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%P</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hashes de las confirmaciones padre</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%p</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hashes de las confirmaciones padre abreviados</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%an</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nombre del autor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%ae</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dirección de correo del autor</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%ad</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fecha de autoría (el formato respeta la opción <code>-–date</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%ar</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fecha de autoría, relativa</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%cn</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Nombre del confirmador</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%ce</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Dirección de correo del confirmador</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%cd</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fecha de confirmación</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%cr</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fecha de confirmación, relativa</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%s</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Asunto</p></td>
+</tr>
+</tbody>
+</table>
+<p>Puede que te estés preguntando la diferencia entre autor (author) y confirmador (committer). El
+autor es la persona que escribió originalmente el trabajo, mientras que el confirmador es quien lo
+aplicó. Por tanto, si mandas un parche a un proyecto, y uno de sus miembros lo aplica, ambos
+recibiréis reconocimiento —tú como autor, y el miembro del proyecto como confirmador—.
+Veremos esta distinción con mayor profundidad en Git en entornos distribuidos.
+</p>
+<p>Las opciones oneline y format son especialmente útiles combinadas con otra opción llamada --
+graph. Ésta añade un pequeño gráfico ASCII mostrando tu historial de ramificaciones y uniones:</p>
+<code>
+$ git log --pretty=format:"%h %s" --graph <br>
+* 2d3acf9 ignore errors from SIGCHLD on trap <br>
+* 5e3ee11 Merge branch 'master' of git://github.com/dustin/grit <br>
+|\ <br>
+| * 420eac9 Added a method for getting the current branch. <br>
+* | 30e367c timeout code and tests <br>
+* | 5a09431 add timeout protection to grit <br>
+* | e1193f8 support for heads with slashes in them <br>
+|/ <br>
+* d6016bc require time for xmlschema <br>
+* 11d191e Merge branch 'defunkt' into local <br>
+</code>
+<p>Este tipo de salidas serán más interesantes cuando empecemos a hablar sobre ramificaciones y
+combinaciones en el próximo capítulo.</p>
+<p>Éstas son sólo algunas de las opciones para formatear la salida de git log —existen muchas más.
+Opciones típicas de git log lista las opciones vistas hasta ahora, y algunas otras opciones de
+formateo que pueden resultarte útiles, así como su efecto sobre la salida.</p>
+<table id="rlog_options" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 2. Opciones típicas de <code>git log</code>
+</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Opción</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-p</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra el parche introducido en cada confirmación.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--stat</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra estadísticas sobre los archivos modificados en cada confirmación.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--shortstat</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra solamente la línea de resumen de la opción <code>--stat</code>.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--name-only</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra la lista de archivos afectados.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--name-status</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra la lista de archivos afectados, indicando además si fueron añadidos, modificados o eliminados.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--abbrev-commit</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra solamente los primeros caracteres de la suma SHA-1, en vez de los 40 caracteres de que se compone.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--relative-date</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra la fecha en formato relativo (por ejemplo, “2 weeks ago” (“hace 2 semanas”)) en lugar del formato completo.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--graph</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra un gráfico ASCII con la historia de ramificaciones y uniones.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--pretty</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra las confirmaciones usando un formato alternativo. Posibles opciones son oneline, short, full, fuller y format (mediante el cual puedes especificar tu propio formato).</p></td>
+</tr>
+</tbody>
+</table>
+       </div>
+       <div id="div-3-1">
+         <h2>Limitar la Salida del Historial</h2>
+         <p>Además de las opciones de formateo, git log acepta una serie de opciones para limitar su salida
+—es decir, opciones que te permiten mostrar únicamente parte de las confirmaciones—. Ya has
+visto una de ellas, la opción -2, que muestra sólo las dos últimas confirmaciones. De hecho, puedes
+hacer -<n>, siendo n cualquier entero, para mostrar las últimas n confirmaciones. En realidad es
+poco probable que uses esto con frecuencia, ya que Git por defecto pagina su salida para que veas
+cada página del historial por separado.</p>
+         <p>Sin embargo, las opciones temporales como --since (desde) y --until (hasta) sí que resultan muy
+útiles. Por ejemplo, este comando lista todas las confirmaciones hechas durante las dos últimas
+semanas:</p>
+         <code>$ git log --since=2.weeks</code>
+         <p>Este comando acepta muchos formatos. Puedes indicar una fecha concreta ("2008-01-15"), o
+relativa, como "2 years 1 day 3 minutes ago" ("hace 2 años, 1 día y 3 minutos").</p>
+         <p>También puedes filtrar la lista para que muestre sólo aquellas confirmaciones que cumplen ciertos
+criterios. La opción --author te permite filtrar por autor, y --grep te permite buscar palabras clave
+entre los mensajes de confirmación. (Ten en cuenta que si quieres aplicar ambas opciones
+simultáneamente, tienes que añadir --all-match, o el comando mostrará las confirmaciones que
+cumplan cualquiera de las dos, no necesariamente las dos a la vez.)
+</p>
+         <p>Otra opción útil es -S, la cual recibe una cadena y solo muestra las confirmaciones que cambiaron
+el código añadiendo o eliminando la cadena. Por ejemplo, si quieres encontrar la última
+confirmación que añadió o eliminó una referencia a una función específica, puede ejecutar:</p>
+         <code>$ git log -Sfunction_name</code>
+         <p>La última opción verdaderamente útil para filtrar la salida de git log es especificar una ruta. Si
+especificas la ruta de un directorio o archivo, puedes limitar la salida a aquellas confirmaciones
+que introdujeron un cambio en dichos archivos. Ésta debe ser siempre la última opción, y suele ir
+precedida de dos guiones (--) para separar la ruta del resto de opciones.</p>
+         <p>En Opciones para limitar la salida de git log se listan estas opciones, y algunas otras bastante
+comunes a modo de referencia</p>
+         <table id="rlimit_options" class="tableblock frame-all grid-all spread">
+<caption class="title">Table 3. Opciones para limitar la salida de <code>git log</code>
+</caption>
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Opción</th>
+<th class="tableblock halign-left valign-top">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-(n)</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra solamente las últimas n confirmaciones</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--since, --after</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra aquellas confirmaciones hechas después de la fecha especificada.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--until, --before</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra aquellas confirmaciones hechas antes de la fecha especificada.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--author</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra sólo aquellas confirmaciones cuyo autor coincide con la cadena especificada.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--committer</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra sólo aquellas confirmaciones cuyo confirmador coincide con la cadena especificada.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-S</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Muestra sólo aquellas confirmaciones que añaden o eliminen código que corresponda con la cadena especificada.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Por ejemplo, si quieres ver cuáles de las confirmaciones hechas sobre archivos de prueba del
+código fuente de Git fueron enviadas por Junio Hamano, y no fueron uniones, en el mes de octubre
+de 2008, ejecutarías algo así:</p>
+<code>
+$ git log --pretty="%h - %s" --author=gitster --since="2008-10-01" \ <br>
+  --before="2008-11-01" --no-merges -- t/ <br>
+5610e3b - Fix testcase failure when extended attributes are in use <br>
+acd3b9e - Enhance hold_lock_file_for_{update,append}() API <br>
+f563754 - demonstrate breakage of detached checkout with symbolic link HEAD <br>
+d1a43f2 - reset --hard/read-tree --reset -u: remove unmerged new paths <br>
+51a94af - Fix "checkout --track -b newbranch" on detached HEAD <br>
+b0ad11e - pull: allow "git pull origin $something:$current_branch" into an unborn
+branch <br>
+</code>
+<p>De las casi 40.000 confirmaciones en la historia del código fuente de Git, este comando muestra las
+6 que cumplen estas condiciones.
+</p>
+       </div>
+       <div id="div-4">
+         <h2>Deshacer Cosas</h2>
+         <p>En cualquier momento puede que quieras deshacer algo. Aquí repasaremos algunas herramientas
+básicas usadas para deshacer cambios que hayas hecho. Ten cuidado, a veces no es posible
+recuperar algo luego que lo has deshecho. Esta es una de las pocas áreas en las que Git puede
+perder parte de tu trabajo si cometes un error.</p>
+         <p>Uno de las acciones más comunes a deshacer es cuando confirmas un cambio antes de tiempo y
+olvidas agregar algún archivo, o te equivocas en el mensaje de confirmación. Si quieres rehacer la
+confirmación, puedes reconfirmar con la opción --amend:</p>
+         <code>$ git commit --amend</code>
+         <p>Este comando utiliza tu área de preparación para la confirmación. Si no has hecho cambios desde
+tu última confirmación (por ejemplo, ejecutas este comando justo después de tu confirmación
+anterior), entonces la instantánea lucirá exactamente igual y lo único que cambiarás será el
+mensaje de confirmación.</p>
+         <p>Se lanzará el mismo editor de confirmación, pero verás que ya incluye el mensaje de tu
+confirmación anterior. Puedes editar el mensaje como siempre y se sobreescribirá tu confirmación
+anterior</p>
+         <p>Por ejemplo, si confirmas y luego te das cuenta que olvidaste preparar los cambios de un archivo
+que querías incluir en esta confirmación, puedes hacer lo siguiente:</p>
+         <code>
+$ git commit -m 'initial commit' <br>
+$ git add forgotten_file <br>
+$ git commit --amend    <br>    
+         </code>
+         <p>Al final terminarás con una sola confirmación - la segunda confirmación reemplaza el resultado de
+la primera.</p>
+       </div>
+       <div id="div-5">
+         <h2>Deshacer un Archivo Preparado</h2>
+         <p>Las siguientes dos secciones demuestran cómo lidiar con los cambios de tu área de preparación y tú
+directorio de trabajo. Afortunadamente, el comando que usas para determinar el estado de esas dos
+áreas también te recuerda cómo deshacer los cambios en ellas. Por ejemplo, supongamos que has
+cambiado dos archivos y que quieres confirmarlos como dos cambios separados, pero
+accidentalmente has escrito git add * y has preparado ambos. ¿Cómo puedes sacar del área de
+preparación uno de ellos? El comando git status te recuerda cómo:
+</p>
+         <code>
+         $ git add . <br>
+$ git status <br>
+On branch master <br>
+Changes to be committed: <br>
+  (use "git reset HEAD &lt;file>..." to unstage) <br>
+  renamed: README.md -> README <br>
+  modified: CONTRIBUTING.md <br>
+         </code>
+         <p>Justo debajo del texto “Changes to be committed” (“Cambios a ser confirmados”, en inglés), verás
+que dice que uses git reset HEAD &lt;file>... para deshacer la preparación. Por lo tanto, usemos el
+consejo para deshacer la preparación del archivo CONTRIBUTING.md:</p>
+         <code>
+         $ git reset HEAD CONTRIBUTING.md <br>
+Unstaged changes after reset: <br>
+M CONTRIBUTING.md <br>
+$ git status <br>
+On branch master <br>
+Changes to be committed: <br>
+  (use "git reset HEAD &lt;file>..." to unstage) <br>
+  renamed: README.md -> README <br>
+Changes not staged for commit: <br>
+  (use "git add &lt;file>..." to update what will be committed) <br>
+  (use "git checkout -- &lt;file>..." to discard changes in working directory) <br>
+  modified: CONTRIBUTING.md    <br>  
+         </code>
+         <p>El comando es un poco raro, pero funciona. El archivo CONTRIBUTING.md esta modificado y,
+nuevamente, no preparado.</p>
+         <p>A pesar de que git reset puede ser un comando peligroso si lo llamas con --hard, en
+este caso el archivo que está en tu directorio de trabajo no se toca. Ejecutar git
+reset sin opciones no es peligroso - solo toca el área de preparación</p>
+         <p>Por ahora lo único que necesitas saber sobre el comando git reset es esta invocación mágica.
+Entraremos en mucho más detalle sobre qué hace reset y cómo dominarlo para que haga cosas realmente interesantes </p>
+       </div>
+       <div id="div-4-2">
+         <h2>Deshacer un Archivo Modificado</h2>
+         <p>¿Qué tal si te das cuenta que no quieres mantener los cambios del archivo CONTRIBUTING.md? ¿Cómo
+puedes restaurarlo fácilmente - volver al estado en el que estaba en la última confirmación (o
+cuando estaba recién clonado, o como sea que haya llegado a tu directorio de trabajo)?
+Afortunadamente, git status también te dice cómo hacerlo. En la salida anterior, el área no
+preparada lucía así:</p>
+         <code>
+         Changes not staged for commit: <br>
+  (use "git add &lt;file>..." to update what will be committed) <br>
+  (use "git checkout -- &lt;file>..." to discard changes in working directory) <br>
+  modified: CONTRIBUTING.md <br>
+         </code>
+         <p>Allí se te indica explícitamente como descartar los cambios que has hecho. Hagamos lo que nos
+dice:</p>
+         <code>
+         $ git checkout -- CONTRIBUTING.md <br>
+$ git status <br>
+On branch master <br>
+Changes to be committed: <br>
+  (use "git reset HEAD &lt;file>..." to unstage) <br>
+  renamed: README.md -> README       <br>
+         </code>
+         <p>Ahora puedes ver que los cambios se han revertido</p>
+         <p>Es importante entender que git checkout -- [archivo] es un comando
+peligroso. Cualquier cambio que le hayas hecho a ese archivo desaparecerá -
+acabas de sobreescribirlo con otro archivo. Nunca utilices este comando a
+menos que estés absolutamente seguro de que ya no quieres el archivo.</p>
+         <p>Para mantener los cambios que has hecho y a la vez deshacerte del archivo temporalmente,
+hablaremos sobre cómo esconder archivos (stashing, en inglés) y sobre ramas en Ramificaciones en
+Git; normalmente, estas son las mejores maneras de hacerlo.</p>
+         <p>Recuerda, todo lo que esté confirmado en Git puede recuperarse. Incluso commits que estuvieron en
+ramas que han sido eliminadas o commits que fueron sobreescritos con --amend pueden
+recuperarse (véase Recuperación de datos para recuperación de datos). Sin embargo, es posible que
+no vuelvas a ver jamás cualquier cosa que pierdas y que nunca haya sido confirmada.</p>
+       </div>
+       <div id="div-15">
+       <h2>Trabajar con Remotos</h2>
+       <p>Para poder colaborar en cualquier proyecto Git, necesitas saber cómo gestionar repositorios
+remotos. Los repositorios remotos son versiones de tu proyecto que están hospedadas en Internet o en cualquier otra red. Puedes tener varios de ellos, y en cada uno tendrás generalmente permisos
+de solo lectura o de lectura y escritura. Colaborar con otras personas implica gestionar estos
+repositorios remotos enviando y trayendo datos de ellos cada vez que necesites compartir tu
+trabajo. Gestionar repositorios remotos incluye saber cómo añadir un repositorio remoto, eliminar
+los remotos que ya no son válidos, gestionar varias ramas remotas, definir si deben rastrearse o no
+y más. En esta sección, trataremos algunas de estas habilidades de gestión de remotos.</p>
+<div id="div-5-1">
+  <h2>Ver Tus Remotos</h2>
+  <p>Para ver los remotos que tienes configurados, debes ejecutar el comando git remote. Mostrará los
+nombres de cada uno de los remotos que tienes especificados. Si has clonado tu repositorio,
+deberías ver al menos origin (origen, en inglés) - este es el nombre que por defecto Git le da al
+servidor del que has clonado:
+</p>
+  <code>
+  $ git clone https://github.com/schacon/ticgit <br>
+Cloning into 'ticgit'... <br>
+remote: Reusing existing pack: 1857, done. <br>
+remote: Total 1857 (delta 0), reused 0 (delta 0) <br>
+Receiving objects: 100% (1857/1857), 374.35 KiB | 268.00 KiB/s, done. <br>
+Resolving deltas: 100% (772/772), done. <br>
+Checking connectivity... done. <br>
+$ cd ticgit <br>
+$ git remote <br>
+origin </code>
+  <p>
+  También puedes pasar la opción -v, la cual muestra las URLs que Git ha asociado al nombre y que
+serán usadas al leer y escribir en ese remoto:
+  </p>
+  <code>
+  $ git remote -v <br>
+origin https://github.com/schacon/ticgit (fetch) <br>
+origin https://github.com/schacon/ticgit (push) <br>
+  </code>
+  <p>Si tienes más de un remoto, el comando los listará todos. Por ejemplo, un repositorio con múltiples
+remotos para trabajar con distintos colaboradores podría verse de la siguiente manera</p>
+  <code>
+  $ cd grit <br>
+$ git remote -v <br>
+bakkdoor https://github.com/bakkdoor/grit (fetch) <br>
+bakkdoor https://github.com/bakkdoor/grit (push) <br>
+cho45 https://github.com/cho45/grit (fetch) <br>
+cho45 https://github.com/cho45/grit (push) <br>
+defunkt https://github.com/defunkt/grit (fetch) <br>
+defunkt https://github.com/defunkt/grit (push) <br>
+koke git://github.com/koke/grit.git (fetch) <br>
+koke git://github.com/koke/grit.git (push) <br>
+origin git@github.com:mojombo/grit.git (fetch) <br>
+origin git@github.com:mojombo/grit.git (push) <br>
+  </code>
+  <p>Esto significa que podemos traer contribuciones de cualquiera de estos usuarios fácilmente. Es
+posible que también tengamos permisos para enviar datos a algunos, aunque no podemos saberlo
+desde aquí.</p>
+  <p>Fíjate que estos remotos usan distintos protocolos; hablaremos sobre ello más adelante, en
+Configurando Git en un servidor.</p>
+</div>
+<div id="div-5-2">
+  <h2>Añadir Repositorios Remotos</h2>
+  <p>En secciones anteriores hemos mencionado y dado alguna demostración de cómo añadir
+repositorios remotos. Ahora veremos explícitamente cómo hacerlo. Para añadir un remoto nuevo y
+asociarlo a un nombre que puedas referenciar fácilmente, ejecuta git remote add [nombre] [url]:</p>
+  <code>
+  $ git remote <br>
+origin <br>
+$ git remote add pb https://github.com/paulboone/ticgit <br>
+$ git remote -v <br>
+origin https://github.com/schacon/ticgit (fetch) <br>
+origin https://github.com/schacon/ticgit (push) <br>
+pb https://github.com/paulboone/ticgit (fetch) <br>
+pb https://github.com/paulboone/ticgit (push) <br>
+  </code>
+  <p>A partir de ahora puedes usar el nombre pb en la línea de comandos en lugar de la URL entera. Por
+ejemplo, si quieres traer toda la información que tiene Paul pero tú aún no tienes en tu repositorio,
+puedes ejecutar git fetch pb:
+</p>
+  <code>
+  $ git fetch pb <br>
+remote: Counting objects: 43, done. <br>
+remote: Compressing objects: 100% (36/36), done. <br>
+remote: Total 43 (delta 10), reused 31 (delta 5) <br>
+Unpacking objects: 100% (43/43), done. <br>
+From https://github.com/paulboone/ticgit <br>
+ * [new branch] master -> pb/master <br>
+ * [new branch] ticgit -> pb/ticgit <br>  
+  </code>
+  <p>La rama maestra de Paul ahora es accesible localmente con el nombre pb/master - puedes
+combinarla con alguna de tus ramas, o puedes crear una rama local en ese punto si quieres
+inspeccionarla. (Hablaremos con más detalle acerca de qué son las ramas y cómo utilizarlas en
+Ramificaciones en Git.)</p>
+</div>
+<div id="div-5-3">
+  <h2>Traer y Combinar Remotos</h2>
+  <p>Como hemos visto hasta ahora, para obtener datos de tus proyectos remotos puedes ejecutar:</p>
+  <code>$ git fetch [remote-name]</code>
+  <p>El comando irá al proyecto remoto y se traerá todos los datos que aun no tienes de dicho remoto.
+Luego de hacer esto, tendrás referencias a todas las ramas del remoto, las cuales puedes combinar e
+inspeccionar cuando quieras.</p>
+  <p>Si clonas un repositorio, el comando de clonar automáticamente añade ese repositorio remoto con
+el nombre “origin”. Por lo tanto, git fetch origin se trae todo el trabajo nuevo que ha sido enviado
+a ese servidor desde que lo clonaste (o desde la última vez que trajiste datos). Es importante
+destacar que el comando git fetch solo trae datos a tu repositorio local - ni lo combina
+automáticamente con tu trabajo ni modifica el trabajo que llevas hecho. La combinación con tu
+trabajo debes hacerla manualmente cuando estés listo.</p>
+  <p>Si has configurado una rama para que rastree una rama remota (más información en la siguiente
+sección y en Ramificaciones en Git), puedes usar el comando git pull para traer y combinar
+automáticamente la rama remota con tu rama actual. Es posible que este sea un flujo de trabajo
+mucho más cómodo y fácil para ti; y por defecto, el comando git clone le indica automáticamente a
+tu rama maestra local que rastree la rama maestra remota (o como se llame la rama por defecto)
+del servidor del que has clonado. Generalmente, al ejecutar git pull traerás datos del servidor del
+que clonaste originalmente y se intentará combinar automáticamente la información con el código
+en el que estás trabajando</p>
+</div>
+<div id="div-5-4">
+  <h2>Enviar a Tus Remotos</h2>
+  <p>Cuando tienes un proyecto que quieres compartir, debes enviarlo a un servidor. El comando para
+hacerlo es simple: git push [nombre-remoto] [nombre-rama]. Si quieres enviar tu rama master a tu
+servidor origin (recuerda, clonar un repositorio establece esos nombres automáticamente),
+entonces puedes ejecutar el siguiente comando y se enviarán todos los commits que hayas hecho al
+servidor:</p>
+  <code>$ git push origin master</code>
+  <p>Este comando solo funciona si clonaste de un servidor sobre el que tienes permisos de escritura y si
+nadie más ha enviado datos por el medio. Si alguien más clona el mismo repositorio que tú y envía
+información antes que tú, tu envío será rechazado. Tendrás que traerte su trabajo y combinarlo con
+el tuyo antes de que puedas enviar datos al servidor. Para información más detallada sobre cómo
+enviar datos a servidores remotos, véase Ramificaciones en Git.</p>
+</div>
+<div id="div-5-6">
+  <h2>Inspeccionar un Remoto</h2>
+  <p>Si quieres ver más información acerca de un remoto en particular, puedes ejecutar el comando git
+remote show [nombre-remoto]. Si ejecutas el comando con un nombre en particular, como origin,
+verás algo como lo siguiente:</p>
+  <code>
+  $ git remote show origin <br>
+* remote origin <br>
+  Fetch URL: https://github.com/schacon/ticgit <br>
+  Push URL: https://github.com/schacon/ticgit <br>
+  HEAD branch: master <br>
+  Remote branches: <br>
+  master tracked <br>
+  dev-branch tracked <br>
+  Local branch configured for 'git pull': <br>
+  master merges with remote master <br>
+  Local ref configured for 'git push': <br>
+  master pushes to master (up to date) <br>
+  </code>
+  <p>El comando lista la URL del repositorio remoto y la información del rastreo de ramas. El comando
+te indica claramente que si estás en la rama maestra y ejecutas el comando git pull,
+automáticamente combinará la rama maestra remota con tu rama local, luego de haber traído toda
+la información de ella. También lista todas las referencias remotas de las que ha traído datos.
+</p>
+  <p>Ejemplos como este son los que te encontrarás normalmente. Sin embargo, si usas Git de forma más
+avanzada, puede que obtengas mucha más información de un git remote show:
+</p>
+  <code>
+  $ git remote show origin <br>
+* remote origin <br>
+  URL: https://github.com/my-org/complex-project
+  Fetch URL: https://github.com/my-org/complex-project <br>
+  Push URL: https://github.com/my-org/complex-project <br>
+  HEAD branch: master <br>
+  Remote branches: <br>
+  master tracked <br>
+  dev-branch tracked <br>
+  markdown-strip tracked <br>
+  issue-43 new (next fetch will store in remotes/origin) <br>
+  issue-45 new (next fetch will store in remotes/origin) <br>
+  refs/remotes/origin/issue-11 stale (use 'git remote prune' to remove) <br>
+  Local branches configured for 'git pull': <br>
+  dev-branch merges with remote dev-branch <br>
+  master merges with remote master <br>
+  Local refs configured for 'git push': <br>
+  dev-branch pushes to dev-branch (up to
+date) <br>
+  markdown-strip pushes to markdown-strip (up to
+date) <br>
+  master pushes to master (up to
+date) <br>
+  </code>
+  <p>Este comando te indica a cuál rama enviarás información automáticamente cada vez que ejecutas
+git push, dependiendo de la rama en la que estés. También te muestra cuáles ramas remotas no
+tienes aún, cuáles ramas remotas tienes que han sido eliminadas del servidor, y varias ramas que
+serán combinadas automáticamente cuando ejecutes git pull.
+</p>
+</div>
+<div id="div-5-7">
+  <h2>Eliminar y Renombrar Remotos</h2>
+  <p>Si quieres cambiar el nombre de la referencia de un remoto puedes ejecutar git remote rename. Por
+ejemplo, si quieres cambiar el nombre de pb a paul, puedes hacerlo con git remote rename:
+</p>
+  <code>
+  $ git remote rename pb paul <br>
+$ git remote <br>
+origin <br>
+paul <br> 
+  </code>
+  <p>Es importante destacar que al hacer esto también cambias el nombre de las ramas remotas. Por lo
+tanto, lo que antes estaba referenciado como pb/master ahora lo está como paul/master</p>
+  <p>Si por alguna razón quieres eliminar un remoto - has cambiado de servidor o no quieres seguir
+utilizando un mirror o quizás un colaborador ha dejado de trabajar en el proyecto - puedes usar git
+remote rm:</p>
+  <code>
+  $ git remote rm paul <br>
+$ git remote <br>
+origin <br>
+  </code>
+</div>
+<div id="div-6">
+  <h2>Etiquetado</h2>
+  <p>Como muchos VCS, Git tiene la posibilidad de etiquetar puntos específicos del historial como
+importantes. Esta funcionalidad se usa típicamente para marcar versiones de lanzamiento (v1.0,
+por ejemplo). En esta sección, aprenderás cómo listar las etiquetas disponibles, cómo crear nuevas
+etiquetas y cuáles son los distintos tipos de etiquetas</p>
+<div id="div-6-1">
+  <h2>Listar Tus Etiquetas</h2>
+  <p>Listar las etiquetas disponibles en Git es sencillo. Simplemente escribe git tag:
+</p>
+  <code>
+  $ git tag <br>
+v0.1 <br>
+v1.3 <br>
+  </code>
+  <p>Este comando lista las etiquetas en orden alfabético; el orden en el que aparecen no tiene mayor
+importancia.</p>
+  <p>También puedes buscar etiquetas con un patrón particular. El repositorio del código fuente de Git,
+por ejemplo, contiene más de 500 etiquetas. Si sólo te interesa ver la serie 1.8.5, puedes ejecutar:</p>
+  <code>
+  $ git tag -l 'v1.8.5*'  <br>
+v1.8.5  <br>
+v1.8.5-rc0  <br>
+v1.8.5-rc1  <br>
+v1.8.5-rc2  <br>
+v1.8.5-rc3  <br>
+v1.8.5.1  <br>
+v1.8.5.2  <br>
+v1.8.5.3  <br>
+v1.8.5.4  <br>
+v1.8.5.5  <br>
+  </code>
+</div>
+</div>
+<div id="div-6-2">
+  <h2>Crear Etiquetas</h2>
+  <p>Git utiliza dos tipos principales de etiquetas: ligeras y anotadas.</p>
+  <p>Una etiqueta ligera es muy parecido a una rama que no cambia - simplemente es un puntero a un
+commit específico</p>
+  <p>Sin embargo, las etiquetas anotadas se guardan en la base de datos de Git como objetos enteros.
+Tienen un checksum; contienen el nombre del etiquetador, correo electrónico y fecha; tienen un mensaje asociado; y pueden ser firmadas y verificadas con GNU Privacy Guard (GPG). Normalmente
+se recomienda que crees etiquetas anotadas, de manera que tengas toda esta información; pero si
+quieres una etiqueta temporal o por alguna razón no estás interesado en esa información, entonces
+puedes usar las etiquetas ligeras.</p>
+</div>
+<div id="div-6-3">
+  <h2>Etiquetas Anotadas</h2>
+  <p>Crear una etiqueta anotada en Git es sencillo. La forma más fácil de hacerlo es especificar la opción
+-a cuando ejecutas el comando git tag:
+</p>
+  <code>
+  $ git tag -a v1.4 -m 'my version 1.4' <br>
+$ git tag <br>
+v0.1 <br>
+v1.3 <br>
+v1.4 <br>
+  </code>
+  <p>La opción -m especifica el mensaje de la etiqueta, el cual es guardado junto con ella. Si no
+especificas el mensaje de una etiqueta anotada, Git abrirá el editor de texto para que lo escribas.</p>
+  <p>Puedes ver la información de la etiqueta junto con el commit que está etiquetado al usar el
+comando git show:</p>
+  <code>
+  $ git show v1.4 <br>
+tag v1.4 <br>
+Tagger: Ben Straub &lt;ben@straub.cc> <br>
+Date: Sat May 3 20:19:12 2014 -0700 <br>
+my version 1.4 <br>
+commit ca82a6dff817ec66f44342007202690a93763949 <br>
+Author: Scott Chacon &lt;schacon@gee-mail.com> <br>
+Date: Mon Mar 17 21:52:11 2008 -0700 <br>
+  changed the version number <br>
+  </code>
+  <p>El comando muestra la información del etiquetador, la fecha en la que el commit fue etiquetado y el
+mensaje de la etiqueta, antes de mostrar la información del commit.</p>
+</div>
+<div id="div-6-4">
+<h2>Etiquetas Ligeras</h2>
+  <p>La otra forma de etiquetar un commit es mediante una etiqueta ligera. Una etiqueta ligera no es
+más que el checksum de un commit guardado en un archivo - no incluye más información. Para
+crear una etiqueta ligera, no pases las opciones -a, -s ni -m:</p>
+  <code>
+  $ git tag v1.4-lw <br>
+$ git tag <br>
+v0.1 <br>
+v1.3 <br>
+v1.4 <br>
+v1.4-lw <br>
+v1.5   <br></code>
+  <p>Esta vez, si ejecutas git show sobre la etiqueta no verás la información adicional. El comando solo
+mostrará el commit:
+</p>
+  <code>
+  $ git show v1.4-lw <br>
+commit ca82a6dff817ec66f44342007202690a93763949 <br>
+Author: Scott Chacon &lt;schacon@gee-mail.com> <br>
+Date: Mon Mar 17 21:52:11 2008 -0700 <br>
+  changed the version number <br>
+  </code>
+</div>
+<div id="div-6-5">
+  <h2>Etiquetado Tardío</h2>
+  <p>También puedes etiquetar commits mucho tiempo después de haberlos hecho. Supongamos que tu
+historial luce como el siguiente:</p>
+  <code>
+  $ git log --pretty=oneline <br>
+15027957951b64cf874c3557a0f3547bd83b3ff6 Merge branch 'experiment' <br>
+a6b4c97498bd301d84096da251c98a07c7723e65 beginning write support <br>
+0d52aaab4479697da7686c15f77a3d64d9165190 one more thing <br>
+6d52a271eda8725415634dd79daabbc4d9b6008e Merge branch 'experiment' <br>
+0b7434d86859cc7b8c3d5e1dddfed66ff742fcbc added a commit function <br>
+4682c3261057305bdd616e23b64b0857d832627b added a todo file <br>
+166ae0c4d3f420721acbb115cc33848dfcc2121a started write support <br>
+9fceb02d0ae598e95dc970b74767f19372d61af8 updated rakefile <br>
+964f16d36dfccde844893cac5b347e7b3d44abbc commit the todo <br>
+8a5cbc430f1a9c3d00faaeffd07798508422908a updated readme <br>
+  </code>
+  <p>Ahora, supongamos que olvidaste etiquetar el proyecto en su versión v1.2, la cual corresponde al
+commit “updated rakefile”. Igual puedes etiquetarlo. Para etiquetar un commit, debes especificar el
+checksum del commit (o parte de él) al final del comando:
+</p>
+  <code>$ git tag -a v1.2 9fceb02
+</code>
+  <p>Puedes ver que has etiquetado el commit:</p>
+  <code>
+  $ git tag <br>
+v0.1 <br>
+v1.2 <br>
+v1.3 <br>
+v1.4 <br>
+v1.4-lw <br>
+v1.5 <br>
+$ git show v1.2 <br>
+tag v1.2 <br>
+Tagger: Scott Chacon &lt;schacon@gee-mail.com> <br>
+Date: Mon Feb 9 15:32:16 2009 -0800 <br>
+version 1.2 <br>
+commit 9fceb02d0ae598e95dc970b74767f19372d61af8 <br>
+Author: Magnus Chacon &lt;mchacon@gee-mail.com> <br>
+Date: Sun Apr 27 20:43:35 2008 -0700 <br>
+  updated rakefile <br>
+... <br>
+  </code>
+</div>
+<div id="div-6-6">
+  <h2>Compartir Etiquetas</h2>
+  <p>Por defecto, el comando git push no transfiere las etiquetas a los servidores remotos. Debes enviar
+las etiquetas de forma explícita al servidor luego de que las hayas creado. Este proceso es similar al
+de compartir ramas remotas - puedes ejecutar git push origin [etiqueta].</p>
+  <code>
+  $ git push origin v1.5 <br>
+Counting objects: 14, done. <br>
+Delta compression using up to 8 threads. <br>
+Compressing objects: 100% (12/12), done. <br>
+Writing objects: 100% (14/14), 2.05 KiB | 0 bytes/s, done. <br>
+Total 14 (delta 3), reused 0 (delta 0) <br>
+To git@github.com:schacon/simplegit.git <br>
+ * [new tag] v1.5 -> v1.5 <br>
+  </code>
+  <p>Si quieres enviar varias etiquetas a la vez, puedes usar la opción --tags del comando git push. Esto
+enviará al servidor remoto todas las etiquetas que aun no existen en él.</p>
+  <code>
+  $ git push origin --tags <br>
+Counting objects: 1, done. <br>
+Writing objects: 100% (1/1), 160 bytes | 0 bytes/s, done. <br>
+Total 1 (delta 0), reused 0 (delta 0) <br>
+To git@github.com:schacon/simplegit.git <br>
+ * [new tag] v1.4 -> v1.4 <br>
+ * [new tag] v1.4-lw -> v1.4-lw <br>
+</code>
+  <p>Por lo tanto, cuando alguien clone o traiga información de tu repositorio, también obtendrá todas
+las etiquetas.</p>
+  <h2 id="div-6-7">Sacar una Etiqueta</h2>
+  <p>En Git, no puedes sacar (check out) una etiqueta, pues no es algo que puedas mover. Si quieres
+colocar en tu directorio de trabajo una versión de tu repositorio que coincida con alguna etiqueta,
+debes crear una rama nueva en esa etiqueta:</p>
+  <code>$ git checkout -b version2 v2.0.0 <br>
+Switched to a new branch 'version2' <br></code>
+<p>Obviamente, si haces esto y luego confirmas tus cambios, tu rama version2 será ligeramente
+distinta a tu etiqueta v2.0.0 puesto que incluirá tus nuevos cambios; así que ten cuidado</p>
+</div>
+<div id="div-6-10"><h3>Eliminando la Tag</h3>
+  <code>git tag -d v1.4</code>
+  <p>Note that this does not remove the tag from any remote servers. There are two common variations for deleting a tag from a remote server.</p>
+  <p>The first variation is git push <remote> :refs/tags/&lt;tagname>:</p>
+  <code>git push origin :refs/tags/v1.4-lw</code>
+  <p>The second (and more intuitive) way to delete a remote tag is with:</p>
+  <code>git push origin --delete &lt;tagname></code></div>
+       </div>
+       <div id="div-7">
+         <h2>Alias de Git</h2>
+         <p>Antes de terminar este capítulo sobre fundamentos de Git, hay otro pequeño consejo que puede
+hacer que tu experiencia con Git sea más simple, sencilla y familiar: los alias. No volveremos a
+mencionarlos más adelante en este libro, ni supondremos que los has utilizado, pero
+probablemente deberías saber cómo utilizarlos.</p>
+         <p>Git no deduce automáticamente tu comando si lo tecleas parcialmente. Si no quieres teclear el
+nombre completo de cada comando de Git, puedes establecer fácilmente un alias para cada
+comando mediante git config. Aquí tienes algunos ejemplos que te pueden interesar:
+</p>
+         <code>$ git config --global alias.co checkout <br>
+$ git config --global alias.br branch <br>
+$ git config --global alias.ci commit <br>
+$ git config --global alias.st status <br>
+</code>
+         <p>Esto significa que, por ejemplo, en lugar de teclear git commit, solo necesitas teclear git ci. A
+medida que uses Git, probablemente también utilizarás otros comandos con frecuencia; no dudes
+en crear nuevos alias para ellos.
+</p>
+         <p>Esta técnica también puede resultar útil para crear comandos que en tu opinión deberían existir.
+Por ejemplo, para corregir el problema de usabilidad que encontraste al quitar del área de
+preparación un archivo, puedes añadir tu propio alias a Git:
+</p>
+         <code>$ git config --global alias.unstage 'reset HEAD --'
+</code>
+         <p>Esto hace que los dos comandos siguientes sean equivalentes:</p>
+         <code>$ git unstage fileA <br>
+$ git reset HEAD fileA <br>
+</code>
+         <p>Esto parece un poco más claro. También es frecuente añadir un comando last, de este modo:
+</p>
+<code>$ git config --global alias.last 'log -1 HEAD'</code>
+<p>De esta manera, puedes ver fácilmente cuál fue la última confirmación:
+</p>
+<code>$ git last <br>
+commit 66938dae3329c7aebe598c2246a8e6af90d04646 <br>
+Author: Josh Goebel &lt;dreamer3@example.com> <br>
+Date: Tue Aug 26 19:48:51 2008 +0800 <br>
+  test for current head <br>
+  Signed-off-by: Scott Chacon &lt;schacon@example.com> <br>
+</code>
+<p>Como puedes ver, Git simplemente sustituye el nuevo comando por lo que sea que hayas puesto en
+el alias. Sin embargo, quizás quieras ejecutar un comando externo en lugar de un subcomando de
+Git. En ese caso, puedes comenzar el comando con un carácter !. Esto resulta útil si escribes tus
+propias herramientas para trabajar con un repositorio de Git. Podemos demostrarlo creando el
+alias git visual para ejecutar gitk:
+</p>
+<code>$ git config --global alias.visual "!gitk"</code>
+       </div>
+   </article> 
+</body>
+</html>

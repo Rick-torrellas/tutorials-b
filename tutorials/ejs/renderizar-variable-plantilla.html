@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Renderizar el contenido de una variable en la plantilla</h1>
+    <p>
+        Primero que nada ejs no se parece tanto a angular, se parece mucho mas a php, por ejemplo ejs no tiene ninguna coneccion con js, las variables creadas en js no pueden ser usadas en ejs. 
+    </p>
+    <p>
+        Para definir variables internas dentro de la platilla, tienen que ser definidos dentro etiquetas ejs, '<%' esta en espesifico se usa para colocar codigo que no va a ser rendericado como un output, aqui se hace la logica que si variables if, for, etc.
+    </p>
+    <p>Para renderizar el conteido se usara la etiqueta <%=.</p>
+    <code>
+        <% let nalga = 'uno'%> <br>
+        &lt;p> <%= nalga %> <br>
+        &lt;script> <br>
+            let nalga = 'dos'; <br>
+        &lt;/script> <br>
+    </code>
+    <p>
+        El resultado sera 'uno'
+    </p>
+    <p>
+        Se pueden usar include como php, para agregar codigo ejs externo.
+    </p>
+    <h3>Otras maneras</h3>
+    <p>
+        Con express se puede renderizar una platilla y mandar objetos junto a ella, para que la platilla pueda usar ese objeto.
+    </p>
+    <p>
+        La otra es declarandolo directamente en express, en las variables locales. Esto puede hacerse estaticamente, osea delcarar un valor unico a una variable local o se puede usar dinamicamente, por ejemplo se puede igualar el valor de una busqueda a una db al valor de la variable, etc.
+    </p>
+</body>
+</html>

@@ -1,0 +1,72 @@
+# commands cli
+
+$(): vaina rara, como que encapsula la ejecucion de algo interno, y luego se puede utlizar para complementar otro comando, esto apartenmete es de linux
+
+con esto va a eliminar todos las instancias, mostrandote solo los ids como resultado.
+docker rm $(docker ps -aq)
+va a detener todas la sinstacias que se esten ejecutando
+docker stop $(docker ps -aq)
+
+# DockerFile
+
+Es una archivo de configuraciones para la creacion de una imagen
+
+* FROM: la imagen en que va a correr la nueva imagen, es por lo general un sistema operativo.
+
+FROM [--platform=<platform>] <image> [AS <name>]
+Or
+
+FROM [--platform=<platform>] <image>[:<tag>] [AS <name>]
+Or
+
+FROM [--platform=<platform>] <image>[@<digest>] [AS <name>]
+
+* RUN: 
+RUN <command> (shell form, the command is run in a shell, which by default is /bin/sh -c on Linux or cmd /S /C on Windows)
+RUN ["executable", "param1", "param2"] (exec form)
+
+* SHELL: te permite espesificar que terminal va a ejecutar los comandos
+
+SHELL ["cmd", "/S", "/C"]
+RUN echo hello
+
+* WORKDIR: The WORKDIR instruction sets the working directory for any RUN, CMD, ENTRYPOINT, COPY and ADD instructions that follow it in the Dockerfile.
+
+ENV DIRPATH=/path
+WORKDIR $DIRPATH/$DIRNAME
+RUN pwd
+The output of the final pwd command in this Dockerfile would be /path/$DIRNAME
+
+* VOLUME: crea un vinculo entre dos carpetas, del host y la imagen, si se modifica un archivo de alguna manera, el cambio se vera reflejado en ambas partes.
+
+VOLUME ["/data"]
+
+* COPY: copia archivos a la imagen
+
+COPY hom* /mydir/
+
+* ADD: copia archivos a la imagen
+
+ADD hom* /mydir/
+
+* ENV: establece variables de ambiente
+
+ENV MY_NAME="John Doe"
+ENV MY_DOG=Rex\ The\ Dog
+ENV MY_CAT=fluffy
+
+# tutoriales
+
+* ejecutar una estancia con diferetes puertos
+
+docker run -p 80:80 -p 3000:80 -p 4000:80 nginx 
+
+* Mostrar un mensaje personalizado para ps
+
+docker -ps --format="ID:\t{{.ID}}\nNames: \t{{.Names}}"
+
+* crear vinculo entre el host y una imagen
+
+docker run -d -p 80:80 --name nalga -v ~/taller/project:/usr/share/nginx/html nginx	
+
+

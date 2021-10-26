@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+        <h2>Transferir Archivos Dejando el Nombre Original</h2>
+        <code>
+            const multer = require('multer');
+            const storage = multer.diskStorage({
+                destination: path.join(__dirname, 'public/img/uploads'),
+                filename: (req, file, cb, filename) => {
+                    cb(null, path.basename(file.originalname , path.extname(file.originalname)) + '-' + imageCode + path.extname(file.originalname));
+                }
+            }) 
+            app.use(multer({storage}).single('image'));
+        </code>
+    </div>
+    <div id="div2">
+        <div>Transferir Archivos Usando un Nombre al Azar</div>
+        <code>
+            const multer = require('multer');
+            const uuid = require('uuid/v4');
+            const storage = multer.diskStorage({
+                destination: path.join(__dirname, 'public/img/uploads'),
+                filename: (req, file, cb, filename) => {
+                    cb(null, uuid(v4options) + path.extname(file.originalname));
+                }
+            }) 
+            app.use(multer({storage}).single('image'));
+        </code>
+    </div>
+    <div id="div3"></div>
+    <div id="div4"></div>
+    <div id="div5"></div>
+    <div id="div6"></div>
+    <div id="div7"></div>
+    <div id="div8"></div>
+    <div id="div9"></div>
+    <div id="div10"></div>
+    <div id="div11"></div>
+    <div id="div12"></div>
+    <div id="div13"></div>
+    <div id="div14"></div>
+    <div id="div15"></div>
+    <div id="div16"></div>
+    <div id="div17"></div>
+    <div id="div18"></div>
+    <div id="div19"></div>
+    <div id="div20"></div>
+</body>
+</html>

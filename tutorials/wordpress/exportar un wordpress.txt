@@ -1,0 +1,11 @@
+Exportar wordpress - Manual
+
+1 Vamos a copiar todos los archivos del wordpress menos .htaccess y wp-config 
+
+2 lo siguiente que vamos a hacer es exportar la base de datos
+
+3 luego vamo a modificar la base de datos, para cambiar la URL, para eso buscaremos en la base de datos, _options ahi donde dice 'siteurl', veremos que sale una URL, copiala y remplala por la ueva URL, es muy importante que la nueva direccion no termine en / o \
+
+4 por ultimo seria iinstalar el wordpress
+
+5 crear el .htaccess para eso vamos a ajustes > enlaces permanentes y escojes la major ruta y guardamos, eso crearia el archivo

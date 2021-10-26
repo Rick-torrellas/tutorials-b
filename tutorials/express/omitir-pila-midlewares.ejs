@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Omitir el resto de las funciones de middleware de una pila de middleware </h1>
+    <p>Para omitir el resto de las funciones de middleware de una pila de middleware de direccionador, invoque next('route') para pasar el control a la siguiente ruta. NOTA: next('route') sólo funcionará en las funciones de middleware que se hayan cargado utilizando las funciones app.METHOD() o router.METHOD().</p>
+    <p>Este ejemplo muestra una subpila de middleware que maneja solicitudes GET a la vía de acceso /user/:id.</p>
+    <code>
+        app.get('/user/:id', function (req, res, next) { <br>
+            // if the user ID is 0, skip to the next route <br>
+            if (req.params.id == 0) next('route'); <br>
+            // otherwise pass the control to the next middleware function in this stack <br>
+            else next(); // <br>
+          }, function (req, res, next) { <br>
+            // render a regular page <br>
+            res.render('regular'); <br>
+          }); <br>
+           <br>
+          // handler for the /user/:id path, which renders a special page <br>
+          app.get('/user/:id', function (req, res, next) { <br>
+            res.render('special'); <br>
+          }); <br>
+    </code>
+</body>
+</html>

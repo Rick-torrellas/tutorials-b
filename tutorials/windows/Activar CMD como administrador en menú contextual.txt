@@ -1,0 +1,7 @@
+Activar CMD como administrador en menú contextual
+
+- Lo primero es dirigirnos al registro del sistema para eso en eso en el buscador de windows, o con **windows+r**, escribiremos **regedit**.
+- Vamos a hacer cambios en una sola de las carpetas: **HKEY_CLASSES_ROOT**. En esta carpeta vamos a buscar una carpeta llamada **directory**, en ella buscaremos dos carpetas, pero para ellas va a ser el mismo proceso las carpetas son **directory/shell/cmd**,**directory/backgorund/shell/cmd**, en ambos se buscara el mismo archivo y se llamara el mismo proceso
+- Una vez estando en la carpeta cmd se buscara el registro: **HideBasedOnVelocityId** para renombrarlo con **HideBasedOnVelocityId_**, solo agregarle un "_", para eso hay que cambir los permisos de la carpeta cmd, para eso:
+         - hay que darle click derecho a la carpeta - permisos - avanzados - Dueño: Cambiar - Colocar el nombre del usuario - verficicar nombre - aceptar - aceptar - luego buscar entre las opciones administradores (elnombre de usuario: ejemplo: NALGA\ADdministrators) - aceptar y con eso podras cambiar el nombre del registro
+- Ahora ya podras ser capas de darle **shift+click derecho**, para inicicar la consola cmd en la carpeta donde te encuentes.

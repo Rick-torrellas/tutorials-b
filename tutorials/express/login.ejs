@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Sistema de Login</h1>
+    <nav>
+       <div>
+        <h2>bcrypt</h2>
+        <h2>mongoose</h2>
+        <div><a href="#div1">Verficar un Usuario</a></div>
+        <div><a href="#div2">Crear usuario</a></div>
+        <div><a href="#div3">Actualizar Usuario</a></div>
+       </div>
+    </nav>
+    <div id="div1">
+        <h2>Verificar Usuario</h2>
+        <code>
+            crudCtrl.validateAdmin = async (req,res) => { <br>
+                const {email,password} = await req.body; <br>
+                const admin = await Admin.findOne({email}) <br>
+                if (!admin) { <br>
+                    console.log(chalk.bold.red(`[ERROR ENCONTRADO]: El correo no existe ${chalk.white('validateAdmin')}`)); <br>
+                    res.status(401).send("El correo no existe"); <br>
+                    return; <br>
+                }  <br>
+                const math = await admin.mathPassword(password); <br>
+                if (math) { <br>
+                    const token = jwt.sign({_id: admin._id}, 'palabraSecreta'); <br>
+                return res.status(200).json({token}); <br>
+                } else { <br>
+                    console.log(chalk.bold.red(`[ERROR ENCONTRADO]: La contraseña es incorrecta ${chalk.white('validateAdmin')}`)); <br>
+                    res.status(401).send('Contraseña Incorrecta');    <br>
+                } <br>
+            // if (admin.password !== password) {       } <br>
+            } <br>
+        </code>
+    </div>
+    <div id="div2">
+        <h2>Crear Admin</h2>
+        <code>
+            crudCtrl.createAdmin = async (req,res) => { <br>
+    <br>
+                const admin = new Admin({ <br>
+                    nombre: req.body.nombre, <br>
+                    password: req.body.password , <br>
+                    email: req.body.email <br>
+                }) <br>
+                // const errors = []; <br>
+                    try { <br>
+                        admin.password = await admin.encriptarPassword(admin.password); <br>
+                        await admin.save(); <br>
+                        const token = jwt.sign({_id: admin._id}, 'palabraSecreta'); <br>
+                        console.log(chalk.bold.green('[ADMIN CREADO]')); <br>
+                        res.status(200).json({token});  <br>
+                    } catch (error) { <br>
+                        console.log(chalk.bold.red(`[ERROR ENCONTRADO]: ${chalk.white('createAdmin')}`)); <br>
+                    console.log(error);  <br>
+                    res.send('[ERROR ENCONTRADO]: createAdmin'); <br>
+                    } <br>
+                 <br>
+            } <br>
+        </code>
+        <p><b>De utilidad para mejorar el codigo</b></p>
+        <code>
+            /*  if (admin.password != confirm_password) { <br>
+                errors.push({mensaje: 'Error las contraseñas no coincidesn'}) <br>
+                res.json(errors); <br>
+                } */ <br>
+                /* if (admin.password < 4) { <br>
+                    errors.push({mensaje: 'La contraseña debe tener mas de 4 caracteres'}) <br>
+                    res.json(errors); <br>
+                } <br>
+                if (errors.length > 0 ) { <br>
+                     <br>
+                } else { <br>
+                     <br>
+                } */ <br>
+        </code>
+    </div>
+    <div id="div3">
+        <h2>Actualizar usuario</h2>
+        <code>
+            crudCtrl.updateAdmin = async (req,res) => { <br>
+                const {email} = req.params; <br>
+                const admin = { <br>
+                    nombre: req.body.nombre, <br>
+                    email: req.body.email, <br>
+                    password: req.body.password <br>
+                }; <br>
+                const admim = new Admin() <br>
+                try { <br>
+                admin.password = await admim.encriptarPassword(admin.password); <br>
+                   await Admin.findByIdAndUpdate(email, {$set: admin}); <br>
+                   console.log(chalk.bold.green('[ADMIN ACTUALIZADO]')); <br>
+                   res.status(200).json({status: 'Admin Actualizado'});   <br>
+                } catch (error) { <br>
+                    console.log(chalk.bold.red(`[ERROR ENCONTRADO]: ${chalk.white('updateAdmin')}`)); <br>
+                    console.log(error); <br>
+                    res.send('[ERROR ENCONTRADO]: updateAdmin'); <br>
+                } <br>
+            } <br>
+        </code>
+    </div>
+</body>
+</html>

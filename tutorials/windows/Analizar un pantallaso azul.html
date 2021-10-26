@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <a href="https://jmtella.com/jmt/page/BSOD-Pantalla-azul.aspx">https://jmtella.com/jmt/page/BSOD-Pantalla-azul.aspx</a>
+    <article>
+        <h1>BSOD - Pantalla azul - Analizar el error</h1>
+        <p>Uno de los peores errores en los que nos podemos encontrar es una pantalla azul (BSOD: Blue Screen of Death), congelaciones de la pantalla -cursor y teclado no responden- o reinicios espontáneos.</p>
+        <div>
+            <h2>Reinicios espontáneos</h2>
+            <p>en Windows XP, estos reinicios espontáneos suelen ser producidos por tener marcado "Reiniciar Automáticamente" (es la opción por defecto). Dicha opción se modifica con botón derecho sobre Mi PC, propiedades, pestaña de avanzado y botón de inicio y recuperación.</p>
+            <p>Un reinicio espontáneo es, o bien porque iba a salir una pantalla azul, y al estar seleccionada la opción anterior, en vez de salir, el sistema se reinicia, o bien por un error hardware que el sistema operativo no ha podido atrapar. Si es la primera opción, simplemente debemos configurar para que NO se reinicie automáticamente y dejar que el sistema atrape el error. Si a pesar de eso, siguen los reinicios, implica entonces un error hardware y grave: normalmente placa madre o CPU y poco más podemos diagnosticar en este caso.</p>
+        </div>
+        <div>
+            <h2>Pantalla azul</h2>
+            <p>en este caso, nos dará en pantalla un mini-informe del error. Únicamente debemos fijarnos si en dicho mensaje aparece un .sys causante del error. Si *no* aparece este .sys, o lo que aparece son componentes de Windows (ntoskrln, win32k.sys, esbstor.sys, usbyhci.sys), deberemos analizar el archivo DMP que se produce (lo veremos posteriormente).
+                Si el driver que aparece es un archivo de terceros: ya tenemos localizado al culpable. La solución será actualizar dichos drivers, o dicho componente (los antivirus, si no ha existido cambio de hardware, suelen ser los primeros candidatos).</p>
+                <p>
+                    Un elevado número de veces no sale ningún .sys o .dll causante del error. En ese caso, no nos queda más remedio también que analizar el archivo DMP.
+                </p>
+                <p>
+                    Por desgracia, la utilidad DUMPCHK que viene en las Support Tools de windows XP / W2003 poco nos sirve para analizar el error ya que únicamente nos mostrará lo mismo que nos muestra Windows en la pantalla azul. Por tanto, si Windows al generar la pantalla azul no ha sido capaz de mostrarlo, este herramienta no nos servirá de nada. Más adelante veremos qué herramienta debemos utilizar para ello.
+                </p>
+        </div>
+        <div>
+            <h2>Congelaciones de la pantalla</h2>
+            <p>Es un caso similar al 2). Tendremos que analizar el DMP. Ahora bien, ¿cómo podemos en este caso hacer que el sistema nos genere un DMP si el sistema está congelado?</p>
+            <p>
+                (NO VÁLIDO PARA TECLADOS USB/BLUETOOTH): Para ello, previamente debemos tener configurado el registro para que una combinación de teclas nos provoque el DUMP aunque todo esté congelado. Por tanto, y es mi consejo que por defecto lo tengamos configurado, debemos tener una variable en la clave:
+            </p>
+            <code>
+                HKEY_LOCAL_MACHINE <br>
+System <br>
+CurrentControlSet <br>
+Services <br>
+i8042prt <br>
+Parameters <br>
+ <br>
+Nombre: CrashOnCtrlScroll <br>
+Tipo: DWORD (doble palabra) <br>
+Contenido: 1 <br>
+            </code>
+            <p>
+                (y reiniciar la máquina para que esté activo). Con esto, en cualquier momento, e incluso en caso de congelación de la pantalla, podremos provocar el DMP, pulsando la tecla CTRL (derecha) y dos veces consecutivas la tecla SCROLL BLOCK (bloqueo de desplazamiento).
+            </p>
+        </div>
+        <section>
+            <div>
+                <h2>
+                    TIPOS DE VOLCADO DE MEMORIA
+                </h2>
+                <p>Existen tres tipos de volcado de memoria, los cuales están activados desde: botón derecho sobre Mi PC, propiedades, pestaña de avanzado y botón de inicio y recuperación:</p>
+                <ul>
+                    <li><b>Minidump (64KB)</b>Realmente vale para poco y no es la mejor opción Si la tenemos activada, nos generará un "minidump" en \windows\minidump</li>
+                    <li><b>Kernel.dmp</b>opción intermedia: solo se vuelca el kernel (núcleo) y en la mayoría de los casos es suficiente para diagnosticar el error. Genera el archivo MEMORY.DMP en la carpeta Windows.</li>
+                    <li><b>Completo</b>Para que el DMP completo funcione y no salga "corrupto", es obligatorio tener el archivo de paginación en la misma partición en la cual tenemos Windows. Generará igualmente en ella el archivo MEMORY.DMP</li>
+                </ul>
+                <p>
+                    Muchas veces por motivos de rendimiento movemos el archivo de paginación a otro disco físico. Si tenemos BSOD del sistema y deseamos un volcado de memoria completo, deberemos previamente volver a establecer el archivo de paginación en la unidad de Windows. Igualmente debemos recordar que en este caso, debemos tener espacio en disco igual a la memoria física de la máquina ya que ese será el tamaño del archivo DMP creado.
+                </p>
+            </div>
+            <div>
+                <h2>SOFTWARE NECESARIO PARA EL ANALISIS DEL ERROR</h2>
+                <p>La información podemos localizarla en esta página: <a href="http://msdn.microsoft.com/en-us/windows/hardware/gg463009">aqui</a></p>
+                <h3>Windows Driver Kit (WDK)</h3>
+                <p>Para instalar este paquete es necesario bajar el <b>Visual Studio</b>, todos los links estan en la web y estan actualizados.</p>
+                <p>El software puede instalarse tanto en la propia máquina como en una máquina ajena. No es necesario analizar el archivo .DMP en la misma máquina en la cual ha sucedido el error, pudiendo hacerse en cualquier otra.</p>
+            </div>
+            <div>
+                <h2>PRIMERA CONFIGURACIÓN DEL SOFTWARE</h2>
+                <p>Aunque no es necesario, para poco nos vale un error si no tenemos instalados los ficheros de símbolos. Los símbolos de drivers de terceros no podremos instalarlos porque los fabricantes normalmente no los dan, pero los símbolos de Windows sí que podremos. No aconsejo instalarlo desde el CD, ni descargarse del sitio de Microsoft los símbolos ya que la propia herramienta instalada: WINDBG, una vez configurada, si no tiene los símbolos los descargará en ese momento, y descargará justo los necesarios para ese análisis teniendo en cuenta por tanto los Service Packs y parches que tiene instalados el sistema que estamos analizando.</p>
+                <p>Para configurarlos de esa manera arrancamos el programa de análisis que hemos instalado: WINDBG y en el menú "File", "Symbol File Path" colocamos:</p>
+                <code>
+                    SRV*c:\websymbols*http://msdl.microsoft.com/download/symbols
+                </code>
+                <p>(en este caso he seleccionado que los símbolos, cuando los descargue, -por ello la primera vez de análisis será lenta, dependiendo de la velocidad de nuestra conexión a Internet- los sitúe en la carpeta: c:\websimbols)</p>
+                <p>Dicha carpeta puede ser cualquier otra, y lo único que tener presente es que debemos tenerla creada previamente.</p>
+            </div>
+            <div>
+                <h2>VOLCADO DE MEMORIA (DMP o DUMP). ANALISIS DE LOS ARCHIVOS</h2>
+                <p>Un vez configurado tal y como está descrito anteriormente, procedemos a abrir el DUMP con windbg, en el menú "File" y la opción "Open Crash Dump". Podemos abrir cualquier archivo de dump, estemos o no en la máquina que ha causado el casque. Incluso puede abrirse en remoto por ADSL, por ejemplo y aunque el DUMP será de muchas megas, normalmente con sólo leer la cabecera y poco más, estará en disposición de ver datos. En este caso vamos a abrir el DUMP desde otra máquina por red.</p>
+                <p>NOTA 1: la primera vez que analizamos un dump de un determinado sistema operativo (o con parches específicos), se bajará automáticamente del sitio de Microsoft los ficheros de símbolos necesarios. Por ello, debemos estar conectados a Internet y puede que esa primera vez tarde unos minutos en bajárselos.</p>
+                <p>Este es un "casque" real en un W2003 Server que está actuando como Controlador de Dominio. Estaba seleccionada la opción de "kernel dump". En la pantalla azul únicamente informó de MULTIPLE_IRP_COMPLETE_REQUESTS, sin dar mas información sobre el módulo causante del fallo.</p>
+                <p>Lo primero que debemos fijarnos en un DUMP es si en las líneas de cabecera cabecera nos indica si está "corrupto". Si lo estuviese, no nos vale para nada.   </p>
+                <p>
+                    NOTA 2: Un dump puede estar corrupto, si tenemos la opción de DUMP completo de memoria y el fichero de paginación reside en otra unidad física. En ese caso, deberemos esperar a repetir el error una vez hayamos puesto el fichero de paginación en la misma unidad que Windows.
+                </p>
+                <p>
+                    Resultado del analizador: (es conveniente leer todos, ya que nos va indicando versión del sistema operativo, parches instalados, etc...) Y sobre todo la parte final:
+                </p>
+                <code>
+                    ============================================================================================== <br>
+ <br>
+Microsoft (R) Windows Debugger Versión 6.4.0007.2 <br>
+Copyright (c) Microsoft Corporation. All rights reserved. <br>
+ <br>
+Loading Dump File [\\ka000SRV\d$\WINDOWS\MEMORY.DMP] <br>
+Kernel Summary Dump File: Only kernel address space is available <br>
+ <br>
+Symbol search path is: SRV*c:\websymbols*http://msdl.microsoft.com/download/symbols <br>
+Executable search path is: <br>
+Windows Server 2003 Kernel Versión 3790 (Service Pack 1) MP (4 procs) Free x86 compatible <br>
+Product: LanManNt, suite: TerminalServer SingleUserTS <br>
+Built by: 3790.srv03_sp1_rtm.050324-1447 <br>
+Kernel base = 0x80800000 PsLoadedModuleList = 0x808af988 <br>
+Debug session time: Thu May 19 19:32:53.800 2005 (GMT+2) <br>
+System Uptime: 0 days 0:05:14.483 <br>
+Loading Kernel Symbols <br>
+..................................................................... <br>
+Loading unloaded module list <br>
+. <br>
+Loading User Symbols <br>
+PEB is paged out (Peb.Ldr = 7ffd800c). Type ".hh dbgerr001" for details <br>
+******************************************************************************* <br>
+* * <br>
+* Bugcheck Analysis * <br>
+* * <br>
+******************************************************************************* <br>
+ <br>
+Use !analyze -v to get detailed debugging information. <br>
+ <br>
+BugCheck 44, {87e5a490, d75, 0, 0} <br>
+ <br>
+*** ERROR: Module load completed but symbols could not be loaded for ax88172.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for portmap.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for PfModNT.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for nfsrdr.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for dump_Fasttrak.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for winacusb.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for vmm.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for ctac32k.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for ctsfm2k.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for emupia2k.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for ha10kx2k.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for hap16v2k.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for ctoss2k.sys <br>
+*** ERROR: Symbol file could not be found. Defaulted to export symbols for drmk.sys - <br>
+*** ERROR: Module load completed but symbols could not be loaded for ctaud2k.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for e100b325.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for lstone2k.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for el90xbc5.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for MTXPARHM.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for pfc.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for drmkaud.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for ASAPIW2k.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for MTXPARHD.dll <br>
+*** ERROR: Module load completed but symbols could not be loaded for netmate2.sys <br>
+*** ERROR: Symbol file could not be found. Defaulted to export symbols for rpcxdr.sys - <br>
+*** ERROR: Module load completed but symbols could not be loaded for Fasttrak.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for VMNetSrv.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for TSKNF601.SYS <br>
+*** ERROR: Module load completed but symbols could not be loaded for ctprxy2k.sys <br>
+*** ERROR: Module load completed but symbols could not be loaded for PSXDRV.SYS <br>
+*** ERROR: Module load completed but symbols could not be loaded for memalloc.sys <br>
+************************************************************************* <br>
+*** *** <br>
+*** *** <br>
+*** Your debugger is not using the correct symbols *** <br>
+*** *** <br>
+*** In order for this command to work properly, your symbol path *** <br>
+*** must point to .pdb files that have full type information. *** <br>
+*** *** <br>
+*** Certain .pdb files (such as the public OS symbols) do not *** <br>
+*** contain the required information. Contact the group that *** <br>
+*** provided you with these symbols if you need this command to *** <br>
+*** work. *** <br>
+*** *** <br>
+*** Type referenced: ocaData *** <br>
+*** *** <br>
+************************************************************************* <br>
+Probably caused by : usbehci.sys <br>
+ <br>
+Followup: MachineOwner <br>
+--------- <br>
+ <br>
+============================================================================== <br>
+                </code>
+                <p>
+                    Bien, esta es la primera información del error. Aparece un nombre de módulo candidato: usbehci.sys el cual corresponde a uno de los drivers del propio Windows para USB. Al menos ya sabemos que el casque está provocado por "algo" que está en el bus USB.
+                </p>
+                <p>
+                    Es extraño, a no ser un error hardware, que un driver del propio Microsoft sea el causante.
+                </p>
+                <p>
+                    Fijémonos en que, en una línea superior, la propia salida del debugger nos aconseja:
+                </p>
+                <code>
+                    **** Use !analyze -v to get detailed debugging information. 
+                </code>
+                <p>Por tanto en la línea inferior de la pantalla, procedemos a ejecutar ese comando:</p>
+                <code>
+                    =============================================================================== <br>
+ <br>
+0: kd> !analyze -v <br>
+ <br>
+******************************************************************************* <br>
+* * <br>
+* Bugcheck Analysis * <br>
+* * <br>
+******************************************************************************* <br>
+ <br>
+MULTIPLE_IRP_COMPLETE_REQUESTS (44) <br>
+A driver has requested that an IRP be completed (IoCompleteRequest()), but <br>
+the packet has already been completed. This is a tough bug to find because <br>
+the easiest case, a driver actually attempted to complete its own packet <br>
+twice, is generally not what happened. Rather, two separate drivers each <br>
+believe that they own the packet, and each attempts to complete it. The <br>
+first actually works, and the second fails. Tracking down which drivers <br>
+in the system actually did this is difficult, generally because the trails <br>
+of the first driver have been covered by the second. However, the driver <br>
+stack for the current request can be found by examining the DeviceObject <br>
+fields in each of the stack locations. <br>
+Arguments: <br>
+Arg1: 87e5a490, Address of the IRP <br>
+Arg2: 00000d75 <br>
+Arg3: 00000000 <br>
+Arg4: 00000000 <br>
+ <br>
+Debugging Details: <br>
+------------------ <br>
+ <br>
+IRP_ADDRESS: 87e5a490 <br>
+ <br>
+DEFAULT_BUCKET_ID: DRIVER_FAULT <br>
+ <br>
+BUGCHECK_STR: 0x44 <br>
+ <br>
+CURRENT_IRQL: 2 <br>
+ <br>
+DEVICE_OBJECT: 8a055618 <br>
+ <br>
+DRIVER_OBJECT: 8a14eaa8 <br>
+ <br>
+IMAGE_NAME: usbehci.sys <br>
+ <br>
+DEBUG_FLR_IMAGE_TIMESTAMP: 42435bb3 <br>
+ <br>
+MODULE_NAME: usbehci <br>
+ <br>
+FAULTING_MODULE: ba27b000 usbehci <br>
+ <br>
+LAST_CONTROL_TRANSFER: from 808596ec to 8087b6be <br>
+ <br>
+STACK_TEXT: <br>
+f789ee10 808596ec 00000044 87e5a490 00000d75 nt!KeBugCheckEx+0x1b <br>
+f789ee48 ba11ddc4 87e5a490 88770eb0 8a0e1028 nt!IopfCompleteRequest+0x2f7 <br>
+f789eeb0 ba11ea45 b70989c0 00000000 8083b28b USBPORT!USBPORT_CompleteTransfer+0x38c <br>
+f789eee0 ba11f558 026e6f44 8a0e10e0 8a0e10e0 USBPORT!USBPORT_DoneTransfer+0x137 <br>
+f789ef18 ba120d58 8a0e1028 8083b28b 8a0e1230 USBPORT!USBPORT_FlushDoneTransferList+0x168 <br>
+f789ef44 ba12eef2 8a0e1028 8083b28b 8a0e1028 USBPORT!USBPORT_DpcWorker+0x224 <br>
+f789ef80 ba12f06a 8a0e1028 00000001 ffdffa40 USBPORT!USBPORT_IsrDpcWorker+0x380 <br>
+f789ef9c 8083eb0f 8a0e164c 6b755044 00000000 USBPORT!USBPORT_IsrDpc+0x166 <br>
+f789eff4 8083a92b b76d5d44 00000000 00000000 nt!KiRetireDpcList+0xca <br>
+ <br>
+STACK_COMMAND: .bugcheck ; kb <br>
+ <br>
+FOLLOWUP_NAME: MachineOwner <br>
+ <br>
+FAILURE_BUCKET_ID: 0x44_IMAGE_usbehci.sys_DATE_3_25_2005 <br>
+ <br>
+BUCKET_ID: 0x44_IMAGE_usbehci.sys_DATE_3_25_2005 <br>
+ <br>
+Followup: MachineOwner <br>
+--------- <br>
+ <br>
+=================================================================== <br>
+                </code>
+                <p>
+                    La salida del comando nos da la explicación de por qué ocurre un MULTIPLE_IRP_COMPLETE_REQUESTS, básicamente nos informa de que un driver ha solicitado la ejecución de un IRP (IoCompleteRequest) pero el paquete ya había sido completado. Nos dice que es un problema no resuelto por el software y difícil de encontrar, ya que en el mejor de los casos, un driver erróneo que pidió su propio paquete dos veces, no suele ser lo que ha sucedido. Nos dice igualmente que lo más probable es que haya dos drivers diferentes, cada uno de ellos cree que el paquete es suyo y hacen intentos para completarlo. Por último indica que seguir la pista de esto no suele ser fácil.
+                </p>
+                <p>Veamos que se equivoca, y que al menos en nuestro caso es sencillo de seguir ;-)</p>
+                <p>Si no fijamos igualmente en la parte anterior, nos da la dirección del IRP en estas líneas:</p>
+                <code>
+                    Arguments: <br>
+Arg1: 87e5a490, Address of the IRP <br>
+Arg2: 00000d75 <br>
+Arg3: 00000000 <br>
+Arg4: 00000000 <br>
+                </code>
+                <p>
+                    Por tanto, vamos a pedir al debugguer que nos muestre el contenido de esa dirección ejecutando el comando: !IRP con la dirección anterior:
+                </p>
+                <code>
+                    ==================================================================== <br>
+ <br>
+0: kd> !IRP 87e5a490 <br>
+Irp is active with 3 stacks 3 is current (= 0x87e5a548) <br>
+No Mdl Thread 00000000: Irp stack trace. <br>
+cmd flg cl Device File Completion-Context <br>
+[ 0, 0] 0 0 00000000 00000000 00000000-00000000 <br>
+ <br>
+Args: 00000000 00000000 00000000 00000000 <br>
+[ 0, 0] 0 0 00000000 00000000 00000000-00000000 <br>
+ <br>
+Args: 00000000 00000000 00000000 00000000 <br>
+> [ f, 0] 0 c0 8a055618 00000000 b69de300-00000000 Success Error <br>
+\Driver\usbehci ax88172 <br>
+Args: b70989c0 00000000 00220003 00000000 <br>
+ <br>
+==================================================================== <br>
+                </code>
+                <p>
+                    Esta última línea nos da todos los drivers que han intervenido "creyendo" que un paquete era suyo y han intentado completar la petición. Y al no ser realmente suya es lo que ha provocado el fallo del sistema. Vemos en la penúltima línea que son:
+                </p>
+                <code>
+                    \Driver\usbehci ax88172
+                </code>
+                <p>El primero corresponde al stack USB de Windows... y el segundo a un "dudoso" y no certificado driver de un dispositivo de red (una NIC LAN 10/100). El aix88712 es el chip que monta y su driver se llama igual.</p>
+                <p>Por tanto... ya sabemos quien ha sido el culpable :-)</p>
+            </div>
+        </section>
+    </article>
+</body>
+</html>

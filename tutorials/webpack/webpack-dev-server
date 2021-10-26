@@ -1,0 +1,18 @@
+webpack-dev-server can be used to quickly develop an application. See the development guide to get started.
+
+el va a tomar la configuracion en el archivo de configuracion de webpack, y lo va a usar y contruir un servidor que se va a a auto actualizar y realizara los cambios echos.
+
+npm install webpack-dev-server --save-dev
+
+devServer: {
+       contentBase: path.join(__dirname, 'dist'),
+       host: 0.0.0.0
+    compress: true,
+    port: 9000,
+    },
+
+## para que se pueda ver el servdor en la red local.
+
+## iniciarlo: 
+
+webpack serve

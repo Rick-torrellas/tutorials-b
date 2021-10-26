@@ -1,0 +1,20 @@
+The css-loader interprets @import and url() like import/require() and will resolve them.
+
+npm install --save-dev css-loader
+
+file.js
+
+import css from "file.css";
+or 
+import 'file.css';
+
+module.exports = {
+  module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ["style-loader", "css-loader"],
+      },
+    ],
+  },
+};

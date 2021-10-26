@@ -1,0 +1,1 @@
+TEner cuidado al comprar 2s variables, en algunos casos al encerrar las vairalbes en [], no va a reconocer la compracion, es mejor simplemente comparar las variables

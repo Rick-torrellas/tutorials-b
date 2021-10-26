@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+        <h2>Configuracion Autentificacion</h2>
+        <ul>
+            <li>Crear un usuario con los roles y privigelios que se quieran</li>
+            <li>Configurar el mongo par que requiera la autentificacion o iniciar el mongod con autentificacion</li>
+        </ul>
+    </div>
+    <div id="div2">
+        <h2>Creacion de usuario</h2>
+        <p>Este es un usuario con todos los privilegios</p>
+        <code>
+            db.createUser( <br>
+                { <br>
+        user: "capitanalgosa", <br>
+        pwd: "abc123", <br>
+        roles: [ { role: "userAdminAnyDatabase", db: "admin" }, "readWriteAnyDatabase" ]             <br>
+                } <br>
+            ) <br>
+        </code>
+        <p>Este otro tendra privilegios varios, dependiendo de la base de datos.</p>
+        <code>
+            <code>
+                db.createUser( <br>
+                    { <br>
+            user: "text", <br>
+            pwd: "abc123", <br>
+            roles: [ { role: "read", db: "nalga" },   <br>
+            { role: "readWrite", db: "vagina" } ]             <br>
+                    } <br>
+                ) <br>
+            </code>
+        </code>
+    </div>
+    <div id="div3">
+        <h2>Conectarse a mongo con autentificacion</h2>
+        <code>mongo -u "usuario" -p "contraseña" --authenticationDatabase "base-datos"</code>
+    </div>
+    <div id="div4">
+        <h2>--authenticationDatabase</h2>
+        <p>Espesificar la db donde el usuario fue creado</p>
+        <code>--authenticationDatabase nombre-db</code>
+    </div>
+    <div id="div5">
+        <h2>Configurar mongo ubuntu</h2>
+        <code>sudo cat /etc/mongodb.conf</code>
+    </div>
+    <div id="div6">
+        <h2>Para cambiar la contraseña de un usuario</h2>
+        <code>db.changeUserPassword("passVieja","passNueva")</code>
+    </div>
+    <div id="div7">
+        <h2>Iniciar mongod con autentificacion</h2>
+        <p><p>Para iniciar mongo y que sea necesario la autentificacion</p></p>
+        <code>mongod --auth</code>
+    </div>
+    <div id="div8">
+        <h2>Configurar mongo para pedir autentificacion</h2>
+        <h3>mongod.conf</h3>
+        <code>
+            security: <br>
+              authorization : enabled // Para que sea necesario identificarte para acceder a la base de datos. <br>
+            </code>
+    </div>
+    <div id="div9">
+        <h2>Roles de usuario</h2>
+        <code>
+            read <br>
+        readWrite <br>
+        dbAdmin <br>
+        dbOwner <br>
+        userAdmin <br>
+        clusterAdmin <br>
+        clusterManager <br>
+        clusterMonitor <br>
+        hostManager <br>
+        backup <br>
+        restore <br>
+        readAnyDatabase <br>
+        readWriteAnyDatabase <br>
+        userAdminAnyDatabase <br>
+        dbAdminAnyDatabase <br>
+        root <br>
+        </code>
+    </div>
+    <div id="div10">
+        <h2>Eliminar un Usuario</h2>
+        <code>db.dropUser("nombre-de-usuario")</code>
+    </div>
+    <div id="div11">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div12">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div13">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div14">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div15">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div16">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div17">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div18">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div19">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div20">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+</body>
+</html>

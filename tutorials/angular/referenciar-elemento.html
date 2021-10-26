@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Referenciar un elemento html</h1>
+    <p>Estas variables nos permiten referenciar al elemento html y todas sus propiedades del dom:</p>
+    <code>&lt;p #myVariable>&lt;/p></code>
+    <p>Hay que saber que esta propiedad se carga cuando se carga la vista, asi que en vez de onInit() se puede colocar ngAferViewInit(), acordarse se exportarlo y la classe del componente en vez de implementar OnInit va a implementar AfterViewInit, pero eso defependiendo que vallas a usar la funcion al iniciar.</p>
+    <p>Para realizar la aplicacion hay que importar ElementRef - ViewChild del @angular/core</p>
+<p>Para extraer el valor del elemento se usa el decorador </p>
+<code>
+    @ViewChild('myVariable') myVariable: ElementRef; <br>
+ <br>
+ngAfterViewInit() { <br>
+ this.myVariable.innerHTML = "Vagina"; <br>
+} <br>
+</code>
+</body>
+</html>
+

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <article>
+        <h1>
+            ¿Qué es el error 403 Prohibido y cómo arreglarlo? </h1>
+            <div>
+                <h2>¿Qué es el error 403 Prohibido?</h2>
+                <p>Antes de profundizar más y tratar de arreglar el Error Prohibido 403, entendamos lo que realmente es. El error 403 prohibido es un código de estado HTTP. Cuando te encuentras con este mensaje de error, básicamente estás tratando de ingresar a una dirección o un sitio web a los que está prohibido acceder.</p>
+            </div>
+            <div>
+                <h2>Causas del error 403 Prohibido</h2>
+                <p>Obtener un mensaje de error 403 en medio del desarrollo puede ser inquietante. Pero antes de que podamos arreglarlo, necesitamos averiguar la verdadera causa. La simple razón por la que vemos este error es porque estás intentando acceder a algo para lo cual no tienes permiso. Lanzar un error prohibido 403 es la forma en que tu sitio web te dice que no tienes suficientes permisos para continuar.</p>
+                <p>Este error se debe básicamente a:</p>
+                <ul>
+                    <li>Permisos de archivos o carpetas incorrectos</li>
+                    <li>Ajustes incorrectos en el archivo .htaccess</li>
+                </ul>
+            </div>
+    </article>
+<article>
+    <h2>Corregir el mensaje de error 403 Prohibido</h2>
+    <p>Ahora que sabemos los diversos factores que causan el error, es hora de buscar cómo deshacerte de él. Los pasos mencionados aquí se centran principalmente en los consejos para corregir este mensaje de error en WordPress, pero también pueden aplicarse a otros sitios web. Veamos los pasos:</p>
+    <div>
+        <h2>Paso 1 – Comprobación del archivo .htaccess</h2>
+        <p>En otros casos, por ejemplo, si usas cPanel, puedes hacerlo accediendo a tu Panel de Control de hosting con la ayuda de File Manager. Ahora sigamos con los pasos:</p>
+        <p> Busca el Administrador de Archivos en el Panel de Control de hosting</p>
+        <p>En el directorio public_html, busca el archivo .htaccess.</p>
+        <p>Si no encuentras ningún archivo .htaccess, puedes hacer clic en Configuración y habilitar la opción Mostrar archivos ocultos (dotfiles).</p>
+        <p>Ahora que has encontrado tu archivo .htaccess, todo lo que tienes que hacer es:</p>
+        <p>Descargar .htaccess en tu computadora para tener una copia de seguridad de la misma.</p>
+        <p>Una vez hecho esto, elimina el archivo.</p>
+        <p>Ahora, intenta acceder a tu sitio web.</p>
+        <p>Si funciona bien, esto simplemente indica que tu archivo .htaccess estaba dañado.</p>
+        <p>Ahora, para generar un nuevo archivo .htaccess, inicia sesión en el Panel de WordPress y has clic en Ajustes > Enlaces permanentes.</p>
+        <p>Sin hacer cambios, pulsa el botón Guardar Cambios en la parte inferior de la página.</p>
+        <p>Esto generará un nuevo archivo .htaccess en tu sitio web.</p>
+    </div>
+    <div>
+        <h2>Paso 2 – Reiniciar permisos de archivos y directorios</h2>
+        <p>Otra razón para encontrar un mensaje Error 403 Prohibido es porque tienes los permisos incorrectos para tus archivos o carpetas. En general, cuando se crean archivos, vienen con ciertos permisos predeterminados. Estos básicamente controlan cómo puedes leer, escribir y ejecutar los archivos para tu uso.</p>
+        <p>Sin embargo,unl cliente FTP de FileZilla ofrece más opciones para cambiar permisos de archivos y carpetas. Para empezar tienes que:</p>
+        <p>Acceder a los archivos de tu sitio web mediante cualquier cliente FTP.</p>
+        <p>Ir al directorio raíz de tu cuenta de alojamiento.</p>
+        <p>Seleccionar la carpeta principal que contiene todos los archivos de tu sitio web (normalmente es public_html), haz clic con el botón derecho en ella y selecciona File permissions (Permisos de archivos).</p>
+        <p>Selecciona Apply to directories only (Aplicar solo a directorios), ingresa el permiso 755 en el campo de valor numérico y presiona OK.</p>
+        <p>Una vez que FileZilla haya terminado de cambiar los permisos de la carpeta, repite el paso 3, pero esta vez elige apply to files only (aplicar sólo a los archivos) e introduce 644 en el campo del valor numérico.</p>
+        <p>Una vez hecho esto, intenta acceder a tu sitio web y mira si el error se resolvió.</p>
+    </div>
+    <div>
+        <h2>Deshabilitar los plugins de WordPress</h2>
+        <p>Si has llegado hasta aquí, es muy probable que el error se haya producido debido a un plugin incompatible o defectuoso. En este paso, intentaremos desactivar los plugins para ver si se soluciona el error 403 Prohibido. Lo mejor sería desactivar todos los plugins a la vez en vez de hacerlo individualmente. Con este paso, deberías ser capaz de detectar el problema y trabajar hacia una solución. Esto es lo que tienes que hacer:</p>
+        <p>Accede a tu cuenta de alojamiento web con FTP y busca la carpeta public_html (o la carpeta que contiene los archivos de instalación de WordPress).</p>
+        <p>Busca la carpeta wp-content en la página.</p>
+        <p>Busca la carpeta Plugins y cámbiale el nombre por algo como: ‘plugins-desactivados‘ de esta manera será más fácil hacer seguimiento.</p>
+        <p>Una vez que hayas desactivado todos los plugins, intenta acceder a tu sitio web nuevamente. ¿Se solucionó el problema? Si es así, un plugin problemático es la fuente real de error. Intenta desactivar los plugins uno por uno y comprueba si tu sitio web regresa a la acción ahora. De esta forma podrás detectar el plugin defectuoso.</p>
+        <p>A continuación, puedes optar por actualizar el plugin si es necesario o instalar uno nuevo. Sin embargo, si ninguno de los pasos mencionados anteriormente te funciona (lo cual es raro), Puede que debas ponerte en contacto con tu proveedor de alojamiento.</p>
+    </div>
+</article>
+</body>
+</html>

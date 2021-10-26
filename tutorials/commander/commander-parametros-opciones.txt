@@ -1,0 +1,11 @@
+en el caso de las opciones la manera de extraer el valor de un parametro que estemos mandando una opcion, sera asi.
+
+.option('-u, --user [user]', 'Inidica el nombre de usuario del core')
+
+.action(function() {
+  if (cmdObj.user) {
+    console.log(cmdObj.user);
+  }
+}
+
+en el caso de pasarle un valor a una opcion el valor mismo de la opcion, se iguala al valor del parametro, osea puede actuar como un bulean o como una variable en si.

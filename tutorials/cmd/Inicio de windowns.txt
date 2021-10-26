@@ -1,0 +1,11 @@
+En windows, existe una carpeta donde estan los accesos directos a programas que se inician con el, si se copia un archivo como un batch un exe, en teoria deberia iniciar con windows, esta es la direccion de dicha carpeta
+C:\"Documents and Settings"\"All Users"\*Inicio\"Programas"\"Inicio"\
+
+La segunda manera de hacer esto es por medio del registro, lo cual requiere saber del comando reg, aqui va el ejemplo 
+reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v
+"UNNOMBREQUESEMOSTRARA" /d "c:\tubat.bat"
+::reg add es para agregar la clave
+::HKLM\Software\Microsoft\Windows\CurrentVersion\Run es la entrada
+magica donde estan todos los programas q se inician cn windows...
+::/v indica el nombre del valor
+::/d indica los datos que seran agregados

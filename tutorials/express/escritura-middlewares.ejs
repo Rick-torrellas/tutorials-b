@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Escritura de middleware para su uso en aplicaciones Express</h1>
+    <nav>
+        <div><a href="#div1">Visión general</a></div>
+        <div><a href="#div2">Desarrollo</a></div>
+    </nav>
+    <article>
+        <div id="div1">
+            <h2>Visión general</h2>
+            <p>Las funciones de middleware son funciones que tienen acceso al objeto de solicitud (req), al objeto de respuesta (res) y a la siguiente función de middleware en el ciclo de solicitud/respuestas de la aplicación. La siguiente función de middleware se denota normalmente con una variable denominada next.</p>
+            <p>Las funciones de middleware pueden realizar las siguientes tareas:</p>
+            <ul>
+                <li>Ejecutar cualquier código.</li>
+                <li>Realizar cambios en la solicitud y los objetos de respuesta.</li>
+                <li>Finalizar el ciclo de solicitud/respuestas.</li>
+                <li>Invocar el siguiente middleware en la pila.</li>
+            </ul>
+            <p>Si la función de middleware actual no finaliza el ciclo de solicitud/respuestas, debe invocar next() para pasar el control a la siguiente función de middleware. De lo contrario, la solicitud quedará colgada.</p>
+            <p>A continuación, se muestra un ejemplo de una aplicación Express simple, “Hello World”, para la que definirá dos funciones de middleware:</p>
+            <code>
+                var express = require('express'); <br>
+var app = express(); <br>
+ <br>
+app.get('/', function (req, res) { <br>
+  res.send('Hello World!'); <br>
+}); <br>
+ <br>
+app.listen(3000); <br>
+            </code>
+        </div>
+        <div id="div2">
+            <h2>Desarrollo</h2>
+            <p>Este es un ejemplo simple de una función de middleware denominada “myLogger”. Esta función simplemente imprime “LOGGED” cuando una solicitud de la aplicación pasa por ella. La función de middleware se asigna a una variable denominada myLogger.</p>
+            <code>
+                var myLogger = function (req, res, next) { <br>
+                    console.log('LOGGED'); <br>
+                    next(); <br>
+                  }; <br>
+            </code>
+            <p>Observe la llamada anterior a next(). La llamada a esta función invoca la siguiente función de middleware en la aplicación. La función next() no forma parte de la API de Express o Node.js, pero es el tercer argumento que se pasa a la función de middleware. La función next() puede tener cualquier nombre, pero por convención siempre se denomina “next”. Para evitar confusiones, utilice siempre esta convención.</p>
+            <p>Para cargar la función de middleware, llame a app.use(), especificando la función de middleware. Por ejemplo, el siguiente código carga la función de middleware myLogger antes de la ruta a la vía de acceso raíz (/).</p>
+            <code>
+                var express = require('express'); <br>
+var app = express(); <br>
+ <br>
+var myLogger = function (req, res, next) { <br>
+  console.log('LOGGED'); <br>
+  next(); <br>
+}; <br>
+ <br>
+app.use(myLogger); <br>
+ <br>
+app.get('/', function (req, res) { <br>
+  res.send('Hello World!'); <br>
+}); <br>
+ <br>
+app.listen(3000); <br>
+            </code>
+            <p>Cada vez que la aplicación recibe una solicitud, imprime el mensaje “LOGGED” en el terminal.</p>
+            <p>El orden de carga del middleware es importante: las funciones de middleware que se cargan primero también se ejecutan primero.</p>
+            <p>Si myLogger se carga después de la ruta a la vía de acceso raíz, la solicitud nunca la alcanza y la aplicación no imprime “LOGGED”, ya que el manejador de rutas de la vía de acceso raíz determina el ciclo de solicitud/respuestas.</p>
+            <p>La función de middleware myLogger simplemente imprime un mensaje y, a continuación, pasa la solicitud a la siguiente función de middleware de la pila llamando a la función next().</p>
+            <p>El siguiente ejemplo añade una propiedad denominada requestTime al objeto de solicitud. Llamaremos a esta función de middleware “requestTime”.</p>
+            <code>
+                var requestTime = function (req, res, next) { <br>
+                    req.requestTime = Date.now(); <br>
+                    next(); <br>
+                  }; <br>
+            </code>
+            <p>La aplicación ahora utiliza la función de middleware requestTime. Asimismo, la función de devolución de llamada de la ruta de vía de acceso raíz utiliza la propiedad que la función de middleware añade a req (el objeto de solicitud).</p>
+            <code>
+                var express = require('express'); <br>
+var app = express(); <br>
+ <br>
+var requestTime = function (req, res, next) { <br>
+  req.requestTime = Date.now(); <br>
+  next(); <br>
+}; <br>
+ <br>
+app.use(requestTime); <br>
+ <br>
+app.get('/', function (req, res) { <br>
+  var responseText = 'Hello World!'; <br>
+  responseText += 'Requested at: ' + req.requestTime + ''; <br>
+  res.send(responseText); <br>
+}); <br>
+ <br>
+app.listen(3000); <br>
+            </code>
+            <p>Cuando realiza una solicitud a la raíz de la aplicación, la aplicación ahora muestra la indicación de fecha y hora de la solicitud en el navegador.</p>
+            <p>Como tiene acceso al objeto de solicitud, el objeto de respuesta, la siguiente función de middleware de la pila y toda la API de Node.js, las posibilidades con las funciones de middleware son ilimitadas.</p>
+        </div>
+    </article>
+</body>
+</html>

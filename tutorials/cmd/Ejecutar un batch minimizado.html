@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejecutar un batch minimizado</h1>
+    <nav><a href="">Desde otro batch</a><a href="">Desde el mismo batch</a></nav>
+    <div id="uno">
+            <h2>Desde otro batch</h2>
+            <p>Para iniciar otro batch minimizdo.</p>
+            <code>cmd.exe /c & start "" /min aplication.cmd</code>
+    </div>
+    <div id="dos">
+            <h2>Desde el mismo batch</h2>
+            <p>Para iniciar el batch minimizado.</p>
+            <code>if not DEFINED IS_MINIMIZED set IS_MINIMIZED=1 && start "" /min "%~dpnx0" %* && exit</code>
+    </div>
+</body>
+</html>

@@ -1,0 +1,14 @@
+set /p control_archivo_new=Indica la nueva ruta fuente: \Ejm\: C:\Vaginas\Pelulas --
+if /i exist %control_archivo_new% (echo nueva ruta VALIDA) else (
+echo:
+echo XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+echo 		ERROR
+echo    --------------------
+echo:
+echo Ruta no valida - %control_archivo_new%
+choice /c 123 /n /m "		|1| Volver a empezar -- |2| Regresar a inicio -- |3| Regresar al menu principal -- |4| Salir"
+if errorlevel 4 call "%ruta_exit%"
+if errorlevel 3 call "%ruta_main%"
+if errorlevel 2 goto :home
+if errorlevel 1 goto :set_valores_all
+	)  
