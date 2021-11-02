@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Singleon</h1>
+    <p>Este patron de diseno, lo que te asegura es no poder instanciar mas de una ves una clase, esto es util para cierto tipo de clases, como conectores a bases de datos, logs , sessions,etc.</p>
+    <p>Es especialmente malo para el debbugin y los testings.</p>
+    <pre><code>
+        class Connection {
+            private function __constructor() {
+                echo "Nueva Instancia";
+            }
+            public static function getInstancie() {
+                static $instance = null;
+                if (null == $instance) {
+                    $instance = new static();
+                } else {
+                    echo 'Usando un extancia existente';
+                }
+                return $instance;
+            }
+        }
+        $obj = new Connection();
+        $obj2 = new Connection();
+    </code></pre>
+    <h3>Otro ejemplo</h3>
+    <pre><code>
+        class User {
+            private static $instance;
+            public static function get_instance() {
+                if (!isset(self::$instance)) {
+                    self::$instance = new __CLASS__;
+                }
+                return self::$instance;
+            }
+        }
+        $user1 = User::get_instance();
+        $user2 = User::get_instance();
+        $user3 = User::get_instance();
+    </code></pre>
+
+</body>
+</html>

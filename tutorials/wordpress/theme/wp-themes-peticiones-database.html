@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+      <p>En este ejemplo se usa shorcodes, para pasar los argumentos</p>
+    <pre><code>
+        &lt;?php
+
+$args = [
+
+    'post_type' => 'cars'
+];
+$query = new WP_Query($args);
+?>
+
+&lt;?php if( $query->have_posts() ):?>
+    &lt;?php while( $query->have_posts() )  : $query->the_post();?>
+    &lt;div class="card mb-3">
+
+    &lt;a href="&lt;?php the_post_thumbnail_url();?>">
+    &lt;img src="&lt;?php the_post_thumbnail_url();?>" alt="&lt;?php the_title();?>">
+    &lt;/a>
+
+    &lt;h3>&lt;?php the_title();?>&lt;/h3>
+    &lt;?php endwhile;?>
+
+
+&lt;?php endif;?>
+    </code></pre>
+    <h2>Complex</h2>
+    <p>Agregando condicionales y buscando taxonomia, shorcodes</p>
+    <pre><code>    
+        &lt;?php
+    $attributes = get_query_var('attributes');
+    $args = [
+
+        'post_type' => 'cars',
+        'posts_per_page' => 0,
+        'tax_query' => [],
+        'meta_query' => [],
+        
+    ];
+
+    if(isset($attributes['price_below']))
+    {
+        $args['meta_query'][] =  array(
+            'key' => 'price',
+            'value' => $attributes['price_below'],
+            'type' => 'numeric',
+            'compare' => '
+            &lt;='
+        );
+
+    }
+    if(isset($attributes['price_above']))
+    {
+        $args['meta_query'][] =  array(
+            'key' => 'price',
+            'value' => $attributes['price_above'],
+            'type' => 'numeric',
+            'compare' => '>='
+        );
+
+    }
+
+
+    if( isset($attributes['colour']) )
+    {
+
+        $args['meta_query'][] =  array(
+            'key' => 'colour',
+            'value' => $attributes['colour'],
+            'compare' => '='
+        );
+
+    }
+
+    if( isset($attributes['brand']) )
+    {
+        $args['tax_query'][] =   [
+            'taxonomy' => 'brands',
+            'field' => 'slug',
+            'terms' => array( $attributes['brand'] ),
+        ];
+    }
+
+    $query = new WP_Query($args);
+?>
+
+&lt;?php if( $query->have_posts() ):?>
+
+&lt;?php while( $query->have_posts() )  : $query->the_post();?>          
+    &lt;a href="
+                &lt;?php the_post_thumbnail_url('blog-large');?>">
+						
+                &lt;img src="
+                        &lt;?php the_post_thumbnail_url('blog-large');?>" alt="
+                        &lt;?php the_title();?>" class="img-fluid mb-3 img-thumbnail">
+				
+                &lt;        /a>
+                
+                &lt;h3>
+                &lt;?php the_title();?>
+                &lt;/h3>
+    &lt;            ?php endwhile;?>
+
+&lt;    ?php endif;?>
+    </code></pre>
+  </body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Declararlos</h2>
+    <pre><code>
+        file: functions.php
+        function xample_short_code() {
+            return "NALGA";
+        }
+        add_shortcode( 'el_shortcode', 'xample_short_code' );
+    </code></pre>
+    <h2>Usarlo</h2>
+    <p>En cualquier archivo, en el texto.</p>
+    <code>[el_shortcode]</code>
+    <h2>Insertar Archivo</h2>
+    <pre><code>
+        function xample_file_shortcode() {
+            ob_start();
+            get_template_part('includes/latest', 'cars');
+            return ob_get_clean();
+        }
+        add_shortcode('latest_cars', 'xample_file_shortcode');
+    </code></pre>
+    <h2>Pasarle argumentos y contenido</h2>
+    <pre><code>
+        function xample_file_shortcode_complex($atts, $content = null, $tag = '')
+{
+
+	ob_start();
+
+	print_r($content);
+
+	set_query_var('attributes', $atts);
+
+	get_template_part('includes/latest', 'cars');
+
+	return ob_get_clean();
+
+}
+add_shortcode('latest_cars', 'xample_file_shortcode_complex');
+    </code></pre>
+    <p>Pasarle los argumentos y el contenido</p>
+    <code>[latest_cars color="verde" marca="mazda"]contenido[/latest_cars] </code>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Next/Previus</h3>
+    <pre><code>
+        &lt;?php previous_posts_link(); ?>
+&lt;?php next_posts_link(); ?>
+    </code></pre>
+    <h3>Con numeros</h3>
+    <p>No funciona</p>
+    <pre><code>
+        global $wp_query;
+        $big = 999999999;
+        echo paginate_links(
+            array(
+                'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+                'format' => '?paged=%#%',
+                'current' => max(1 , get_query_var('paged')),
+                'total' => $wp_query->max_num_paged
+            )
+            );
+    </code></pre>
+</body>
+</html>

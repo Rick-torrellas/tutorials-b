@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>trait singleton</h1>
+    <pre><code>
+        trait Singleton {
+            public static function get_instance() {
+                static $instance = [];
+                $called_class = get_called_class();
+                if (! isset($instance[$called_class])) {
+                    $instance[$called_class] = new $called_class();
+                }
+                return $instance[$called_class];
+            }
+        }
+        class User {
+            use Singleton;
+            public function __construct() {
+
+            }
+        }
+        $user_one = User::get_instance();
+    </code></pre>
+</body>
+</html>

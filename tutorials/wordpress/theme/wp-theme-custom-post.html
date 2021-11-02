@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Registro</h2>
+    <p>Dependiendo del hierarchical, true/false se comportara como un post o un page.</p>
+    <p>Para anadir un icono diferente al menu, se puede usar <a href="https://developer.wordpress.org/resource/dashicons/#buddicons-replies">Wordpress Dashboard Icon</a></p>
+    <p><b>IMPORTANTE:</b> Para que los links de los custom post funciones. tienes que ir a setting y buscar los permalinks. y actualizarlos, con tan solo darle a save changes.</p>
+    <pre><code>
+        function xample_custom_post() {
+            $arg = [
+                'labels' => [
+                    'name' => 'Cars',
+                    'singular_name' => 'Car'
+                ],
+                'menu_icon' => 'dashicons-buddicons-replies',
+                'hierarchical' => true,
+                'public' => true,
+                'has_archive' => true,
+                'supports' => ['title','editor','thumbnail','custom-fields']
+            ];
+            register_post_type('cars',$arg);
+        }
+        add_action('init', 'xample_custom_post');
+    </code></pre>
+    <h2>Registrar una taxonomia</h2>
+    <p>Dependiendo del hierarchical, true/false se comportara como un tag/category</p>
+    <pre><code>
+        function xample_custom_taxonomy() {
+            $arg = [
+                'labels' => [
+                    'name' => 'Brands',
+                    'singular_name' => 'Brand'
+                ], 
+                'public' => true,
+                'hierarchical' => true
+            ];
+            register_taxonomy('brands',['cars'],$arg);
+        }
+        add_action('init','xample_custom_taxonomy' );
+    </code></pre>
+    <h2>Custom Files</h2>
+    <p>Para poder renderizar estos custom post/taxonomies.</p>
+    <h3>post</h3>
+    <p>single-cars.php</p>
+    <h3>taxonomie</h3>
+    <p>archive-cars.php</p>
+    <h3>Custom Fiels</h3>
+    <h4>Activarlo</h4>
+    <p>Cuando estas creando tu custom post, tiene que espesificarlo para usarlo.</p>
+    <pre><code>
+        'supports' => ['title','editor','thumbnail','custom-fields']
+    </code></pre>
+    <h4>Usarlo</h4>
+    <pre><code>
+        <ul>
+            &lt;?php if (get_post_meta($id,'Name',true)): ?>
+            <li>&lt;?php echo get_post_meta($id,'Name',true)?></li>
+            &lt;?php endif; ?>
+            &lt;?php if (get_post_meta($id,'Color')): ?>
+            <li>&lt;?php echo get_post_meta($id,'Color',true)?></li>
+            &lt;?php endif; ?>
+        </ul>
+    </code></pre>
+    
+</body>
+</html>

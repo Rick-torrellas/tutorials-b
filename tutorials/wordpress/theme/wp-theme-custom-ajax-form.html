@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>formulatio</h2>
+    <pre>
+        <code>
+            &lt;form id="enquiry">
+                &lt;h2>Send an enquiry about &lt;?php the_title();?>&lt;/h2>
+                &lt;input type="text" name="fname" placeholder="First Name"  class="form-control" required>
+                &lt;input type="text" name="lname" placeholder="Last Name" class="form-control" required>
+                &lt;input type="email" name="email" placeholder="Email Address"  class="form-control" required>
+                &lt;input type="tel" name="phone" placeholder="Phone" class="form-control" required> 
+                &lt;textarea name="enquiry" class="form-control" placeholder="Your Enquiry" required>&lt;/textarea>  
+                &lt;button type="submit" >Send your enquiry&lt;/button>
+                &lt;/form>
+        </code>
+    </pre>
+    <h2>jquery script</h2>
+    <pre><code>
+        &lt;script>
+            (function($){
+                $('#enquiry').submit(function(event) {
+                    event.preventDefault();
+                    var endpoint = '&lt;?php echo admin_url('admin-ajax.php');?>';
+                    var form = $('#enquiry').serialize();
+                    var formdata = new FormData;
+                    formdata.append('action','enquiry');
+                    formdata.append('nonce', '&lt;?php echo wp_create_nonce('ajax-nonce');?>');
+                    formdata.append('enquiry',form);
+                    $.ajax(endpoint, {
+                        type: 'POST',
+                        data: formdata,
+                        processData: false,
+                        contentType: false,
+                        success: function (res) {
+        
+                            $('#enquiry').fadeOut(200);
+        
+                            $('#success_message').text('Thanks for your enquiry').show();
+        
+                            $('#enquiry').trigger('reset');
+        
+                            $('#enquiry').fadeIn(500);
+        
+                        },
+                        error: function (err) {
+                            alert(err.responseJSON.data);
+                        }
+                    })
+                })
+            })(jQuery);
+        &lt;/script>
+    </code></pre>
+    <h2>registro y backend del formulario</h2>
+    <pre><code>
+        add_action('wp_ajax_enquiry','xample_enquiry_form');
+add_action('wp_ajax_nopriv_enquiry','xample_enquiry_form');
+function xample_enquiry_form() {
+// Esta funcion basicamente agarra los valores usados en el formulario 'enquiry' y los mandara al email usado en el formulario. 
+    if(  !wp_verify_nonce( $_POST['nonce'], 'ajax-nonce' )  )
+	{
+		wp_send_json_error('Nonce is incorrect', 401);
+		die();
+	}
+    $formdata = [];
+    wp_parse_str($_POST['enquiry'], $formdata);
+
+// Admin email
+$admin_email = get_option('admin_email');
+	// Email headers
+	$headers[] = 'Content-Type: text/html; charset=UTF-8';
+	$headers[] = 'From: My Website <' . $admin_email . '>';
+	$headers[] = 'Reply-to:' . $formdata['email'];
+    	// Who are we sending the email to?
+	$send_to = $admin_email;
+    	// Subject
+	$subject = "Enquiry from " . $formdata['fname'] . ' ' . $formdata['lname']; 
+	// Message
+	$message = '';
+    foreach($formdata as $index => $field)
+	{
+		$message .= '&lt;strong>' . $index . '&lt;/strong>: ' . $field . '&lt;br />';
+	}
+    try {
+		if( wp_mail($send_to, $subject, $message, $headers) )
+		{
+			wp_send_json_success('Email sent');
+		}
+		else {
+			wp_send_json_error('Email error');
+		}
+	} catch (Exception $e)
+	{
+			wp_send_json_error($e->getMessage());
+	}
+
+	wp_send_json_success( $formdata['fname'] );
+
+}
+    </code></pre>
+</body>
+</html>

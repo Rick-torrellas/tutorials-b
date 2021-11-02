@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>autoloaders</h1>
+    <p>Los autoloaders te ayudan de una manera automatica, a cargar classes. Sin que estes abusando tanto de los includes</p>
+    <p>La manera que funcionan, agarran el nombre de la clase y lo usan para agregar el archivo, osea que el nombre del archivo se debe llamar igual que la clase. (creo)</p>
+    <p>Tambien funcionan con namespaces.</p>
+    <pre><code>
+        <?php 
+        file: autoloader
+        spl_autoload_register('autoloader');
+        function autoloader($className) {
+            $path = "classes/";
+            $extencion = ".php";
+            $full = $path . $className . $extencion;
+            if (!file_exists($full) ) {
+                return false
+            }
+            include_once $full;
+        }
+        file: classes/gato/miu.php
+        namespace gato
+        class Miu {
+            ...
+        }
+        file: index.php
+        include_once 'autoloader.php';
+        use gato/Miu as Miu;
+        $obj = new Miu();
+    </code></pre>
+</body>
+</html>

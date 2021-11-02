@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>traits</h1>
+    <p>Los traits agregan metodos/funcionalidades a las clases, sin complicarse tanto con la herencia.</p>
+    <p>Los traits no pueden ser instanciados como un objeto directamente. </p>
+    <p>Los traits tambien pueden usar metodos abstractos.</p>
+    <p>Un trait y una clase no se pueden llamar igual.</p>
+    <pre><code>
+        trait Pajuo {
+            public $nombre;
+            public function mostrarNombre(){
+                echo $this->nombre;
+            }
+            abstract function ola($nombre);
+        }
+        trait Cagon {
+            protected function mensaje() {
+                echo "Me gusta cagar y soy:";
+            }
+        }
+        class Persona {
+            use Pajuo,Cagon;
+            public function ola($nombre) {
+                $this->nombre = self::mensaje() $nombre;
+            }
+        }
+        $obj = new Persona();
+        $obj->ola('Ramon');
+        $obj->mostrarNombre();
+    </code></pre>
+</body>
+</html>

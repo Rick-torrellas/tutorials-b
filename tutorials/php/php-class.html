@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>private</h3>
+    <p>Son propiedades/metodos que solo estaran disponibles dentro de la clase.</p>
+    <h3>protected</h3>
+    <p>Se usa para usar una propiedad de otra clase cuando se hereda otra clase. pero comparte el mismo principio de private, osea se puede acceder a ella dento de las clases y no fuera. Para acceder a ella se necesita crear una propiedad publica que referencie a esa propiedad.</p>
+    <h3>public</h3>
+    <p>Son propiedades/metodos que estaran disponibles fuera de la clase </p>
+    <h3>static</h3>
+    <p>Son propiedad/metodos que no necesitan ser instanciados en un objeto para poder ser usados.</p>
+    <h3>Referenciar a una propiedad interna</h3>
+    <code>$a = $this->var;</code>
+    <h3>herencia</h3>
+    <pre><code>
+        class Person {
+            public $name;
+        }
+        class SuperPerson extends Person {
+            $newName = $this->name;
+        }
+    </code></pre>
+    <h2>Clases</h2>
+    <pre><code>
+        class Person {
+            public $name; 
+            public static value = "Valor global";
+        public function __construct($name = 'jimmy') {
+            $this->name = $name
+        }
+        public function myFuncion() {
+            return $this->name;
+        }
+        public function myFuncion2($stuff) {
+            return $stuff;
+        }
+        public function myFuncion3() {
+            return self::$value;
+        }
+        public static function setValue($newValue) {
+            return self::$value == $newValue;
+        }
+        }
+        $object = new Person('Pedro');
+        $object->name;
+        $object->myFuncion2('algo');
+        echo Person::$value;
+        echo Person::setValue('nuevo valor');
+    </code></pre>
+    
+</body>
+</html>

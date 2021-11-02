@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Abstrack Classes</h1>
+    <p>Las clases abstractas sirven para complementetar otras clases, para extender otras clases, estas no pueden ser instanciadas como un objeto.</p>
+    <h2>Metodos Abstractos</h2>
+    <p>Cuando defines un metodo abstracto, estas diciendo que en la clase que va a ser refrencia, necesita tener un metodo con ese nombre.</p>
+    <pre><code>
+        abstract class Visa {
+            public function visaPayment() {
+                return "pagando";
+            }
+        abstract public function getPayment();
+        }
+        class Person extend Visa {
+            public function getPayment() {
+                return $this->visaPayment();
+            }
+        }
+    </code></pre>
+</body>
+</html>

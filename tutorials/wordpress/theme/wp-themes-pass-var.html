@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Pasar variables a un template.</h2>
+    <p>One use case for this is to pass variable to template file when calling it with get_template_part().</p>
+
+    <pre><code>
+// When calling a template with get_template_part()
+set_query_var('my_form_id', 23);
+get_template_part('my-form-template');
+    </code></pre>
+    <p>Now in you template you can then call it</p>
+    <pre><code>
+        // Inside my-form-template.php
+$my_form_id = get_query_var('my_form_id');
+    </code></pre>
+</body>
+</html>

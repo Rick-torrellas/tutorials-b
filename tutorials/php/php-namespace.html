@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>namespace</h1>
+    <p>Los namespace te ayudan a encapsular codigo, algo tanto parecido a los imports de javascript, creando algo parecido a los modulos.</p>
+    <p>El namespace debe ser lo primero que se declare en un archivo.</p>
+    <pre><code>
+    file1:
+&lt;?php namespace foo;
+  class Cat {
+    static function says() {echo 'meoow';}  } ?>
+    file2:
+&lt;?php namespace bar;
+  class Dog {
+    static function says() {echo 'ruff';}  } ?>
+    file4:
+&lt;?php namespace fub;
+  include 'file1.php';
+  include 'file2.php';
+  use foo/Cat as feline;
+  use bar as canine;
+  $object = new feline();
+  echo \canine\Dog::says(), "&lt;br />\n";
+    </code></pre>
+    <p>Esto nos ayuda a que no existan conflictos con los nombres.</p>
+</body>
+</html>
