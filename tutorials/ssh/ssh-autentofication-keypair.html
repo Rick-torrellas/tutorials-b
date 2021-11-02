@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Crear la carpeta para guardar las llaves y darle los permisos.</h2>
+    <code>mkdir ~/.ssh && chmod 700 ~/.ssh</code>
+    <h2>upload key al servidor ssh</h2>
+    <h3>windows to ubuntu</h3>
+    <code>scp $env:USERPROFILE/.ssh/id_rsa.pub root@ip-adres:~/.ssh/authorized_keys</code>
+    <h3>ubuntu a ubuntu</h3>
+    <code>ssh-copy-id root@ip-adres</code>
+    <h3>mac</h3>
+    <code>scp ~/.ssh/id_rsa.pub root@ip-adres:~/.ssh/authorized_keys</code>
+    <h2>lockdown logins</h2>
+    <code>sudo nano /etc/ssh/sshd_config</code>
+    <h3>Configuraciones</h3>
+    <pre><code>
+        Port el que quieras
+        AddressFamily intet
+        PermitRootLogin no
+        PasswordAuthentication no
+    </code></pre>
+</body>
+</html>
