@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>install</h2>
+    <pre><code>
+        sudo apt install xscreensaver
+    </code></pre>
+    <h2>Autostart</h2>
+    <pre><code>
+        sudo apt remove gnome-screensaver
+        mkdir -p ~/.config/systemd/user/
+        nano ~/.config/systemd/user/xscreensaver.service
+    </code></pre>
+    <p>Escribir esta mierda</p>
+    <pre><code>
+        [Unit]
+Description=XScreenSaver
+[Service]
+ExecStart=/usr/bin/xscreensaver -nosplash
+[Install]
+WantedBy=default.target
+    </code></pre>
+    <code>
+        systemctl --user enable xscreensaver
+    </code>
+</body>
+</html>
