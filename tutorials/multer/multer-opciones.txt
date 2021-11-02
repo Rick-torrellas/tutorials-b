@@ -1,0 +1,30 @@
+# Multer solo funciona si las opciones son encerradas en una varaible storage
+
+const storage = multer.diskStorage
+
+# Importante acordarse que se puede ejecutar acciones antes de declarar la ruta o el nombre 
+
+const storage = multer.diskStorage({
+destination: (req, file, cb) => { // setting destination of uploading files       
+  process.env.PORNO_FOLDER=uuid();
+  fs.mkdirSync(path.join(__dirname,'../../.nucleo/img/galeria/content/'+process.env.PORNO_FOLDER ))
+  if (file.fieldname === "galeriaContent") { // if uploading resume
+    cb(null, path.join(__dirname, '../../.nucleo/img/galeria/content/'+process.env.PORNO_FOLDER));
+  } else if(file.fieldname === "actrices"){ // else uploading image
+    cb(null, path.join(__dirname, '../../.nucleo/img/Actrices'));
+  } else {
+    cb(null, path.join(__dirname, '../../.nucleo/img/galeria/profile'));
+  }
+},
+    filename: (req, file, cb, filename) => {
+      if (file.fieldname === "galeriaContent") {
+        cb(null, file.originalname)
+      } else {
+        cb(null, path.basename(file.originalname , path.extname(file.originalname)) + '-' + imageCode + path.extname(file.originalname));
+      } 
+    }
+})
+
+# usando fields, como buscar valores del req.files
+
+Para buscar datos se tiene que colocar el fieldname usado en el form, por ejemplo. req.files.culo[0].originalname

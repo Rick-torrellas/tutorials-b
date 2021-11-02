@@ -1,0 +1,4 @@
+Se puede instalar programas usando esto:!!!! msiexec.exe
+
+https://www.youtube.com/watch?v=dhT_Wb0ioCo&ab_channel=CommandbUniverse
+

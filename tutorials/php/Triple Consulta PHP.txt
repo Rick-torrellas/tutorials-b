@@ -1,0 +1,22 @@
+<article id="master">
+	<?php
+	$busqueda_cg = "SELECT * FROM categoria_galerias WHERE id_categorias='$ide' ORDER BY orden";
+	$resultado_cg = $conector->query($busqueda_cg);
+	while ($categorias_galerias=$resultado_cg->fetch_assoc()) {
+		$ide_galeria = $categorias_galerias['id_galeria'];
+		$busqueda_g = "SELECT * FROM galerias WHERE id_galeria='$ide_galeria'";
+		$resultado_g = $conector->query($busqueda_g);
+		$galerias=$resultado_g->fetch_assoc();
+		$ide_modelo = $galerias['id_modelos'];
+		$busqueda_m = "SELECT * FROM modelos WHERE id_modelos='$ide_modelo'";
+		$resultado_m = $conector->query($busqueda_m);
+		$modelo = $resultado_m->fetch_assoc();
+		?>
+	<div class="bloque">
+		<img src="<?php echo '../nucleo/imagenes/'.$modelo['nombre'].'_'.$galerias['nombre'].'.jpg';?>" class="cover" onmousedown="abrir('<?php echo 'galeria.php?id_galeria='.$galerias['id_galeria'].'&nombre='.$modelo['nombre'];?>',event)">
+		<img src="../nucleo/imagenes/delete.png" class="icon" onclick="abrir('<?php echo 'eliminar_categoria.php?ides='.$categorias_galerias['id_categoria_galerias'].'&carajo='.$ide;?>',event)">
+	</div>
+	<?php
+			}
+	?>	
+</article>

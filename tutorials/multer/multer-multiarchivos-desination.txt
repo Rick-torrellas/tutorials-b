@@ -1,0 +1,13 @@
+Como configurar multer, para que acepte diferentes rutas, y todos los archivos subidos no se guarden en la misma carpeta, para eso nos valeremos del fieldname, usado en el formulario.
+
+destination: (req, file, cb) => { // setting destination of uploading files       
+  process.env.PORNO_FOLDER=uuid();
+  fs.mkdirSync(path.join(__dirname,'../../.nucleo/img/galeria/content/'+process.env.PORNO_FOLDER ))
+  if (file.fieldname === "galeriaContent") { // if uploading resume
+    cb(null, path.join(__dirname, '../../.nucleo/img/galeria/content/'+process.env.PORNO_FOLDER));
+  } else if(file.fieldname === "actrices"){ // else uploading image
+    cb(null, path.join(__dirname, '../../.nucleo/img/Actrices'));
+  } else {
+    cb(null, path.join(__dirname, '../../.nucleo/img/galeria/profile'));
+  }
+}

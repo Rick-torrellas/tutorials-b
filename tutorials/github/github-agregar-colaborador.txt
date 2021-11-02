@@ -1,0 +1,10 @@
+Para agregar un colaborador:
+* vamos al repositorio que queramos compatir
+* le damos a opciones/settings 
+* manage access 
+* invite colaborator
+* para verificar que te invitator a un repositorio, puedes o copiar un link que se crea cuando invitas a la persona o a la persona le llegara un correo a su mail.
+
+## ejemplo de link
+
+https://github.com/Rick-torrellas/gigs/invitations

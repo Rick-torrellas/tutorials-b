@@ -1,0 +1,22 @@
+Para ingersar datos a un campo que sea un array
+
+      for (let index = 0; index < req.files.galeriaContent.length; index++) {
+            const element = req.files.galeriaContent[index];
+	if() {
+            if (element.filename == undefined) {
+                console.log('ERROR: no se pudo enviar el archivo');
+                res.send({mensaje: 'ERROR: no se pudo enviar el archivo'})
+            }
+            if (element.filename !== undefined) {
+                galeria.content.path.push(`${content}/${name}/${element.filename}`);  
+            }   
+        }
+
+Tambien se podria hacer con un for in
+
+      for (const key in object) {
+            if (object.hasOwnProperty(key)) {
+                const element = object[key];
+                galeria.content.path.push(`${content}/${name}/${element.filename}`);    
+            }
+        }

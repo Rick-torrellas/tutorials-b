@@ -1,0 +1,9 @@
+Como usar diferentes configuraciones para nombrar los archivos que vallan llegando, se va a usar el noombre usado en el formulario, para identificar el tipo de archivo que se quiere.
+
+ filename: (req, file, cb, filename) => {
+      if (file.fieldname === "galeriaContent") {
+        cb(null, file.originalname)
+      } else {
+        cb(null, path.basename(file.originalname , path.extname(file.originalname)) + '-' + imageCode + path.extname(file.originalname));
+      } 
+    }

@@ -1,0 +1,5 @@
+Como quebrar la linea en un commit sin usar vim, osea como tener un comit con multi-lineas
+
+
+
+git commit -m "My head line" -m "My content line." -m "vagina"

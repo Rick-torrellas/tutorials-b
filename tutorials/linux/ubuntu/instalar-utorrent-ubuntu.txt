@@ -1,0 +1,32 @@
+# Comenzamos instalando las librerías necesarias.
+
+sudo apt install libssl-dev
+
+# También se requiere «libssl1.0.0», pero como Ubuntu 20.04 ya no lo contiene en sus repositorios tomamos el de Ubuntu 19.10.
+
+wget https://launchpad.net/ubuntu/+archive/primary/+files/libssl1.0.0_1.0.2n-1ubuntu5.3_amd64.deb
+
+# Lo instalas…
+
+sudo dpkg -i libssl1.0.0_1.0.2n-1ubuntu5.3_amd64.deb
+
+# Ahora descargamos el servidor «µTorrent Server for Ubuntu 13.04 for 64-bit», y lo descomprimimos.
+
+wget http://download.ap.bittorrent.com/track/beta/endpoint/utserver/os/linux-x64-ubuntu-13-04 -O utserver.tar.gz
+
+sudo tar -zxvf utserver.tar.gz -C /opt/
+
+# Solo nos falta crear el ejecutable, e iniciar µTorrent.
+
+sudo ln -s /opt/utorrent-server-*/utserver /usr/bin/utserver
+
+utserver -settingspath /opt/utorrent-server-*/ &
+
+# Bueno… ya lo tenemos todo instalado. Vamos a iniciar sesión. Puede ser localhost, o la ip de tu sistema (en nuestro caso al ser un remoto la ip).
+
+http:// localhost:8080/gui
+
+http://ip-del-server:8080/gui
+
+# Nos aparece la pantalla de inicio de sesión gui, el usuario es admin, el password lo dejas en blanco (después podrás introducir uno).
+

@@ -1,0 +1,3 @@
+Los flag de inquirer son case-sensitive:
+
+es diferente decir core text -F a core text -f

@@ -1,0 +1,5 @@
+Como requerir un archivo json o el que sea, que se encuentre en el lugar donde se esta ejecutando el script.
+
+.action(function() {
+  const json = require(process.cwd()+'\\archivo.json');
+});

@@ -1,0 +1,5 @@
+Submodulos - Como clonar un submodulo y hacer que se inicie y se actualize automaticamente
+
+Si pasa --recursive al comando git clone, se inicializará y actualizará automáticamente cada submódulo en el repositorio.
+
+git clone --recursive https://github.com/chaconinc/MainProject

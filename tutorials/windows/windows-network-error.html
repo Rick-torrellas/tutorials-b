@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>You Can't Access This Shared Folder Because Your Organization's Security Policies Block</h1>
+    <ul>
+        <li>regedit (win+r-regedir)</li>
+        <li>HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\LanmanWorkstation\Parameter\AllowsecureGuestAuth</li>
+        <li>Si el valor esta en 0, colocarlo en 1</li>
+    </ul>
+</body>
+</html>

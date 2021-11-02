@@ -1,0 +1,7 @@
+Para iniciar openssh en windows, hay que recordar que este es un servicio, no existe un comando sshd.
+
+iniciar la consola como administrador.
+
+runas /user:usuario cmd
+
+net start sshd

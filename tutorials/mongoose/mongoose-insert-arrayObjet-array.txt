@@ -1,0 +1,24 @@
+Como insertar un array dentro de un array de objetos o subdocumento.
+
+1)
+var arrey = ['vagina','culo','pupu'];
+        await Text.updateOne({_id:'5fb8349aaa8fbd37105e2030'},{ $addToSet: { box: {name:"COÑOOOOOOOOOOOOOOOOOOOOO", nalga:arrey } } },function(err, result) {
+            if (err) {
+              res.send(err);
+            } else {
+              res.send(result);
+            }
+          }
+        );
+
+2) 
+
+        await Text.updateOne({_id:'5fb8349aaa8fbd37105e2030'},{ $addToSet: { box: {name:"COÑOOOOOOOOOOOOOOOOOOOOO", nalga:['valor1','valor2',etc] } } },function(err, result) {
+            if (err) {
+              res.send(err);
+            } else {
+              res.send(result);
+            }
+          }
+        );
+

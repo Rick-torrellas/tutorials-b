@@ -1,0 +1,9 @@
+Cuidado con los return, ya que tambien va a obviar el performance, asi que hay que colocarlos antes del return.
+
+
+  performance.mark("a")
+  console.log('hola');
+  return true
+  console.log('vafgin');
+    performance.mark("b")
+   performance.measure("example", "a", "b")

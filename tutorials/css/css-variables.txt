@@ -1,0 +1,16 @@
+# declarar una variable 
+
+Creo que solamente se puede usar para los colores.
+
+Simpre se tiene que iniciar el nombre de la variable con doble --
+
+:root {
+   --verde: rgb('0,225,0');
+}
+
+# usar la variable
+
+.component {
+	backgorund-color: var(--verde);
+}
+

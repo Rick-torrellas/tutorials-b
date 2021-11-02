@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Enrutado</h1>
+    <div id="div1">
+        <h2>Introduccion</h2>
+        <p>In an SPA, all of your application's functions exist in a single HTML page. As users access your application's features, the browser needs to render only the parts that matter to the user, instead of loading a new page. This pattern can significantly improve your application's user exprience.</p>
+        <p>To define how users navigate through your application, you use routes. You can add routes to define how users navigate from one part of your application to another. You can also configure routes to guard against unexpected or unauthorized behavior.</p>
+    </div>
+    <div id="div2">
+        <h2>Objetivo del Enrutado</h2>
+        <ul>
+            <li>Organize a sample application's features into modules.</li>
+            <li>Define how to navigate to a component.</li>
+            <li>Pass information to a component using a parameter.</li>
+            <li>Structure routes by nesting several routes.</li>
+            <li>Check whether users can access a route.</li>
+            <li>Control whether the application can discard unsaved changes.</li>
+            <li>Improve performance by pre-fetching route data and lazy loading feature modules.</li>
+            <li>Require specific criteria to load components.</li>
+        </ul>
+    </div>
+    <div id="div3">
+        <h2>Definir Rutas</h2>
+        <h3>Seran Definidas en el app.module.ts</h3>
+        <h3>Import RouterModule from @angular/router</h3>
+        <p>Routing allows you to display specific views of your application depending on the URL path. To add this functionality to your sample application, you need to update the app.module.ts file to use the module, RouterModule. You import this module from @angular/router.</p>
+        <p>open the app.module.ts file</p>
+        <h3>Definiendo las Rutas</h3>
+        <p>A route definition is a JavaScript object. Each route typically has two propteries. The first property, path, is a string that specifies the URL path for the route. The second property, component, is a string that specifies what component your application should display for that path.</p>
+        <p> open the app.module.ts file</p>
+        <code>
+            imports: [ <br>
+  BrowserModule, <br>
+  RouterModule.forRoot([ <br>
+    {path: 'crisis-list', component: CrisisListComponent}, <br>
+    {path: 'heroes-list', component: HeroesListComponent}, <br>
+  ]), <br>
+], <br>
+        </code>
+        <p>This code adds the RouterModule to the imports array. Next, the code uses the forRoot() method of the RouterModule to define your two routes. This method takes an array of JavaScript objects, with each object defining the proprties of a route. The forRoot() method ensures that your application only instantiates one RouterModule.</p>
+        <h3>Update your component with router-outlet</h3>
+        <p>To implement this functionality, you add the router-outlet directive to your template file.</p>
+        <p> open the app.component.html</p>
+        <code>
+            &lt;router-outlet>&lt;/router-outlet>
+        </code>
+        <p>View your updated application in your browser. You should see only the application title. To view the crisis-list component, add crisis-list to the end of the path in your browser's address bar. For example:</p>
+        <code>http://localhost:4200/crisis-list</code>
+    </div>
+    <div id="div4">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div5">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div6">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div7">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div8">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div9">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div10">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div11">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div12">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div13">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div14">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div15">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div16">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div17">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div18">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div19">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+    <div id="div20">
+        <h2></h2>
+        <p></p>
+        <code></code>
+    </div>
+</body>
+</html>

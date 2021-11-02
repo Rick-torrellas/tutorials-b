@@ -1,0 +1,23 @@
+Con esto podemos acceder a estos datos, marcando un proceso, nos dira cuando se inicio y cuanto le tomo terminar de ejecutarlo, los datos son dados en milisegundos
+
+NOTA: donde se coloque el performance.measure() es donde se colocara el console.log()
+
+PerformanceEntry {
+    name: 'example',
+    entryType: 'measure',
+    startTime: 912.0056,
+    duration: 4.9774
+  }
+
+const { performance, PerformanceObserver } = require("perf_hooks")
+
+ const obs = new PerformanceObserver((items) => {
+    console.log(items.getEntries()[0]);
+performance.clearMarks();
+  });
+  obs.observe({ entryTypes: ['measure'] });
+  performance.mark("a")
+const nalga = require('./services/backup');
+console.log('hola');
+  performance.mark("b")
+ performance.measure("example", "a", "b")

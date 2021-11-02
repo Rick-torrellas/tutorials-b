@@ -1,0 +1,9 @@
+Para desabilitar un servicio en windows, primero hay que desabilitar su inicio con sc 
+
+sc config servicename start= disabled
+
+luego se tiene que parar el servicio, solo asi se puede detener un servicio. ojo solo se puede detener no se puede pausar. 
+
+Para volver a iniciar el servicio se necesita iniciar el servicio otra ver con sc
+
+sc config servicename start=auto

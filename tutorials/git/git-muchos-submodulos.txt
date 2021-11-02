@@ -1,0 +1,3 @@
+hay gregar mas de 11 submodulos, git te dice que ya no estara pendiente de los cambios dentros de los submodulos, tanto es asi que vscode imnora esos repositorios, y lei por ahi que tambien trae problemas de rendimeinto. 
+
+CONCLUCION: la mecanica de submodulos no es rentable para un proyecto con muchos submodulos.

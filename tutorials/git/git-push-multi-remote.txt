@@ -1,0 +1,10 @@
+Se logra usando un remote con multiples rutas
+
+git remote add all origin-host:path/proj.git
+git remote set-url --add all nodester-host:path/proj.git
+git remote set-url --add all duostack-host:path/proj.git
+
+asi solo tendras que usar 
+
+git push all
+

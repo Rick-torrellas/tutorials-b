@@ -1,0 +1,1 @@
+Solo hay que agregar el .env, en el archivo principal donde se ejecute tu programa, no es cada modulo, una vez que lo importes al modulo principal, todos los tendra accesible las variables.

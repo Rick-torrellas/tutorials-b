@@ -1,0 +1,3 @@
+Declarar un valor por defecto.
+
+updated: { type: Date, default: Date.now }

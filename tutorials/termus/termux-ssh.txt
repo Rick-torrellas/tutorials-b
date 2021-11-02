@@ -1,0 +1,20 @@
+* instalar servidor ssh 
+
+* iniciar el servidor
+
+sshd
+
+pkg install openssh
+
+* descubrir el puerto que esta escuchando
+logcat -s 'syslog'
+logcat | grep port
+
+* descubre el nombre de tu host
+whoami
+
+nano ~/.ssh/authorized_keys
+
+* encuentra tu ip local
+
+ifconfig

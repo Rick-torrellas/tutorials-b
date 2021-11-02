@@ -1,0 +1,35 @@
+Lo primero que hay que hacer es en la carpeta raiz del proyecto, editar el acchivo package.json:
+
+En la parte de los scripts, escribir uno llamado:
+start "ruta/server.js" (El archivo que ejecuta el servidor)
+postinstall ng build --aot --prod
+
+Fuera de todos los objetos escribirmos un nuevo objeto llamado engine en el vamos espesificar las verciones tanto de node como de npm,
+
+ "engines": {
+    "node": "~13.7.0",
+    "npm": "~6.13.7"
+  }
+
+Luego hay que estar seguro de estar logeado en el heroku cli para poder continuar.
+
+Crear el proyecto en heroky 
+(heroku create <proyect-name>)
+
+Luego enlazamos el proyecto local con heroku con el siguiente comando: 
+heroku git:remote -a <proyect-name
+
+Por ultimo si se quiere enviar la informacion se hace como en git: 
+git push heroku master
+
+Para abrir tu nueva app usa:
+heroku open 
+
+
+
+INFO
+
+postinstall: es un comando que se ejecuta automaticamente luego de ser instalada la aplicacion, no se si es natvo de heroku o de npm.
+~: Creo que este simbolo indica a la hora indica una vercion, que es desde en esa vercion en adelante.
+heroky login: sirve para logearse
+heroku git:remote -a <proyect-name:

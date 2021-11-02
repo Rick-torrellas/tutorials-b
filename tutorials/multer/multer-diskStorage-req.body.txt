@@ -1,0 +1,22 @@
+A la hora de querer usar elementos del req, es necesairio saber el orden en que se mandan los elementos en el formulario, es IMPORTANTE, mandar los archivos de ultimo, ya que si mandas un archivo antes de un valor, por ejemlo req.body.hola, este sera undefined.
+
+const storage = multer.diskStorage({
+
+destination: (req, file, cb) => { // setting destination of uploading files       
+
+  if (file.fieldname === "galeriaContent") { // if uploading resume
+    cb(null, path.join(__dirname, '../../nucleo/img/galeria/content/'+req.body.nalga));
+  } else if(file.fieldname === "actrices"){ // else uploading image
+    cb(null, path.join(__dirname, '../../nucleo/img/Actrices'));
+  } else {
+    cb(null, path.join(__dirname, '../../nucleo/img/galeria/profile'));
+  }
+},
+    filename: (req, file, cb, filename) => {
+      if (file.fieldname === "galeriaContent") {
+        cb(null, file.originalname)
+      } else {
+        cb(null, path.basename(file.originalname , path.extname(file.originalname)) + '-' + imageCode + path.extname(file.originalname));
+      } 
+    }
+})

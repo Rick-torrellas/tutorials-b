@@ -1,0 +1,7 @@
+Para poder usar archivos .json
+
+Hace falta requerirlos y instanciarlos en una variable.
+
+var json=require('./file.json');
+
+console.log(json.name);

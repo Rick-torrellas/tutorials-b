@@ -1,0 +1,10 @@
+Mejora iniciar el server con un assyn
+
+async function main() {
+await app listen(3000);
+console.log('server is runnin')
+}
+
+en caso de las rutas, en serverConfig, se pueden definir las rutas en otro archivo, y hacer referencia a el asi:
+
+app.user(require('./routes/index'))

@@ -1,0 +1,24 @@
+Requirir un modulo de rutas dentro de otro.
+
+No va a funciconar, si se va a incluir el modulo, pero el enrutado que uses no va a funcionar.
+
+router.route('/upload')
+.get(crud.render.createContent)
+.post(crud.create.contenido);
+
+router.route('/text')
+.get(crud.render.home);
+
+// rutas hacia el contenido
+require('./t-content');
+
+##t-content
+
+const { Router } = require('express');
+const crud = require('./../controllers/t');
+const router = Router();
+
+router.route('/text')
+.get(crud.render.home);
+
+module.exports = router;

@@ -1,0 +1,11 @@
+Extraer el magnet link de un torrent
+
+Le damos click derecho al archivo, le damos -copy magnet URI-
+
+listo
+
+
+Importar un magnet link
+
+le damos al segundo icono al , que dice -add torrent from URL-
+listo

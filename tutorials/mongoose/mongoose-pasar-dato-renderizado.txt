@@ -1,0 +1,7 @@
+Como pasar un dato junto con que se renderize un archivo.
+
+
+router.get('/', async (req, res) => {
+    const images = await Image.find();
+    res.render('index', { images });
+});

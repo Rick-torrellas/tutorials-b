@@ -1,0 +1,13 @@
+Emmet
+
+$$ empieza a contar usando el 0: 01,02,03,04,05. 
+
+Changing numbering base and direction $@- o $@
+
+$@- se usa para empezar a contar hacia atras: 5 4 3 2 1 0 (NO SIRVE EN VSCODE)
+
+$@nuemro puedes indicar de que numero se va a empezar a contar div{$@10}*10, se empezara a contar desde el 10
+
+div.name.culo para colocar varias clases en un mismo elemento
+
+button:submit Para indica algunos de los atributos de los elementos, algunos por que la gran mayoria no esta.

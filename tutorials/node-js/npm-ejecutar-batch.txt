@@ -1,0 +1,2 @@
+"cd ./.nucleo/escrip/ && start \"\" bc-database-mongo.cmd"
+"cd ./.nucleo/escrip/ && bc-database-mongo.cmd"

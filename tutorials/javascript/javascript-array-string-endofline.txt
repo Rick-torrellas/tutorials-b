@@ -1,0 +1,23 @@
+Como transformar una string, que por ejemplo, tenga quiebre de lineas, transformarlo en un array y obviar las lineas vacias.
+
+const links = `
+https://mega.nz/#!XQQnVDBb!PfWpP09KO42koevnYPeC9lVURpAP69Ez6zL6ImkJzGQ
+
+https://mega.nz/#!jUQzjaoS!PoMm0T5GIe4W4y1G67rgCvTjL1_KePabag5at7Y-fng
+https://mega.nz/#!CMx1EQLA!JAvmscco4vWT3qWMNdslM0YlIyTiKe3YGqka_Lq3N_A
+
+https://mega.nz/#!CZJVCY6J!epWagzf7h-qwae1ALfBwP69QzjJfBLhJVAkgq4H_k2I`;
+
+var arrey = links.split('\n')
+
+var nalga = []
+// depurador
+for (const key in arrey) {
+    if (arrey.hasOwnProperty(key)) {
+        const element = arrey[key];
+        if (element !== '') {
+        nalga.push(element);  
+        }
+    }
+}
+console.log(nalga)

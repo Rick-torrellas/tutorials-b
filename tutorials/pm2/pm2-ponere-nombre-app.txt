@@ -1,0 +1,3 @@
+Pnerle un nombre a tu aplicacion a la hora de iniciarla
+
+pm2 start G:\taller\x\x-apirest\src --name x

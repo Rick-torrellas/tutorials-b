@@ -1,0 +1,22 @@
+Metodos: 
+1: 
+
+* Power & sleep settings
+
+* Additional power settings
+
+* Choose what the power button does
+
+* Change settings that are currently unavailable
+
+* Desactivar la casilla: Turn on fast statip (recomendado).
+
+2: Este metodo no parece estar relacionado,pero lo pongo por si las dudas (COMPROBAR)
+
+* win+r = registry
+
+* HKEY_LOCAL_MACHINE - SYSTEM - ControlSet001 - Services - AppXSvc - Start = Value data: 4   
+
+EXTRA: 
+
+This fix is actually two different fixes. The first method is to change the Windows Store Application (AppXsvc) startup value to  4 which means "Disable" without going through the Services tool. That's a cheat, but who needs Windows Store ? I dont know. But I do know that when I look at disk use under the Task Manager I dont see that as an issue.   The Second fix is to get around bugs having to do with the SLEEP image that gets saved during a Windows 10 shutdown . Default is the "Fast Startup" which means it tries to save a kernel image which it can reload to make the startup faster. Problem is on my computer, the battery that enables that memory is fading. So the image gets corrupted. The second option works for me.  Finally I wanted to add one of my own: which is to go in the Services App and look for something called SysMain.  It used to be called SuperFetch, and is completely optional. It sucks memory cpu and disk io like a vampire robbing you of all performance. Disable this service (via properties) and reboot.  Option 2 (which ironically forces a true shutdown) will make startups take a bit longer (maybe 30 seconds) but its a cleaner reboot.  My option (shutdown SysMain, aka prefetch) is strictly to enable a more balanced CPU and GPU..  Microsoft should fix all of these, but doesnt seem to care.  Also - even though you probably just upgraded to Windows 10 1909, there are plenty of bugs related to Display Adapters and Devices.  Check your drivers. Why should we be finding out about these on a supposed upgrade. I dont know.   Good luck.

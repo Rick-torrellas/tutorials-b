@@ -1,0 +1,1 @@
+La diferencia entre ellos es que las funciones "sync" o sincronas, tambien llmadas "bloquing code", cuando estas funciones se ejecutan, node esperara hasta que esta termine de ejecutarse, mientras las non-sync no se esperar su ejecucion.

@@ -1,0 +1,87 @@
+constructor(private meta: Meta) {}
+
+ngOnInit() {
+this.meta.updateTag({ name: 'description', content: '...'});
+}
+
+Meta Tags
+
+Para usar meta tag quiere 
+
+import { Meta } from '@angular/platform-browser';
+
+Añadir meta Tags
+addTag & addTags
+
+Nota: Esta funcion es util cuando se va a agregar por primera vez una meta tag, no es practigo agregar las meta tags por componente, ya que se van acumulando las mismas por cada componente que viajemos, ya que no se actualizan las ya creadas slo se amontonan, lo mas recomendable es crear las meta tag globalmente, ya sea en el root component, o insertarlas directamente, en el index.html.
+
+Using the Meta service is as easy as importing it from @angular/platform-browser and injecting it in a component or service of yours.
+
+tucomponente-component.ts
+
+import { Meta } from '@angular/platform-browser';
+
+With multiple meta tags like the example above, you can use the addTags method instead to set them all in the same call:
+
+this.meta.addTags([
+  { name: 'twitter:card', content: 'summary_large_image' },
+  { name: 'twitter:site', content: '@alligatorio' },
+  // ...
+]);
+
+Note that both addTag and addTags can take a second boolean argument to indicate if the tag should be created even if it already exists. Here for example the tag will be added twice:
+
+no se si se tengan que crear ajuro dentro del consturctor
+
+constructor(private meta: Meta) {
+    this.meta.addTags([
+      { name: 'twitter:site', content: '@alligatorio' },
+      { name: 'twitter:site', content: '@alligatorio' }
+    ], true);
+  }
+}
+
+Obtener la meta Tag
+getTag & getTags
+
+Analogous to the addTag and addTags methods, there are also the getTag and getTags methods. Here’s an example of how getTag can be used:
+
+constructor(private meta: Meta) {
+  const viewport = this.meta.getTag('name=viewport');
+  console.log(viewport.content); // width=device-width, initial-scale=1
+}
+
+getTag takes an attribute selector string and returns an HTMLMetaElement. getTags also takes an attribute selector, but returns an array with potentially multiple HTMLMetaElements that match the selector.
+
+Actualizar la meta Tag
+updateTag
+
+Given a new meta tag definition and a selector, the updateTag method will update any tag that matches the selector. In the following somewhat contrived example, we first set a meta tag with a content of summary_large_image and then update it to just summary:
+
+constructor(private meta: Meta) {
+  this.meta.addTag(
+    { name: 'twitter:card', content: 'summary_large_image' }
+  );
+
+  this.meta.updateTag(
+    { name: 'twitter:card', content: 'summary' },
+    `name='twitter:card'`
+  );
+}
+
+In a real app you’ll probably instead want to update meta tags that are present globally in the app, but that should take different values depending on the active route.
+
+Remover meta Tag
+
+The removeTag method takes a string for an attribute selector and removes the tag. Not that you’d ever want to do this, but here’s how you could remove the charset meta tag:
+
+constructor(private meta: Meta) {
+  this.meta.removeTag('charset');
+}
+
+The removeTagElement is similar, but instead takes an HTMLTagElement directly instead of a string selector. Here’s the same example, but here we first get the charset meta tag element:
+
+constructor(private meta: Meta) {
+  const chartsetTag = this.meta.getTag('charset');
+  this.meta.removeTagElement(chartsetTag);
+}

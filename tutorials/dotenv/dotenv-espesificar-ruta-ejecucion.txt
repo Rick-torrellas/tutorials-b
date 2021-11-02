@@ -1,0 +1,4 @@
+Por defecto dotemv, buscara el archivo '.env', en: path.resolve(process.cwd(), '.env')
+
+Si se quiere cambiar eso puede espesificarse en el .config
+require('dotenv').config({path: path.join(__dirname,'../.env')});

@@ -1,0 +1,1 @@
+shell:startup = Para abrir la carpeta startup, que contiene los script que se iniciaaran con el sistema.

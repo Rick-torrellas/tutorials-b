@@ -1,0 +1,20 @@
+ const file = './package.json';
+/*   const fileRead = require(file); */
+  const fileRead = fs.readFileSync(file);
+  const data = JSON.parse(fileRead);
+  data.author = 'pepe';
+  const word = 'join';
+  const value = 2;
+  data[word] = value
+  data.nalga = 'vagina';
+  data.hola = {
+    "name": 'vagina',
+    "culo": 'cama'
+  }
+  data.nuevo = 'VAGINAAAAAAAAA';
+  data.snake = 'Solid Snake';
+  var complete = JSON.stringify(data,null,2);
+  fs.writeFile(file,complete,terminado)
+  function terminado(err) {
+    console.log('terminado');
+  }

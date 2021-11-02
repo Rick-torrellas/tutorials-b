@@ -1,0 +1,7 @@
+Esta es una de las maneras de colaborar en git, consiste en :
+
+* hacer folk al repositorio de origen. (esto creara una copia personal del repositorio original)
+
+* trabajar en el repositorio copia, cuando se tengan los cambios listos en el repositorio copia en github.
+
+* se le da a pull request, esto dejara al dueño del repositorio si quiere usar los cambios.

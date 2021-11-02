@@ -1,0 +1,5 @@
+Como insertar un componente y trasmirte data.
+
+ <% users.forEach(function(user){ %>
+    <%- include('user/show', {user: user}); %>
+  <% }); %>

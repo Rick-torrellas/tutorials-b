@@ -1,0 +1,30 @@
+Agregar una clave SSH nueva a tu cuenta de GitHub
+
+Para configurar tu cuenta de GitHub a fin de usar tu clave SSH nueva (o existente), también deberás agregarla a tu cuenta de GitHub.
+
+# Copia la clave SSH a tu portapapeles.
+
+Si tu archivo de clave SSH tiene un nombre diferente al código del ejemplo, modifica el nombre de archivo para que concuerde con tu configuración actual. Al copiar tu clave, no agregues líneas nuevas o espacios en blanco.
+
+sudo apt-get install xclip
+
+xclip -sel clip < ~/.ssh/id_rsa.pub
+
+Sugerencia: Si xclip no está funcionando, puedes ubicar la carpeta .ssh oculta, abrir el archivo en tu editor de texto favorito, y copiarlo en tu portapapeles.
+
+# En la esquina superior derecha de cualquier página, da clic en tu foto de perfil y después da clic en Configuración.
+
+# En la barra lateral de configuración de usuario, da clic en Llaves SSH y GPG.
+
+# Haz clic en New SSH key (Nueva clave SSH) o Add SSH key (Agregar clave SSH).
+
+# En el campo "Title" (Título), agrega una etiqueta descriptiva para la clave nueva. Por ejemplo, si estás usando tu Mac personal, es posible que llames a esta tecla "Personal MacBook Air".
+
+# Copia tu clave en el campo "Key" (Clave).
+
+# Haz clic en Add SSH key (Agregar tecla SSH). 
+
+# Si se te solicita, confirma tu contraseña GitHub.
+
+
+

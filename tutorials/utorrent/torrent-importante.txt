@@ -1,0 +1,3 @@
+Todos los torrent que vas agregando se guardan en una carpeta, se crea un archivo torrent.
+
+%appdata%/utorrent

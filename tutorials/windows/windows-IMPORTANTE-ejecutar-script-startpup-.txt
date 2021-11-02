@@ -1,0 +1,5 @@
+Para iniciar scripts, al iniciar windows, se tienen que colocar en la siguiente ruta.
+
+Tambien puedes acceder  ella usando: windows+r - shell:startup
+
+C:\Users\worf_\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup

@@ -1,0 +1,21 @@
+Correcto!
+
+Con este agrega solo un valor al array 
+
+The $addToSet operator adds a value to an array unless the value is already present.
+
+ await Text.update({_id:'5fb7c38a17637d2aa8d069e9'},{ $addToSet: { box: {name:"COÑOOOOOOOOOOOOOOOOOOOOO",nalga:"DE LA MADREEEEEEEEEEEEEE"} } },function(err, result) {
+            if (err) {
+              res.send(err);
+            } else {
+              res.send(result);
+            }
+          }
+    );
+
+The $push operator can update the array with same value many times
+
+Si lo haces asi y se repiten los valores, por alguna razon agrega dos
+
+ text.update({_id:'5fb7c38a17637d2aa8d069e9'},{ $push: { name: ["New York"] } })
+

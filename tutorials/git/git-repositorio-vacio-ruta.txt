@@ -1,0 +1,7 @@
+Como crer un repositorio vacio espesificando la ruta
+
+Por defecto si tu inicias un "git init --bare"
+
+Este iniciara un repositorio "vacio", dentro de la carpeta donde lo ejecutaste, eso quiere decir que no cre la carpeta .git si no que crea el contenido de la misma dentro de tu directorio. Para evitar esto se puede colocar una ruta, bsoluta o relativa, para crear el repositorio.
+
+git init --bare folder.git

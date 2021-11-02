@@ -1,0 +1,56 @@
+# toda las siguientes reglas se pueden romper, solo si el momento lo amerita.
+
+# inicializar css
+
+se recomienda tener una hoja de css, que tenga todos los valores globales, los que afectan al body, es el unico lugar donde se permiten selecionar por elementos, por ejemplo p,a,div,etc.
+
+# no usar @import
+
+por que se carga secuencialmente.
+
+# no usar prefijos
+los prefijos es la manera de estandarizar el codigo, para los navegadores que no aceptan determinades propiedades.
+para eso usar erramientas autoprefixer.
+
+# no usar el selector id 
+
+# nunca usar estilos en el HTML
+
+# siempre usar clases
+
+# no usar selectores de elementos HTML
+
+# no usar !important
+
+# evitar sobrescribir clase
+
+evitar sobrescirbir un elemento al volverlo a declarar mas abajo, siempre es mejor editar el original.
+o te puedes valer de una segunda clase para sobrescribir la primera, pero el chiste es que esta segunda clase este declarada mas abajo en el codigo.
+
+# no usar 0 con unidad
+usar 0 absluto , no no 0px,etc.
+
+# no abusar de los shorhands
+los shorhands so las propiedades css, que modifican un cumulo de propiedades.
+es mejor modificar espesificamente lo que se quiera.
+NOTE: la unica manera correcta de usar un shorhand es espesificar a conciencia cada valor del mismo.
+
+# nombrar adecuadamente las clases.
+usar metodologias como bem
+
+# no agrupar los selectores
+
+# tratar de no usar los selectores dependiendo del html.
+
+tratar de no aplicar css de manera jerarquica como html.
+tratar de no usar la recla: elemento-padre elemento-hijo {}, como selementor. solo usarlo en casos espesificos.
+ 
+* No escribir los prefijos a mano, escribir solo el codigo estandar, luego usar un auto prefijador.
+
+- autoprefixer
+- gal
+- npm
+- preprox
+
+* entender el concepto de cascada, lo que significa que, se va a ejecutar por orden secuencial, y el codigo que aparesca abajo va a sobrescribir el de arriba. Esto nos permite, evitar sobrescribir el codigo, usando lo que ya se definio anteriormente y sobrescribirlo o añadirle mas si es necesario.
+

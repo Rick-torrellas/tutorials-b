@@ -1,0 +1,11 @@
+para cambiar el tema en vs code
+
+(windows)
+
+* File
+* Preferences
+* color theme
+
+o
+
+ctrl+k ctrl+t

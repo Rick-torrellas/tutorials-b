@@ -1,0 +1,7 @@
+Como referenciar la rama en que se esta ubicndo en el momento
+
+git push origin HEAD
+
+y si es primer vez que pusheas 
+
+git push -u origin HEAD
