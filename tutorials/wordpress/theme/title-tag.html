@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Definir el title tag</h1>
+    <h2>Definicion</h2>
+    <pre><code>
+        <b>file: function.php</b>
+        function xample_title() {
+
+            // Adds &lt;title> tag support
+            add_theme_support( 'title-tag' );  
+        
+        }
+        add_action( 'after_setup_theme', 'xample_title');
+    </code></pre>
+    <h2>Establecer el titulo</h2>
+    <p>El titulo consta de 2s partes.</p>
+    <p>La primera parte se establecera:</p>
+    <code>Apparience/customize/site identity/Site title</code>
+    <p>La otra parte sera el titulo del post/page</p>
+    <p>La cosa terminara como:</p>
+    <code>Title Site - Page/Post Title</code>
+</body>
+</html>

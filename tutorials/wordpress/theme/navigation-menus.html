@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Menus de navegacion</h1>
+    <h2>Registro</h2>
+    <pre><code>
+        <b>file: functions.php</b>
+        add_theme_support('menus');
+        register_nav_menus(
+    [
+        'top-menu' => 'Top Menu Location',
+        'mobile-menu' => 'Mobile Menu Location'
+    ]
+);
+    </code></pre>
+    <h2>Configuracion</h2>
+    <p>Para configurar un menu de navegacion</p>
+    <code>Appearence/Menus/</code>
+    <h2>Implementacion</h2>
+    <pre><code>
+        &lt;?php
+        wp_nav_menu(
+            [
+                'theme_location' => 'top-menu',
+                'menu_class' => 'top-bar'
+                ]
+            );
+            ?>
+    </code></pre>
+</body>
+</html>

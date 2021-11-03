@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>archive.php / mostrar categoria - tag</h1>
+    <p>La funcion de este archivo es mostrar cada categoria o tag. una a la vez, osea no muestra todas las categorias/tags.</p>
+    <h4>Ejemplo basico:</h4>
+    <p>En este ejemplo se muestra una categoria/tag y se muestran todos los post relacionados a el.</p>
+    <pre><code>
+        <b>file: archive.php</b>
+        &lt;h1>&lt;?php echo single_cat_title(); ?>&lt;/h1>
+        &lt;?php if (have_posts()): while(have_posts()): the_post(); ?>
+        &lt;h3>&lt;?php the_title(); ?>&lt;/h3>
+        &lt;?php the_excerpt(); ?>
+        &lt;a href="&lt;?php the_permalink(); ?>">Read more&lt;/a>&lt;br>
+        &lt;?php endwhile; else: endif;?>
+    </code></pre>
+</body>
+</html>

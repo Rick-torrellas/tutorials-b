@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Cargar js y css al tema</h1>
+    <pre><code>
+        <b>file: functions.php</b>
+        function xample_add_assets() {
+            wp_register_style( 'style', get_stylesheet_uri(), [] , filemtime( get_template_directory(  ) . '/style.css' ), 'all' );
+            wp_register_script( 'escripts', get_template_directory_uri() . '/assets/main.js' , [] ,  filemtime( get_template_directory(  ) . '/assets/main.js' ), true );
+            wp_enqueue_style( 'style' );
+            wp_enqueue_script( 'escripts' );
+            wp_enqueue_script('jquery');
+        }
+        add_action( 'wp_enqueue_scripts', 'xample_add_assets' );
+    </code></pre>
+    <h2>Implementacion</h2>
+    <p>Para que se agregen estos archivos, en cualquier template hay que usar las siguientes funciones:</p>
+    <pre><code>
+        &lt;?php wp_head(); ?>
+        &lt;?php wp_footer(  ) ?>
+    </code></pre>
+</body>
+</html>

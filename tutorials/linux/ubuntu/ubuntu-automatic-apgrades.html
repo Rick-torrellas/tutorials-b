@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Actualizacion automatica para ubuntu</h1>
+    <h2>Instalacion</h2>
+    <code>apt install unattended-upgrades</code>
+    <p>Verify the installation:</p>
+    <code>systemctl status unattended-upgrades</code>
+    <h2>Configuracion</h2>
+    <code>sudo dpkg-reconfigure --priority=low unattended-upgrades</code>
+    <h2>Testing Automatic Upgrades</h2>
+    <p>The dry run command ensures that the update is only a simulation and that no actual changes will take place. Use the command:</p>
+    <code>sudo unattended-upgrades --dry-run --debug</code>
+    <p>log file:</p>
+    <code>/var/log/unattended-upgrades/unattended-upgrades.log</code>
+    <h2>(Optional Info)</h2>
+    <p>Accessing the Configuration File</p>
+    <code>sudo nano /etc/apt/apt.conf.d/50unattended-upgrades</code>
+    <h3>Blacklist Packages</h3>
+    <p>Accesing Automatic Upgrades File</p>
+    <code>sudo nano /etc/apt/apt.conf.d/20auto-upgrades</code>
+    <pre>
+        Update-Package-Lists: 1 enables auto-update, 0 disables.
+        Unattended-Upgrade: 1 enables auto-upgrade, 0 disables.
+        AutocleanInterval: Enables auto clean packages for X days. This configuration displays 7 days
+    </pre>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Mostrar post individuales</h1>
+    <h2>single.php</h2>
+    <p>Una de las maneras de mostrar post individuales que tiene wordpress.</p>
+    <h4>sample basico</h4>
+    <pre><code>
+        <b>file: single.php</b>
+        &lt;h1>&lt;?php the_title() ?>&lt;/h1>
+        &lt;?php if (have_posts()): while(have_posts()): the_post(); ?>
+&lt;?php
+$nombre = get_the_author_meta('first_name');
+$apellido = get_the_author_meta('last_name');
+$tags = get_the_tags();
+$categories = get_the_category();
+?>
+&lt;p>Creado: &lt;?php echo get_the_date('d/m/Y h:i:s') ?>&lt;/p>
+&lt;?php the_content() ?>
+&lt;p>&lt;?php echo 'Author: ' . $nombre . ' ' . $apellido;?>&lt;/p>
+&lt;?php if (has_tag()): ?>
+    &lt;span>Tags: &lt;/span>
+    &lt;?php foreach($tags as $tag):?>
+        &lt;a href="&lt;?php echo get_tag_link($tag->term_id);?>">
+        &lt;?php echo $tag->name; ?>
+    &lt;/a>
+    &lt;?php  endforeach; endif; ?>
+    &lt;br>
+    &lt;?php if (has_category()): ?>
+    &lt;span>Categories: &lt;/span>
+    &lt;?php foreach($categories as $cat):?>
+        &lt;a href="&lt;?php echo get_category_link($cat->term_id);?>">
+        &lt;?php echo $cat->name; ?>
+    &lt;/a>
+    &lt;?php  endforeach; endif; ?>
+    &lt;br>
+    &lt;?php comments_template() ?>
+&lt;?php endwhile; else: endif;?>
+        &lt;?php wp_link_pages(); ?>
+    </code></pre>
+</body>
+</html>

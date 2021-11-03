@@ -7,10 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h3>Next/Previus</h3>
+    <h1>Pagination</h1>
+    <h2>Next/Previus</h2>
+    <p>Hasta ahora creo que solo funciona con post,tag y categories. Lo cual tiene sentido por que osn los unicos que se muestran en secuencia y guardan relacion entre ellos.</p>
     <pre><code>
-        &lt;?php previous_posts_link(); ?>
-&lt;?php next_posts_link(); ?>
+    &lt;?php if (get_previous_post() && get_next_post()): ?>
+    &lt;?php previous_post_link(); ?> &lt;span>|&lt;/span> &lt;?php next_post_link(); ?>  
+    &lt;?php endif; ?>
     </code></pre>
     <h3>Con numeros</h3>
     <p>No funciona</p>
