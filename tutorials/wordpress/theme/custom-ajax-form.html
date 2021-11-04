@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h2>formulatio</h2>
+    <h2>formulario</h2>
     <pre>
         <code>
             &lt;form id="enquiry">
@@ -39,15 +39,10 @@
                         processData: false,
                         contentType: false,
                         success: function (res) {
-        
                             $('#enquiry').fadeOut(200);
-        
                             $('#success_message').text('Thanks for your enquiry').show();
-        
                             $('#enquiry').trigger('reset');
-        
                             $('#enquiry').fadeIn(500);
-        
                         },
                         error: function (err) {
                             alert(err.responseJSON.data);
@@ -58,6 +53,7 @@
         &lt;/script>
     </code></pre>
     <h2>registro y backend del formulario</h2>
+    <p>Hay que tomar en cuenta que los nombres de los hooks, es <b>wp_ajax_nopriv,wp_ajax_</b>, el enquiry es el id del formulario.</p>
     <pre><code>
         add_action('wp_ajax_enquiry','xample_enquiry_form');
 add_action('wp_ajax_nopriv_enquiry','xample_enquiry_form');
@@ -99,9 +95,7 @@ $admin_email = get_option('admin_email');
 	{
 			wp_send_json_error($e->getMessage());
 	}
-
 	wp_send_json_success( $formdata['fname'] );
-
 }
     </code></pre>
 </body>

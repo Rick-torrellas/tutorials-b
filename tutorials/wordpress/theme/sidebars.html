@@ -7,9 +7,13 @@
     <title>Document</title>
 </head>
 <body>
-    <h3>functions.php</h3>
+    <h1>Sidebars</h1>
+    <h3>Pre-requisitos</h3>
+    <p>Para que funcionen los sidebars hay que habilitar los widgets.</p>
+    <code>add_theme_support('widgets');</code>
+    <h3>Declaracion</h3>
     <pre><code>
-        add_theme_support('widgets');
+        <b>file: functions.php</b>
         function xample_add_sidebars( ) {
             register_sidebar(
                 [
@@ -31,5 +35,14 @@
     add_action('widgets_init','xample_add_sidebars');
     </code></pre>
     <h3>implementacion</h3>
+    <pre><code>
+        &lt;?php if(is_active_sidebar('page-sidebar')): ?>
+    &lt;?php dynamic_sidebar('page-sidebar') ?>
+    &lt;?php endif; ?>
+    </code></pre>
+    <h3>Configuracion en wordpress</h3>
+    <p>Para configurar cada sidebar declarado en functions.php, hay que hacerlo manualmente en wordpress.</p>
+    <code>Apparience/widgets/</code>
+    <p>Ahi te apareceran todos ;ps widgets declarados anteriormente. y podras configurarlo.</p>
 </body>
 </html>

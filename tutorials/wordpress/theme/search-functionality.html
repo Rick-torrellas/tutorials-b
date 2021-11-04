@@ -9,30 +9,34 @@
 <body>
     <h1>Search Functionality</h1>
     <h2>Activarlo</h2>
-    <code>&lt;?php get_search_form() ?></code>
+    <p>Estoy casi seguro que solo se puede usar en el front-page.</p>
+    <pre>
+        <code>
+            <b>file: front-page.php</b>
+            &lt;?php get_search_form() ?>
+        </code>
+    </pre>
     <h2>Mostrar los resultados</h2>
     <pre><code>
         file: search.php
         &lt;?php if (have_posts()): while(have_posts()): the_post(); ?>
-<h3>section-search-result.php</h3>
 &lt;?php get_template_part('includes/section','thumbnailS'); ?>
 <h3>&lt;?php the_title(); ?></h3>
 &lt;?php the_excerpt(); ?>
-<a href="&lt;?php the_permalink(); ?>">Read more</a><br>
+&lt;a href="&lt;?php the_permalink(); ?>">Read more</a><br>
 &lt;?php endwhile; else: ?> 
     <p>The are no results for: '<?php echo get_search_query();?>'</p>
     &lt;?php endif;?>
-<h3>/section-search-result.php</h3>
     </code></pre>
     <p>Basicamente el archivo puede ser muy parecido al front-page por ejemplo. solo que si quieres puedes usar get_search_query(), para mostrar el query usado por ejemplo. </p>
     <h2>Custom search form</h2>
     <pre><code>
         file: searchform.php
-<form action="/wordpress" method="get">
-    <label for="search">Search</label>
-    <input type="text" name="s" id="search" value="<?php the_search_query(); ?>" required>
-    <button type="submit">Search!</button>
-    </form>
+    &lt;form action="&lt;?php home_url();?>" method="get">
+    &lt;label for="search">Search&lt;/label>
+    &lt;input type="text" name="s" id="search" value="&lt;?php the_search_query(); ?>" required>
+    &lt;button type="submit">Search!&lt;/button>
+    &lt;/form>
     </code></pre>
     <p>el action debe estar dirigido a la pagina raiz del proyecto de wordpress como tal.</p>
 </body>

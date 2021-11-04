@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Advance custom search</h1>
+    <h2>Formulario y Codigo php</h2>
+    <pre><code>
+        <b>file car-search.php</b>
+        &lt;h3>car-search.php&lt;/h3>
+&lt;div>
+    &lt;form action="&lt;?php echo $link; ?>">
+    &lt;div>
+    &lt;label>Type a keyword&lt;/label>
+    &lt;input 
+    type="text" 
+    name="keyword" 
+    placeholder="Type a keyword"
+    value="&lt;?php echo isset($get_keyword) ? $get_keyword : '';?>"
+    >
+    &lt;/div>
+    &lt;div>
+        &lt;label for="">Choose a brand&lt;/label>
+        &lt;select name="brand" id="">
+            &lt;option  value="">Choose a brand&lt;/option>
+            &lt;?php foreach($brands as $brand):?>
+                &lt;?php if(isset($get_brand) && ($get_brand == $brand->slug) ): ?>
+                selected
+            &lt;?php endif;?> 
+                &lt;option value="&lt;?php echo $brand->slug; ?>">&lt;?php echo $brand->name; ?>&lt;/option>
+            &lt;?php endforeach; ?>
+        &lt;/select>
+        &lt;label>From price&lt;/label>
+
+&lt;select name="price_above" class="form-control">
+
+    &lt;?php for($i=0; $i &lt; 210000; $i+=10000):?>    
+
+        &lt;option 
+        
+        &lt;?php if(  isset($get_price_above) && ( $get_price_above == $i)  ):?>
+            selected
+        &lt;?php endif;?>
+        
+        
+        value="&lt;?php echo $i;?>">
+            &lt;?php echo '$' . number_format($i) ;?>
+        &lt;/option>
+
+    &lt;?php endfor;?>
+
+&lt;/select>
+&lt;label>To Price&lt;/label>
+
+&lt;select name="price_below" class="form-control">
+
+    &lt;?php for($i=0; $i &lt; 210000; $i+=10000):?>    
+
+        &lt;option 
+        
+        &lt;?php if(  isset($_GET['price_below']) && ( $_GET['price_below'] == $i)  ):?>
+            
+            selected
+
+        &lt;?php elseif( $i == 200000):?>
+
+            selected
+
+        &lt;?php endif;?>
+        
+        
+        value="&lt;?php echo $i;?>">
+            &lt;?php echo '$' . number_format($i) ;?>
+        &lt;/option>
+
+    &lt;?php endfor;?>
+
+&lt;/select>
+    &lt;/div>
+    &lt;div>&lt;button type="submit">Search&lt;/button>&lt;/div>
+    &lt;a href="&lt;?php echo $link;?>">Reset search&lt;/a>
+    &lt;/form>
+&lt;/div>
+
+&lt;h3>/car-search.php&lt;/h3>
+    &lt;?php if($is_search):?>
+    &lt;?php if($query->have_posts()) : ?>
+
+        &lt;?php while($query->have_posts()) : $query->the_post(); ?>
+        
+        &lt;h2>Result:&lt;/h2>
+        &lt;h1>&lt;?php the_title() ?>&lt;/h1>
+        &lt;?php get_template_part('includes/section','thumbnailS'); ?>
+        &lt;?php endwhile; ?>
+        &lt;div class="pagination">
+                    &lt;?php 
+                        echo paginate_links( array(
+                            'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
+                            'total'        => $query->max_num_pages,
+                            'current'      => max( 1, get_query_var( 'paged' ) ),
+                            'format'       => '?paged=%#%',
+                            'show_all'     => false,
+                            'type'         => 'plain',
+                            'end_size'     => 2,
+                            'mid_size'     => 1,
+                            'prev_next'    => true,
+                            'prev_text'    => sprintf( '&lt;i>&lt;/i> %1$s', __( 'Prev', 'text-domain' ) ),
+                            'next_text'    => sprintf( '%1$s &lt;i>&lt;/i>', __( 'Next', 'text-domain' ) ),
+                            'add_args'     => false,
+                            'add_fragment' => '',
+                        ) );
+                    ?>
+                &lt;/div>
+        &lt;?php wp_reset_postdata(); ?>
+        &lt;?php else:?>
+
+        &lt;p>No hay resultados&lt;/p>    
+
+        &lt;?php endif; ?>
+        &lt;?php endif; ?>
+    </code></pre>
+    <h2>Codigo y funcion</h2>
+    <pre><code>
+        <b>function.php</b>
+        function xample_search_query() {
+            $paged = (get_query_var('paged') ? get_query_var('paged') : 1);
+            $args = [
+                'paged' => $paged,
+                'post_type' => 'cars',
+                'posts_per_page' => 1,
+                'tax_query' => [],
+                'meta_query' => [
+                    'relation' => 'AND',
+                ] 
+                ];
+                if (isset($get_keyword)) {
+                    if (!empty($get_keyword)) {
+                        $args['s'] = sanitize_text_field($get_keyword);
+                    }
+                }
+                if (isset($get_brand)) {
+                    if(!empty($get_brand)) {
+                        $args['tax_query'][] = [
+                            'taxonomy' => 'brands',
+                            'field' => 'slug',
+                            'terms' => sanitize_text_field([$get_brand])
+                        ];
+                    }
+                }
+                if (isset($get_price_above)) {
+                    if(!empty($get_price_above)) {
+                        $args['meta_query'][] = [
+                            'key' => 'price',
+                            'value' => sanitize_text_field($get_price_above),
+                            'type' => 'numeric',
+                            'compare' => '>='
+                        ];
+                    }
+                }
+                if (isset($get_price_below)) {
+                    if(!empty($get_price_below)) {
+                        $args['meta_query'][] = [
+                            'key' => 'price',
+                            'value' => sanitize_text_field($get_price_below),
+                            'type' => 'numeric',
+                            'compare' => '<='
+                        ];
+                    }
+                }
+                return new WP_Query($args);
+        }
+    </code></pre>
+</body>
+</html>

@@ -10,5 +10,15 @@
 <body>
     <h1>Llamar funciones dentro de functions.php</h1>
     <p>Dentro de cualquier template se pueden llamar las funciones declaradas, dentro del archivo functions.php</p>
+    <pre><code>
+        <b>file: functions.php</b>
+        function xample_test() {
+            return 'JAI';
+        }
+    </code></pre>
+    <h3>Implementacion</h3>
+    <code>
+        &lt;p>&lt;?php echo xample_test();?>&lt;/p>
+    </code>
 </body>
 </html>

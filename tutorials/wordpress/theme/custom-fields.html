@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Custom Fiels</h1>
+    <h2>Aplicarlo</h4>
+        <pre><code>
+            &lt;ul>
+                &lt;?php if (get_post_meta($id,'Name',true)): ?>
+                &lt;li>&lt;?php echo get_post_meta($id,'Name',true)?>&lt;/li>
+                &lt;?php endif; ?>
+                &lt;?php if (get_post_meta($id,'Color')): ?>
+                &lt;li>&lt;?php echo get_post_meta($id,'Color',true)?>&lt;/li>
+                &lt;?php endif; ?>
+            &lt;/ul>
+        </code></pre>
+    <h2>Activarlo</h2>
+    <h4>Con custom post/page</h4>
+    <p>Cuando estas creando tu custom post, tiene que espesificarlo para usarlo.</p>
+    <pre><code>
+        'supports' => ['title','editor','thumbnail','custom-fields']
+    </code></pre>
+    <h4>Activarlo desde wordpress</h4>
+    <p>Para habilitar los custom fields para todo tipo de post/page.</p>
+    <p>Vamos al post/page en cuestion  y le damos a <b>Screen Options/custom fields.</b></p>
+</body>
+</html>
