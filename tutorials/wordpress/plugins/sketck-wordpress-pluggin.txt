@@ -1,0 +1,239 @@
+* Debug Info
+
+En la raiz de nuestro proyecto en wordpress, vamos a ir a:
+
+wp-config-sample.php/define( 'WP_DEBUG', true );
+
+* Cargar un nuevo plugin
+
+1 - Directo
+
+Dentro de:
+
+wp-content/plugins
+
+Crear la carpeta de tu plugin con todos los archivos. Nota: el nombre de esta carpeta debe ser unico.
+Nota: en vez de espacios vamos a usar dashes "-".
+
+Nota: El nombre del archivo principal debe llamarse igual que la carpeta contenedora.
+
+2 - Dentro de tu wordpress:
+
+Pluggins/Add new/Upload Pluggin/
+
+NOTA: debe estar en formato zip.
+
+Donde se encuentran los plugins? 
+wp-content/plugins
+
+* Informacion Basica
+
+Lo minimo que necesita un plugin es:
+Cabecera Basica
+<?php
+/*
+* Plugin Name: El nombre del plugin
+*/
+?>
+
+Cabecera completa
+
+/**
+ * Plugin Name:       My Basics Plugin
+ * Plugin URI:        https://example.com/plugins/the-basics/
+ * Description:       Handle the basics with this plugin.
+ * Version:           1.10.3
+ * Requires at least: 5.2
+ * Requires PHP:      7.2
+ * Author:            John Smith
+ * Author URI:        https://author.example.com/
+ * License:           GPL v2 or later
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Update URI:        https://example.com/my-plugin/
+ * Text Domain:       my-basics-plugin
+
+ Here’s another example which allows file-level PHPDoc DocBlock as well as WordPress plugin file headers:
+
+ /**
+ * Plugin Name
+ *
+ * @package           PluginPackage
+ * @author            Your Name
+ * @copyright         2019 Your Name or Company Name
+ * @license           GPL-2.0-or-later
+ *
+ * @wordpress-plugin
+ * Plugin Name:       Plugin Name
+ * Plugin URI:        https://example.com/plugin-name
+ * Description:       Description of the plugin.
+ * Version:           1.0.0
+
+NOTA: es buenas practicas argregar la licencia de nuestro plugin, despues de la cabecera, 
+
+/* 
+licencia
+*/
+
+* Recomendaciones de seguridad basicas
+
+Por razones de seguridad es recomendado crear:
+index.php
+<?php
+// silence is golden
+
+* Seguridad basica
+
+Lo primero que se deberia hacer en el archivo principal, despues de la licencia, es verificar si esta definido esta variable. ABSPATH
+
+Esta es una constante que inicia wordpress cuando inicia tu web. es una manera de verificar que es wordpress quien esta accediendo al plugin.
+
+if ( ! defined( 'ABSPATH' )) {
+    die;
+}
+
+tambien se puede colocar
+
+defined('ABSPATH') or die('Hey, you can\t access this file, you silly human!');
+
+Segundo check, este es muy parecido al primero.
+
+if ( ! function_exists('add_action')) {
+    echo 'Hey, you can\t access this file, you silly human!';
+    die;
+}
+
+
+* contenido basico
+
+Cuando se trata de los plugins wordprees acciones 3s tipos de metodos.
+
+*** activation
+en el caso de una funcion
+register_activation_hook( __FILE__, $function );
+en el caso de una clase
+register_activation_hook( __FILE__, $classname, 'classfunction' );
+
+** deactivation
+en el caso de una funcion
+register_deactivation_hook( __FILE__, $function );
+en el caso de una clase
+register_deactivation_hook( __FILE__, $classname,'classfunction'); 
+
+** uninstall
+por lo general en estos procesos, lo que hacemos es borrar la informacion de la base de datos, que el plugin ah creado.
+
+*** metodo 1
+en el caso de una funcion
+register_uninstall_hook( __FILE__, $function );
+en el caso de una clase
+register_uninstall_hook( __FILE__, $classname,'classfunction'); 
+
+*** metodo 2
+crear un archivo llamado uninstall.php
+
+/**
+ * @package xample
+ * Trigger this file on plugin uninstall
+ */
+
+if (! defined('WP_UNINSTALL_PLUGIN')) {
+    die;
+}
+
+
+* como aclar un metodo de una clase a un hook.
+
+** metodo 1
+Se hace dentro del metodo __contruct: este metodo no es muy recomendado.
+
+function __construct() {
+    add_action('init', [$this, 'custom_post_type']);
+}
+
+** metodo 2
+crear una funcion especial (se puede llamar como sea), y registrar los hooks, luego llamar a ese metodo 
+
+class XamplePlugin {
+function register() {
+        add_action('admin_enqueue_scripts',[$this,'enqueue']);
+    }
+
+ function enqueue() {
+        // agregar css y js.
+        wp_enqueue_style('estilos', plugins_url('/assets/styles.css', __FILE__),[''],false,'all');
+    }
+}
+
+if ( class_exists('XamplePlugin')) {
+    $xample_plugin = new XamplePlugin();
+    $xample_plugin->register();
+}
+
+* custom post type
+Nota: todo esta en una clase.
+
+function __construct() {
+    add_action('init', [$this, 'custom_post_type']);
+}
+
+function activate() {
+        $this->custom_post_type();
+        flush_rewrite_rules( );
+    }
+function custom_post_type() {
+        register_post_type('book', ['public' => true,'label' => 'Books']);
+    }
+
+* uninstall custom post type
+
+** metodo 1
+
+$books = get_posts(['post_type' => 'book','numberposts'=>-1]);
+
+foreach ($books as $book) {
+    wp_delete_post( $book->ID, true );
+}
+
+** metodo 2
+
+con este metodo vamos a acceder a la base de datos de wordpress, usando SQL.
+
+global $wpdb;
+$wpdb->query("DELETE FROM wp_posts WHERE post_type = 'book'");
+$wpdb->query( "DELETE FROM wp_postmeta WHERE post_id NOT IN (SELECT id FROM wp_posts)");
+$wpdb->query( "DELETE FROM wp_term_relationships WHERE object_id NOT IN (SELECT id FROM wp_posts)");
+
+* Enqueue css js
+
+class XamplePlugin {
+     function register() {
+        add_action('admin_enqueue_scripts',[$this,'enqueue']);
+    }
+    function enqueue() {
+        // agregar css y js.
+        wp_enqueue_style('estilos', plugins_url('/assets/styles.css', __FILE__),[''],false,'all');
+        wp_enqueue_script('escript', plugins_url('/assets/scripts.js', __FILE__));
+    }
+}
+if ( class_exists('XamplePlugin')) {
+    $xample_plugin = new XamplePlugin();
+    $xample_plugin->register();
+}
+
+** Enqueue backend css js
+Los scripts se cargaran en el area de admin de wordpress.
+
+class XamplePlugin {
+     function register() {
+        add_action('admin_enqueue_scripts',[$this,'enqueue']);
+    }
+}
+* Enqueue frontend css js
+Los scripts se cargaran en tu pagina de wordpress como tal.
+
+class XamplePlugin {
+     function register() {
+        add_action('wp_enqueue_scripts',[$this,'enqueue']);
+        
+    }
+}
