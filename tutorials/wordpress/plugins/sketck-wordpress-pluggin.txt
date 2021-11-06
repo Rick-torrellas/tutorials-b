@@ -169,6 +169,12 @@ if ( class_exists('XamplePlugin')) {
     $xample_plugin->register();
 }
 
+*** cuando es un metodo estatico
+
+function register() {
+        add_action('admin_enqueue_scripts',['XamplePlugin','enqueue']);
+    }
+
 * custom post type
 Nota: todo esta en una clase.
 
@@ -237,3 +243,8 @@ class XamplePlugin {
         
     }
 }
+
+* include files
+
+require_once plugin_dir_path(__FILE__) . $includes_deactivate_plugin;
+
