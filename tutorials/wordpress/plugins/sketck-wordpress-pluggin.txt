@@ -248,3 +248,99 @@ class XamplePlugin {
 
 require_once plugin_dir_path(__FILE__) . $includes_deactivate_plugin;
 
+* Plugin Page
+
+Puede usar iconos propios, me imagino que deben tener un tamano especifico, usando url o incluso un icono interno. o puedes usar los wordpress dash icons.
+
+public function register() {
+        add_action('admin_menu',[$this,'add_admin_pages']);
+    }
+function add_admin_pages() {
+        $page_title = 'Xample Plugin';
+        $menu_title = 'Xample';
+        $capability = 'manage_options';
+        $menu_slug = 'xample_plugin';
+        $function = [$this,'admin_index'];
+        $icon_url = 'dashicons-superhero-alt';
+        $position = 110;
+        add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function , $icon_url, $position );
+    }
+    function admin_index() {
+        require_once plugin_dir_path(__FILE__) . XampleExternal::templates_admin();
+    }
+
+Necesitas un template que muestre la pagina del plugin.
+
+* setting links
+Se pueden agregar tantos links como quieras, solo tienes que pushearlos a los links, tambien donde dice NAME-OF-MY-PLUGIN, se tiene que usar este valor de ejemplo: "xample/xample.php".
+
+public function register() {
+        add_filter('plugin_action_link_NAME-OF-MY-PLUGIN',[$this,'setting_links']);
+    }
+
+class XamplePlugin {
+public $plugin_name;
+function __construct() {
+        $this->plugin_name = plugin_basename(__FILE__);
+    }
+
+public function register() {
+add_filter("plugin_action_links_$this->plugin_name",[$this,'setting_links']);
+}
+function setting_links($links) {
+        $href = "admin.php?page=$this->admin_page";
+        $settings_link = "<a href='$href'>Configuracion</a>";
+        array_push($links,$settings_link);
+        return $links;
+    }
+* composer autolad
+
+Los autoload es una funcionalidad que ya php permite, pero composer se encargara de administrar el mismo este proceso, a traves del archivo composer.json.
+
+{
+    "name": "worf/xample",
+    "description": "xample plugin",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Includes\\": "./includes"
+        }
+    },
+    "authors": [
+        {
+            "name": "Rick-torrellas",
+            "email": "75484605+Rick-torrellas@users.noreply.github.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
+
+En el area de auload, vamos a definir los namespaces y la ruta de archivos donde se encuentran nuestros namespaces. En este caso se llamara "Includes\\" y la carpeta "./includes".
+
+** actualizar los autoloads
+
+Se pueden actualizar los autoloads en todo momento. una vez actualizados ejecutar el siguiente comando.
+
+composer dump-autoload
+
+** implementar el autoload
+archivo donde vas a crear el namespace
+
+file: activate-plugin.php
+namespace includes;
+class ActivatePlugin {
+    public static function activate() {
+        flush_rewrite_rules();
+    }
+}
+
+file: index.php
+$autoload = dirname(__FILE__) . '/vendor/autoload.php';
+if ( file_exists($autoload)) {
+    require_once $autoload;
+}
+use includes\ActivatePlugin;
+
+
