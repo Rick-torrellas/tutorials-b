@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>class_exists()</h1>
+    <p>Si se quiere verificar que una clase existe en determinado namespace con la funcion class_exists, hay que tener en cuenta una sola cosa, ejemplo:</p>
+    <pre><code>
+        use home\Globals;
+        if (class_exists('home\\Globals')) {
+            Globals::register();
+        }
+    </code></pre>
+    <p>Si por ejemplo se intenta verificar la clase directamente asi dara error</p>
+    <pre><code>
+        use home\Globals;
+        if (class_exists('Globals')) {
+            Globals::register();
+        }
+        o
+        if (class_exists('home\Globals')) {
+            Globals::register();
+        }
+    </code></pre>
+    <p>Ambos dara error.</p>
+</body>
+</html>

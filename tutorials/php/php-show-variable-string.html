@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Mostrar una variable en una string sin concatenar</h1>
+    <p>En php se pueden insertar variables dentro de una string usando comillas dobles ""</p>
+    <p>NOTA: esto nada mas funciona con las funciones.</p>
+    <pre><code>
+        class pi {
+            public static $value=3.14159;
+            public $valor;
+            public $valor2;
+            function __construct() {
+            $this->valor = 'como estas';
+            $this->valor2 = "Hola $this->valor";
+            }
+            public function staticValue() {
+              return "$this->valor2";
+            }
+          }
+          
+          $pi = new pi();
+          echo $pi->valor;
+    </code></pre>
+</body>
+</html>

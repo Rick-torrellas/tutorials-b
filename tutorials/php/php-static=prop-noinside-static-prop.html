@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Meter una propiedad estatica dentro de otra propiedad estatica</h1>
+    <pre><code>
+        class pi {
+            public static $value=3.14159;
+            public static $nalga=self::$value . 'nalga';
+            public function staticValue() {
+              return self::$value;
+            }
+          }
+        echo pi::$nalga;
+    </code></pre>
+    <p>Esto soltara un error, una manera de acceder a esta variable es dentro de una funcion.</p>
+    <pre><code>
+        class pi {
+            public static $value=3.14159;
+            public static function staticValue() {
+              return self::$value;
+            }
+          }
+          
+          // Get static property
+          echo pi::staticValue();
+    </code></pre>
+    <p>NOTA: no tiene por que ser estatica necesariamente.</p>
+</body>
+</html>
