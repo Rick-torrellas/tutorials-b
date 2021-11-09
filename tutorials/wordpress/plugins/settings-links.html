@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Settings link o links del plugin</h1>
+    <p>Se pueden agregar tantos links como quieras, solo tienes que pushearlos a los links, tambien donde dice NAME-OF-MY-PLUGIN, se tiene que usar este valor de ejemplo: "xample/xample.php".</p>
+    <pre><code>
+        public function register() {
+            add_filter('plugin_action_link_NAME-OF-MY-PLUGIN',[$this,'setting_links']);
+        }
+    
+    class XamplePlugin {
+    public $plugin_name;
+    function __construct() {
+            $this->plugin_name = plugin_basename(__FILE__);
+        }
+    
+    public function register() {
+    add_filter("plugin_action_links_$this->plugin_name",[$this,'setting_links']);
+    }
+    function setting_links($links) {
+            $href = "admin.php?page=$this->admin_page";
+            $settings_link = "<a href='$href'>Configuracion</a>";
+            array_push($links,$settings_link);
+            return $links;
+        }
+    </code></pre>
+</body>
+</html>

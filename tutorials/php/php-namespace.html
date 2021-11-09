@@ -10,6 +10,7 @@
     <h1>namespace</h1>
     <p>Los namespace te ayudan a encapsular codigo, algo tanto parecido a los imports de javascript, creando algo parecido a los modulos.</p>
     <p>El namespace debe ser lo primero que se declare en un archivo.</p>
+    <p><b>NOTA:</b> creo que cuando estas en el mismo namespace, ya no es necesario usar el import, solo con use tienes o puedes acceder directamente, espesificando la ruta.</p>
     <pre><code>
     file1:
 &lt;?php namespace foo;
@@ -19,15 +20,34 @@
 &lt;?php namespace bar;
   class Dog {
     static function says() {echo 'ruff';}  } ?>
+    file5:
+    &lt;?php namespace nalga;
+      class Culo {
+        static function says() {echo 'pfffff';}  } ?>
     file4:
-&lt;?php namespace fub;
+&lt;?php 
   include 'file1.php';
   include 'file2.php';
+  include 'file5.php';
   use foo/Cat as feline;
   use bar as canine;
   $object = new feline();
-  echo \canine\Dog::says(), "&lt;br />\n";
+  echo canine\Dog::says(), "&lt;br />\n";
+  echo Cat::say();
+  echo nalga\Culo::says();
     </code></pre>
     <p>Esto nos ayuda a que no existan conflictos con los nombres.</p>
+    <h2>Como acceder a un directorio que no esta en el mismo directorio.</h2>
+    <p>Por ejemplo supongamos que tenemos esta estructura</p>
+    <pre><code>
+      inc\data
+      inc\base
+      inc\tetra
+    </code></pre>
+    <p>Que pasa si estamos en base y queremos acceder a tetra?</p>
+    <pre><code>
+      <b>base: </b>
+      use \imc\tetra\ClassName
+    </code></pre>
 </body>
 </html>

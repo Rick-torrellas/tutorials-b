@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Recomendaciones basicas de seguridad</h1>
+    <h2>index.php</h2>
+    <p>Por razones de seguridad es recomendado crear</p>
+    <pre><code>
+        index.php
+&lt;?php
+// silence is golden
+    </code></pre>
+    <p>Lo primero que se deberia hacer en el archivo principal, despues de la licencia, es verificar si esta definido esta variable. ABSPATH</p>
+    <p>Esta es una constante que inicia wordpress cuando inicia tu web. es una manera de verificar que es wordpress quien esta accediendo al plugin.</p>
+    <pre><code>
+        if ( ! defined( 'ABSPATH' )) {
+            die;
+        }
+    </code></pre>
+    <p>tambien se puede colocar</p>
+    <pre><code>
+        defined('ABSPATH') or die('Hey, you can\t access this file, you silly human!');
+
+Segundo check, este es muy parecido al primero.
+
+if ( ! function_exists('add_action')) {
+    echo 'Hey, you can\t access this file, you silly human!';
+    die;
+}
+    </code></pre>
+</body>
+</html>

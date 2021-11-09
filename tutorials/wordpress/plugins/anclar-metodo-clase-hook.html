@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>como aclar un metodo de una clase a un hook.</h1>
+    <h2>metodo 1</h2>
+    <p>Se hace dentro del metodo __contruct: este metodo no es muy recomendado.</p>
+    <pre><code>
+        function __construct() {
+            add_action('init', [$this, 'custom_post_type']);
+        }
+    </code></pre>
+    <h2>metodo 2</h2>
+    <p>crear una funcion especial (se puede llamar como sea), y registrar los hooks, luego llamar a ese metodo</p>
+    <pre><code>
+        class XamplePlugin {
+            function register() {
+                    add_action('admin_enqueue_scripts',[$this,'enqueue']);
+                }
+            
+             function enqueue() {
+                    // agregar css y js.
+                    wp_enqueue_style('estilos', plugins_url('/assets/styles.css', __FILE__),[''],false,'all');
+                }
+            }
+            
+            if ( class_exists('XamplePlugin')) {
+                $xample_plugin = new XamplePlugin();
+                $xample_plugin->register();
+            }
+    </code></pre>
+    <h2>cuando es un metodo estatico</h2>
+    <pre><code>
+        function register() {
+            add_action('admin_enqueue_scripts',['XamplePlugin','enqueue']);
+        }
+    </code></pre>
+</body>
+</html>

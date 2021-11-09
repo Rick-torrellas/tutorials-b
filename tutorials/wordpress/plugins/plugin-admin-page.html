@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Pagina principal del plugin en el medu de administracion</h1>
+    <p>Puede usar iconos propios, me imagino que deben tener un tamano especifico, usando url o incluso un icono interno. o puedes usar los wordpress dash icons.</p>
+    <pre><code>
+        public function register() {
+            add_action('admin_menu',[$this,'add_admin_pages']);
+        }
+    function add_admin_pages() {
+            $page_title = 'Xample Plugin';
+            $menu_title = 'Xample';
+            $capability = 'manage_options';
+            $menu_slug = 'xample_plugin';
+            $function = [$this,'admin_index'];
+            $icon_url = 'dashicons-superhero-alt';
+            $position = 110;
+            add_menu_page( $page_title, $menu_title, $capability, $menu_slug, $function , $icon_url, $position );
+        }
+        function admin_index() {
+            require_once plugin_dir_path(__FILE__) . XampleExternal::templates_admin();
+        }
+    </code></pre>
+    <p>Necesitas un template que muestre la pagina del plugin.</p>
+</body>
+</html>

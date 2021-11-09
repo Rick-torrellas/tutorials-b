@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Enqueue css js</h1>
+    <pre><code>
+        class XamplePlugin {
+            function register() {
+               add_action('admin_enqueue_scripts',[$this,'enqueue']);
+           }
+           function enqueue() {
+               // agregar css y js.
+               wp_enqueue_style('estilos', plugins_url('/assets/styles.css', __FILE__),[''],false,'all');
+               wp_enqueue_script('escript', plugins_url('/assets/scripts.js', __FILE__));
+           }
+       }
+       if ( class_exists('XamplePlugin')) {
+           $xample_plugin = new XamplePlugin();
+           $xample_plugin->register();
+       }
+    </code></pre>
+    <h2>Backend</h2>
+    <p>Los scripts se cargaran en el area de admin de wordpress.</p>
+    <pre><code>
+        class XamplePlugin {
+            function register() {
+               add_action('admin_enqueue_scripts',[$this,'enqueue']);
+           }
+       }
+    </code></pre>
+    <h2>frontend</h2>
+    <p>Los scripts se cargaran en tu pagina de wordpress como tal.</p>
+    <pre><code>
+        class XamplePlugin {
+            function register() {
+               add_action('wp_enqueue_scripts',[$this,'enqueue']);
+               
+           }
+       }
+    </code></pre>
+</body>
+</html>

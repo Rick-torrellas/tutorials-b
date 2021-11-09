@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Activar Desactivar y Desinstalar un plugin</h1>
+    <h2>Activation</h2>
+    <p>en el caso de una funcion</p>
+    <code>register_activation_hook( __FILE__, $function );</code>
+    <p>en el caso de una clase</p>
+    <code>register_activation_hook( __FILE__, $classname, 'classfunction' );</code>
+    <h2>Deactivation</h2>
+    <p>en el caso de una funcion</p>
+    <code>register_deactivation_hook( __FILE__, $function );</code>
+    <p>en el caso de una clase</p>
+    <code>register_deactivation_hook( __FILE__, $classname,'classfunction'); </code>
+    <h2>uninstall</h2>
+    <p>por lo general en estos procesos, lo que hacemos es borrar la informacion de la base de datos, que el plugin ah creado.</p>
+    <h3>metodo 1</h3>
+    <p>en el caso de una funcion</p>
+    <code>register_uninstall_hook( __FILE__, $function );</code>
+    <p>en el caso de una clase</p>
+    <code>register_uninstall_hook( __FILE__, $classname,'classfunction'); </code>
+    <h3>metodo 2</h3>
+    <p>crear un archivo llamado uninstall.php</p>
+    <pre><code>
+        /**
+ * @package xample
+ * Trigger this file on plugin uninstall
+ */
+
+if (! defined('WP_UNINSTALL_PLUGIN')) {
+    die;
+}
+    </code></pre>
+</body>
+</html>
