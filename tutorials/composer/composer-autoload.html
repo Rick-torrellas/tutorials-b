@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>composer autoload</h1>
+    <p>Los autoload es una funcionalidad que ya php permite, pero composer se encargara de administrar el mismo este proceso, a traves del archivo composer.json.</p>
+    <pre><code>
+        {
+            "name": "worf/xample",
+            "description": "xample plugin",
+            "type": "project",
+            "license": "MIT",
+            "autoload": {
+                "psr-4": {
+                    "Includes\\": "./includes"
+                }
+            },
+            "authors": [
+                {
+                    "name": "Rick-torrellas",
+                    "email": "75484605+Rick-torrellas@users.noreply.github.com"
+                }
+            ],
+            "minimum-stability": "dev",
+            "require": {}
+        }
+    </code></pre>
+    <p>En el area de auload, vamos a definir los namespaces y la ruta de archivos donde se encuentran nuestros namespaces. En este caso se llamara "Includes\\" y la carpeta "./includes".</p>
+    <h2>actualizar los autoloads</h2>
+    <p>Se pueden actualizar los autoloads en todo momento. una vez actualizados ejecutar el siguiente comando.</p>
+    <code>composer dump-autoload</code>
+    <h2>implementar el autoload</h2>
+    <p>archivo donde vas a crear el namespace</p>
+    <p><b>NOTA:</b>Los archivos que carges con el autoload, deben llamarse igual igual que la clase, no es case sensitive.</p>
+    <pre><code>
+        file: activate-plugin.php
+namespace includes;
+class ActivatePlugin {
+    public static function activate() {
+        flush_rewrite_rules();
+    }
+}
+
+file: index.php
+$autoload = dirname(__FILE__) . '/vendor/autoload.php';
+if ( file_exists($autoload)) {
+    require_once $autoload;
+}
+use includes\ActivatePlugin;
+    </code></pre>
+</body>
+</html>

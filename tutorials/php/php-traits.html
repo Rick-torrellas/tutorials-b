@@ -35,5 +35,24 @@
         $obj->ola('Ramon');
         $obj->mostrarNombre();
     </code></pre>
+    <h2>
+        Definir propiedades
+    </h2>
+    <p>Para definir proppiedades en un trait se tiene que espesificar en el ambito public, tanto como si no lo espesificas o colocas private o protected, causara un fata error.</p>
+    <pre><code>
+        trait PropiedadesTrait {
+            public $x = 1;
+        }
+    </code></pre>
+    <h3>Las propiedades no pueden contener funciones de ningun tipo</h3>
+    <p>Esto cusara un error fatal.</p>
+    <pre><code>
+        trait Globals {
+            public $plugin_path = "Hola";
+            public $admin_page = dirname(__FILE__);
+            public $plugin_url;
+            public $plugin_name;
+        }
+    </code></pre>
 </body>
 </html>
