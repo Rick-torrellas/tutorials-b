@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Como recibir informacion de una fucion que regresa un array</h1>
+    <h2>Con el keyname</h2>
+    <pre><code>
+        class Test {
+            public static function sample() {
+                return [
+                'name' => 'nombre',
+                'number' => 123
+                ];
+            } 
+            }
+            $var = Test::sample();
+            echo $var["name"];
+    </code></pre>
+    <h2>Array position</h2>
+    <pre><code>
+        class Test {
+              public static function samplex() {
+                return [
+                'caca','cumulo'
+                ];
+            } 
+            }
+            list($a,$b) = Test::samplex();
+            echo $b;
+    </code></pre>
+</body>
+</html>
