@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Manejo de errores y ecepciones en php</h1>
+<p>Estos dos conceptos estan estrechamente relacionados, tinen pocas diferencias. Estos estan representados por 2s clases, Error y Exception, ambas hacen casi lo mismo.</p>
+<h2>Lanzar un error/eception</h2>
+<p>En ambos casos la metodologia va a ser muy parecida con un resultado ligeramente diferente.</p>
+<pre><code>
+    function error($a) {
+        if ($a === false) {
+            throw new Error("Es falso wey! que paja?");
+        }
+        return "Bien es verdadero";
+    }
+    function eception($a) {
+        if ($a === false) {
+            throw new Exception("Es falso wey! que paja?");
+        }
+        return "Bien es verdadero";
+    }
+    echo error(false);
+    echo eception(false);
+</code></pre>
+<p>El resultado va a ser ligeramente diferente, en ambos casos, lanzara un error, y detendra por completo la ejecucion del codigo, y lanzara.</p>
+<p>exception</p>
+<code>Fatal error: Uncaught Exception:Es falso wey! que paja?</code>
+<p>error</p>
+<code>Fatal error: Uncaught Error:Es falso wey! que paja?</code>
+<p>seguido de la linea donde se produjo el error,etc.</p>
+<h2>try catch</h2>
+<p>Este operador ayuda a ejecutar el codigo hasta que consiga un error, en ese caso detendra la ejecucion del codigo y mandara el mensaje definido y dentendra la ejecucion. pero en el caso del try catch, no mostrara un fatal error ni el mensaje descriptivo de error.</p>
+<p>La clase Throwable es la clase padre de Error y Exception. y por lo mismo al usarlo en un try catch, va a ser recivir tanto las excepciones como los errores</p>
+<pre><code>
+    function error($a) {
+        if ($a === false) {
+            throw new Error("Es falso wey! que paja?");
+        }
+        return "Bien es verdadero";
+    }
+    function eception($a) {
+        if ($a === false) {
+            throw new Exception("Es falso wey!");
+        }
+        return "Bien es verdadero";
+    }
+    try {
+      echo error(true) . "<br>";
+        echo error(true) . "<br>";
+        echo eception(false) . "<br>";
+    } catch (Error $e) {
+        echo "Error:" . $e->getMessage() . "<br>";
+    } catch (Exception $ex) {
+        echo "Exception:" . $ex->getMessage() . "<br>";
+    }
+</code></pre>
+<p>En este ejemplo dependiendo si es un error o una excepcion, mostrara un mensaje distinto. si se quiere capturar todo tipo de error se aconseja usar la clase Throwable.</p>
+</body>
+</html>

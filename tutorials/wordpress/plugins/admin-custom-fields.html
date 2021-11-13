@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Crear custom fields</h1>
+    <h2>Register Settings</h2>
+    <code>register_settings($setting["option_group"],$settings["option_name",$setting["callback"]]);</code>
+    <h2>Add Settings Section</h2>
+    <code>add_settings_section($section["id"],$section["title"],(isset($section["callback"]) ? $section["callback"] : ''),$section["page"]); </code>
+    <h2>Add Settings Field</h2>
+    <code>add_settings_field($field["id"],$field["title"],(isset($field["callback"]) ? $field["callback"] : ''),$field["section"],(isset($field["arg"]) ? $field["arg"] : ''));</code>
+    <h2>Anclarlo al hook</h2>
+    <code>
+        add_action('admin_init',[$this,'registerCustomFields']);
+    </code>
+</body>
+</html>
