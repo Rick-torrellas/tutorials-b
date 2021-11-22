@@ -8,7 +8,11 @@
 </head>
 <body>
     <h1>Settings link o links del plugin</h1>
+    <p>Se trata de los links que aparecen en el area, donde estan instalados los plugins, por defecto son <b>activar | desactivar | eliminar</b>.</p>
     <p>Se pueden agregar tantos links como quieras, solo tienes que pushearlos a los links, tambien donde dice NAME-OF-MY-PLUGIN, se tiene que usar este valor de ejemplo: "xample/xample.php".</p>
+    <p><b>NOTA</b> Para poder renderizar el template, que esta relacionado cada link, la manera que encontre para hacerlo es agregando el <a href="./admin-menu.html" title="admin-menu">admin menu</a>, para vincular cada template, se tiene que usar el page_slug. </p>
+    <h2>code</h2>
+    <h4>Orientado a Objetos</h4>
     <pre><code>
         public function register() {
             add_filter('plugin_action_link_NAME-OF-MY-PLUGIN',[$this,'setting_links']);
@@ -25,10 +29,29 @@
     }
     function setting_links($links) {
             $href = "admin.php?page=$this->admin_page";
-            $settings_link = "<a href='$href'>Configuracion</a>";
+            $settings_link = "&lt;a href='$href'>Configuracion</a>";
             array_push($links,$settings_link);
             return $links;
         }
     </code></pre>
+    <h4>Funcional</h4>
+    <pre><code>
+        function setting_links_register() {
+            $path = plugin_basename(dirname(__FILE__,2)) . '/sample-wp-plugin-c.php';
+            add_filter("plugin_action_links_$path" ,'setting_links');
+        }
+        function setting_links($links) {
+            $template = "admin.php";
+            $page_name = PAGE_SLUG;
+            $href = "$template?page=$page_name";
+            $settings_link = "&lt;a href='$href'>Configuracion</a>";
+            array_push($links,$settings_link);
+            return $links;
+        }
+    </code></pre>
+    <div>
+        <h3>Ver ejemplo:</h3>
+        <a href="https://github.com/Rick-torrellas/sample-wp-plugin-c">git clone https://github.com/Rick-torrellas/sample-wp-plugin-c</a>
+    </div>
 </body>
 </html>
