@@ -1,4 +1,8 @@
-agregar un submodulo con path.
+# agregar un submodle 
+
+git sudmodule add https://github.com/Capitanalgosa/t-util-vanilla
+
+# agregar un submodulo con path.
 
 el ultimo folder, sera el nombre del repositorio
 
