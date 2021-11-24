@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+        <h2>special characters en variables</h2>
+        <p>INVERTIGAR MAS A FONDO, a la hora de guardar una variable con algunos de los simbolos especiales, va a hacer que el archivo no se pueda abrir. </p>
+        <p>No se puede guardar variable con simbolos especiales como ">" y no sirve la guebonah esa de ^>, por que en esa ocacion al menos no se queda pegao, pero muestra el > cuando muestra el valor de la variable </p>
+        <pre><code>
+            @echo off
+            set mysql_paran_1=Hola > Nalga
+            echo %mysql_paran_1%
+            pause
+        </code></pre>
+        <p>Resultado</p>
+        <p>Hola</p>
+    </div>
+    <div id="div2">
+        <h2>Pasar argumentos de un comando con variables</h2>
+        <p>Se le puede pasar los parametros a un comando por medio de variables. </p>
+        <p>Ejemplo</p>
+        <pre><code>
+            set ubicacion=c:/users/worf_/desktop/nalga
+set taller_servidor=c:/users/worf_/desktop/compota
+set parametro=/mir %ubicacion% %taller_servidor%
+robocopy %parametro%
+        </code></pre>
+    </div>
+</body>
+</html>
+# 
+
+
+
+
+

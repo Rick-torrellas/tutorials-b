@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>En windows, existe una carpeta donde estan los accesos directos a programas que se inician con el, si se copia un archivo como un batch un exe, en teoria deberia iniciar con windows, esta es la direccion de dicha carpeta.</p>
+    <p>Para iniciar scripts, al iniciar windows, se tienen que colocar en la siguiente ruta.</p>
+    <code>C:\Users\worf_\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup</code>
+    <p>Tambien puedes acceder  ella usando: windows+r - shell:startup</p>
+    <p>La segunda manera de hacer esto es por medio del registro, lo cual requiere saber del comando reg, aqui va el ejemplo </p>
+    <pre><code>
+        reg add "HKLM\Software\Microsoft\Windows\CurrentVersion\Run" /v
+        "UNNOMBREQUESEMOSTRARA" /d "c:\tubat.bat"
+        ::reg add es para agregar la clave
+        ::HKLM\Software\Microsoft\Windows\CurrentVersion\Run es la entrada
+        magica donde estan todos los programas q se inician cn windows...
+        ::/v indica el nombre del valor
+        ::/d indica los datos que seran agregados
+    </code></pre>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

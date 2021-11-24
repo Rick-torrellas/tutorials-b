@@ -1,7 +1,0 @@
-SC comando
-
-Aparentenmente en windows tambien existen los servicios como tal, para programarlos hay qu aprender C#, pero se pueden crear si ya tiene el .exe. brutal :D
-
-Tambien el comando net sirve para eso
-
-https://ss64.com/nt/net-service.html

@@ -1,1 +1,0 @@
-Para hacer referencia que se esta en el directorio actual se escribe ".\"

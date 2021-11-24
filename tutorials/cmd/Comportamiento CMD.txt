@@ -1,8 +1,0 @@
-Se le puede pasar los parametros a un comando por medio de variables. 
-
-Ejemplo
-
-set ubicacion=c:/users/worf_/desktop/nalga
-set taller_servidor=c:/users/worf_/desktop/compota
-set parametro=/mir %ubicacion% %taller_servidor%
-robocopy %parametro%

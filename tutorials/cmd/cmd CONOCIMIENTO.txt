@@ -1,3 +1,0 @@
-Se pueden reprensetar a todos los argumentos de esta manera 
-
-%*

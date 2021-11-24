@@ -1,1 +1,0 @@
-./PATH se utiliza para indicar que el archivo o lo que sea se encuentra en la carpeta de ejecucion.

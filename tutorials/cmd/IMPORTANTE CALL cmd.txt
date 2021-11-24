@@ -1,5 +1,0 @@
-Al iniciar un archivo este siempre lo hace desde el ambito global del archivo, pero cuando llamas a una subroutine, este ambito cambia a esa subroutine hasta que termine, si se quiere usar &0, para expresar donde se esta en el archivo, hay que hay una llamada inicial.
-
-Tambien tienes que tener en cuanta que este comportamiento es valido solo para call, incluso goto ni permite pasar parametro a la hora de brican al codigo, call y goto son diferentes.
-
-El unico que puede cambiar la subtoutine es call, incluso si el flujo del script te cambia la subroutine esta permanece en donde fue llamada.

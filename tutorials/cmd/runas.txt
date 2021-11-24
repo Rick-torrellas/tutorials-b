@@ -1,5 +1,0 @@
-sirve para ejecutar un programa o el mismo cmd como un usuario, como administrador.
-
-runas /user:<usuario> programa
-
-runas /user:worf_ cmd

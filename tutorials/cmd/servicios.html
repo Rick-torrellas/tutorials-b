@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="div1">
+        <h2>Comandos para servicios</h2>
+        <p>SC comando</p>
+        <p>Aparentenmente en windows tambien existen los servicios como tal, para programarlos hay qu aprender C#, pero se pueden crear si ya tiene el .exe. brutal :D</p>
+        <p>Tambien el comando net sirve para eso</p>
+        <p>https://ss64.com/nt/net-service.html</p>
+    </div>
+    <div id="div2">
+        <h2>Desabilitar un servicio</h2>
+        <p>Para desabilitar un servicio en windows, primero hay que desabilitar su inicio con sc </p>
+        <p>sc config servicename start= disabled</p>
+        <p>luego se tiene que parar el servicio, solo asi se puede detener un servicio. ojo solo se puede detener no se puede pausar. </p>
+        <p>Para volver a iniciar el servicio se necesita iniciar el servicio otra ver con sc</p>
+        <code>sc config servicename start=auto</code>
+    </div>
+</body>
+</html>
