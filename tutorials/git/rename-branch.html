@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Renombrar branches</h1>
+    <p>If you want to rename a branch while pointed to any branch, do:</p>
+    <code>git branch -m &lt;oldname> &lt;newname></code>
+    <p>If you want to rename the current branch, you can do:</p>
+    <code>git branch -m &lt;newname></code>
+    <p>If you want to push the local branch and reset the upstream branch:</p>
+    <code>git push origin -u &lt;newname></code>
+    <p>If you are on Windows or another case-insensitive filesystem, and there are only capitalization changes in the name, you need to use -M, otherwise, git will throw branch already exists error:</p>
+    <code>git branch -M &lt;newname></code>
+</body>
+</html>
