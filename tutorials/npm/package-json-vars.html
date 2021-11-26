@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Usar los fields definidos en el package.json</h1>
+    <p>The package.json fields are tacked onto the npm_package_ prefix. So, for instance, if you had {"name":"foo", "version":"1.2.5"} in your package.json file, then your package scripts would have the npm_package_name environment variable set to "foo", and the npm_package_version set to "1.2.5". You can access these variables in your code with process.env.npm_package_name and process.env.npm_package_version, and so on for other fields.</p>
+    <p><b>NOTA:</b> nada mas se pueden usar el name y version</p>
+    <h2>Como usar estas variables en un script dentro del package.json</h2>
+    <pre><code>
+        "name": "capri",
+    "scripts": {
+        "prueba": "echo %npm_package_version%",
+    }
+    </code></pre>
+    <p>Resultado:</p>
+    <code>capri</code>
+</body>
+</html>
