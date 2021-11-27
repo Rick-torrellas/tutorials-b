@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Como clonar directorios y archivos</h1>
+    <p>lo primero es habilitar esta funcionalidad en el repositorio vacio que hemos creado con git init</p>
+    <code>git config core.sparsecheckout true</code>
+    <p>luego es crear un archivo en .git.info llamado sparse-checkout, el cual tendra todas las carpetas y/o archivos que se quieran descargar, ejemplo:</p>
+    <code>echo /css/ >> .git/info/sparse-checkout</code>
+    <p><b>NOTA</b>: es importante recordar que esto se puede hacer una sola vez, antes de hacer el pull, ya que si hacemos el pull y luego volvemos a agregar carpetas/archivos al sparse-checkout, ya no traera los nuevos archivos.</p>
+    <p>Por ultimo hacemos un pull al repositorio:</p>
+    <code>git pull --depth=1 origin master</code>
+</body>
+</html>
