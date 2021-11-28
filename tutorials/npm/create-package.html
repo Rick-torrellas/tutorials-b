@@ -16,90 +16,89 @@
         <p>En el paquete que quieras instalarlo</p>
         <code>npm link nombre-del-paquete</code>
         <p>De este manera podemos ver los cambios de manera rapida y sencilla, sin tener que estarlo publicando directamente en npm y tener que actualizar los paquetes, ademas te garantiza no subir nada con fallos a npm.</p>
+        <p><b>NOTA:</b>como actualizar los cambios? no hay necesidad, se va actulizando automaticamente, es literamente como un short code.</p>
     </div>
     <div id="div2">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
+        <h2>Requisitos para crear un paquete de npm</h2>
+        <div>
+            <h3>Datos en el package.json</h3>
+            <p>Datos en el package.json</p>
+            <div>
+                <h4>El nombre con el cual tu paquete será publicado en npm.</h4>
+                <p>Los nombres de paquetes tienes ciertas reglas:</p>
+                <ul>
+                    <li>El nombre debe ser menor o igual a 214 caracteres.</li>
+                    <li>El nombre no puede comenzar con un punto o un guión bajo.</li>
+                    <li>No deben tener letras mayúsculas</li>
+                    <li>El nombre termina siendo parte de una URL, un argumento en la línea de comandos y un nombre de carpeta. Por lo tanto, el nombre no puede contener caracteres que no sean seguros para URL.</li>
+                    <li>Debe ser único, es decir, no pueden existir dos paquetes con el mismo nombre.</li>
+                </ul>
+            </div>
+            <div>
+                <h4>version</h4>
+                <p>Tu paquete debe tener una versión siguiendo los estándares de SemVer, es decir, versionado semántico el cual utiliza tres valores:</p>
+                <ul>
+                    <li>Cambio mayor: Se agrega un nuevo feature, se refactoriza completamente la aplicación, etc</li>
+                    <li>Cambio menor: Se hacen cambios menores.</li>
+                    <li>Parches: Sobre todo, se arreglan fallas.</li>
+                </ul>
+            </div>
+            <div>
+                <h4>main</h4>
+                <p>Es el punto de entrada principal del programa. Es decir, si un paquete se llama foo, y un usuario lo instala, y luego lo requiere (“foo”), se devolverá el objeto de exportación de su módulo principal.</p>
+                <p>Este debe ser un ID de módulo relativo a la raíz de la carpeta del paquete.</p>
+                <p>Para la mayoría de los módulos, tiene más sentido tener solamente un script principal.</p>
+            </div>
+            <div>
+                <h4>bin</h4>
+                <p>Muchos paquetes tienen uno o más archivos ejecutables que les gustaría instalar en el PATH. Para esto, en el campo bin se pone un mapa del nombre del comando al nombre del archivo local. En la instalación, npm enlazará ese archivo con el prefijo / bin para instalaciones globales, o ./node_modules/.bin/ para instalaciones locales.</p>
+                <p>Ejemplo</p>
+                <code>{ "bin" : { "myapp" : "./cli.js" } }</code>
+                <p>De modo que cuando hagas las instalación de myapp generará un enlace de cli.js a /usr/local/bin/myapp</p>
+                <p>Esto dará acceso a que tu paquete se pueda ejecutar directamente usando el comando que hayas indicado, en ente caso sería myapp.</p>
+            </div>
+        </div>
     </div>
     <div id="div3">
-        <h2></h2>
-        <p></p>
-        <p></p>
+        <h2>Archivo principal</h2>
+        <p>El archivo ejecutable agregado en el main y en el bin en el package.json debe ser un archivo que permita la ejecución de toda la lógica del paquete con Node.js.</p>
+        <p>Como una recomendación se propone que se utilice el shebang de Node.js</p>
+        <code>
+#!/usr/bin/env node
+ 
+// Aquí debe ir la lógica que ejecuta tu paquete
+myModule.run()
+        </code>
         <p></p>
     </div>
     <div id="div4">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
+        <h2>Configurar npm en tu entorno de desarrollo</h2>
+        <div>
+            <h2>Agregar usuario de npm al cli</h2>
+            <p>Asumiendo que ya se tiene instalado npm, el siguiente paso es iniciar sesión en la terminal. De este modo, cualquier nueva interacción relacionada con publicación de paquetes se realizará con el usuario que se tiene registrado.</p>
+            <p>Para revisar si ya se tiene algun usuario registrado se puede usar el comando</p>
+            <code>npm whoami</code>
+            <p>Para iniciar sesión se usará el comando npm login y completar los datos solicitados de username y password</p>
+            <code>npm login</code>
+        </div>
     </div>
     <div id="div5">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
+        <h2>Publicar un paquete de npm</h2>
+        <p>Ahora que ya se tiene todo listo, solo falta publicar el paquete en la base de datos de npm.</p>
+        <p>Estando en la raíz del proyecto, hay que ejecutar</p>
+        <code>npm publish</code>
     </div>
     <div id="div6">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
-    </div>
-    <div id="div7">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
-    </div>
-    <div id="div8">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
-    </div>
-    <div id="div9">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
-    </div>
-    <div id="div10">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
-    </div>
-    <div id="div11">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
-    </div>
-    <div id="div12">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
-    </div>
-    <div id="div13">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
-    </div>
-    <div id="div14">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
-    </div>
-    <div id="div15">
-        <h2></h2>
-        <p></p>
-        <p></p>
-        <p></p>
+        <h2>Publicar Scoped Packages</h2>
+        <p>En el directorio raíz del paquete, ejecute el comando npm init y pase el alcance al indicador de scope :</p>
+        <p>hace falta tener una organizacion pero tambien se puede usar el nombre de usuario de npm.</p>
+        <p>Para un paquete en el ámbito de la organización, reemplace my-org por el nombre de su organización:</p>
+        <code>npm init --scope=@my-org</code>
+        <p>Para un paquete de ámbito de usuario, reemplace my-username con su nombre de usuario:</p>
+        <code>npm init --scope=@my-username</code>
+        <p>O tambien puedes simplemente agregar esa informacion en el nombre del packete.</p>
+        <p>Para publicar este paquete, por defecto siempre viene privado, por lo que tendras que espesificar, el acceso publico, en caso de no tener una cuenta privada.</p>
+        <code>npm publish --access public</code>
     </div>
 </body>
 </html>
