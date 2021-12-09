@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>import</h1>
+  <div>
+        <p>La sentencia import se usa para importar funciones que han sido exportadas desde un módulo externo.</p>
+        <h2>Sintaxis</h2>
+        <pre><code>
+            import defaultExport from "module-name";
+      port * as name from "module-name";
+      port { export } from "module-name";
+      port { export as alias } from "module-name";
+      port { export1 , export2 } from "module-name";
+      port { export1 , export2 as alias2 , [...] } from "module-name";
+      port defaultExport, { export [ , [...] ] } from "module-name";
+      port defaultExport, * as name from "module-name";
+      port "module-name";
+        </code></pre>
+        <ul>
+            <li>
+                <p><b>defaultExport</b></p>
+                <p>Nombre que se referirá al export por defecto del módulo.</p>
+            </li>
+            <li>
+                <p><b>module-name</b></p>
+                <p>El módulo desde el que importar. Normalmente es una ruta relativa o absoluta al archivo .js que contiene el módulo, excluyendo la extensión .js. Algunos empaquetadores pueden permitir o requerir el uso de la extensión; comprueba tu entorno. Sólo se permiten Strings con comillas simples o dobles.</p>
+            </li>
+            <li>
+                <p><b>name</b></p>
+                <p>Nombre del objeto del módulo que se utilizará como nombre de dominio al hacer referencia a los imports.</p>
+            </li>
+            <li>
+                <p><b>export, exportN</b></p>
+                <p>Nombre de los exports a ser importados.</p>
+            </li>
+            <li>
+                <p><b>alias, aliasN</b></p>
+                <p>Nombre del objeto que recibirá la propiedad importada.</p>
+            </li>
+        </ul>
+  </div>
+  <div>
+      <h2>Ejemplos</h2>
+      <h3>Importa el contenido de todo un módulo.</h3>
+      <p>Esto inserta myModule en el ámbito actual, que contiene todos los elementos exportados en el archivo ubicado en  /modules/my-module.js.</p>
+      <code>import * as myModule from '/modules/my-module.js';</code>
+      <p>Aquí, para acceder a los miembros exportados habrá que usar el alias del módulo ("myModule" en este caso) como namespace. Por ejemplo, si el módulo importado arriba incluye un miembre exportado llamado doAllTheAmazingThings(), habría que invocarlo de la siguiente manera:</p>
+      <code>myModule.doAllTheAmazingThings();</code>
+      <h3>Importa un solo miembro de un módulo.</h3>
+      <p>Dado un objeto o valor llamado myExport que ha sido exportado del módulo my-module ya sea implícitamente (porque todo el módulo ha sido exportado) o explícitamente (usando la sentencia export ), esto inserta myExport en el ámbito actual.</p>
+      <code>import {myExport} from '/modules/my-module.js';</code>
+      <h3>Importa multiples miembros de un módulo.</h3>
+      <p>Esto inserta foo y bar en el ámbito actual.</p>
+      <code>import {foo, bar} from "my-module.js";</code>
+      <h3>Importa un miembre con un alias mas conveniente</h3>
+      <p>Se puede renombrar un miembro exportado cuando se importa. Por ejemplo, esto inserta shortName en el ámbito actual.</p>
+      <code>import {reallyReallyLongModuleExportName as shortName}
+        from '/modules/my-module.js';</code>
+        <h3>Renombra multiples miembros durante la importación</h3>
+        <p>Importa múltiples miembros exportados de un módulo con un alias conveniente.</p>
+        <code>
+            import {
+                reallyReallyLongModuleExportName as shortName,
+                anotherLongModuleName as short
+              } from '/modules/my-module.js';
+        </code>
+        <h3>Importa un módulo entero para efectos secundarios sólamente</h3>
+        <p>Importa un módulo entero para efectos secundarios sólamente, sin importar ningun elemento. Esto ejecuta el código global del módulo, pero no importa ningún valor.</p>
+        <code>import '/modules/my-module.js';</code>
+        <h3>Importación de elementos por defecto</h3>
+        <p>Es posible tener una exportación por defecto (tanto si se trata de un objeto, función, clase, etc.). Recíprocamente, es posible usa la instrucción import para importar esos elementos establecidos como por defecto.</p>
+        <p>La versión más sencilla de importar un elemento por defecto es:</p>
+        <code>import myDefault from '/modules/my-module.js';</code>
+        <p>También es posible usar la sintaxis por defecto con lo que hemos visto anteriormente (importación de espacios de nombres o importaciones con nombre. En esos casos, la importación por defecto se deberá realizar en primer lugar. Por ejemplo:</p>
+        <pre><code>
+            import myDefault, * as myModule from '/modules/my-module.js';
+// myModule used as a namespace
+        </code></pre>
+        <p>o</p>
+        <pre><code>
+            import myDefault, {foo, bar} from '/modules/my-module.js';
+// specific, named imports
+        </code></pre>
+        
+  </div>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Fetch data en nextjs, pages</h1>
+    <p>Como hacer llamadas y extraer data, este procedimiento nada mas puede usarse para los componentes, declarados en la carpeta pages.</p>
+    <pre><code>
+        import axios from "axios";
+        function Content({ res }) {
+
+            return (
+              &lt;>
+                &lt;div width="5%" />
+                {res.map((Res, i) => {
+                  return &lt;p key={i} >{Res.name}&lt;/p>
+                })}
+              &lt;/>
+            );
+          }
+        export async function getServerSideProps() {
+            const res = await axios.get(`${config.host}/api/data/home`);
+            return {
+              props: { res: res.data },
+            };
+          }
+    </code></pre>
+</body>
+</html>

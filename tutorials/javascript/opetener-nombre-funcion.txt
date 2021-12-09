@@ -1,0 +1,11 @@
+var cuca = {
+  pija: function() {
+    return cuca.pija.name
+  }
+}
+function pepe() {
+}
+
+console.log(pepe.name);
+console.log(cuca.pija());
+console.log(cuca.pija.name);

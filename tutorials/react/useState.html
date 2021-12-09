@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Usando el Hook de estado - useState</h1>
+    <pre><code>
+        import React, { useState } from 'react';
+
+function Example() {
+  // Declaración de una variable de estado que llamaremos "count"
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div>
+      &lt;p>You clicked {count} times&lt;/p>
+      &lt;button onClick={() => setCount(count + 1)}>
+        Click me
+      &lt;/button>
+    &lt;/div>
+  );
+}
+    </code></pre>
+    <h2>Hooks y componentes de función</h2>
+    <p>Como recordatorio, un componente de función en React se ve así:</p>
+    <pre><code>
+        const Example = (props) => {
+            // Puedes usar Hooks aquí!
+            return &lt;div />;
+          }
+    </code></pre>
+    <p>o asi</p>
+    <pre><code>
+        function Example(props) {
+            // Puedes usar Hooks aquí!
+            return &lt;div />;
+          }
+    </code></pre>
+    <div>
+        <h2>Declarando una variable de estado</h2>
+        <p>En un componente de función no existe this por lo que no podemos asignar o leer this.state. En su lugar, usamos el Hook useState directamente dentro de nuestro componente:</p>
+        <pre><code>
+            import React, { useState } from 'react';
+
+function Example() {
+  // Declaración de una variable de estado que llamaremos "count"
+  const [count, setCount] = useState(0);
+        </code></pre>
+        <p>¿Qué hace la llamada a useState? Declara una “variable de estado”. Nuestra variable se llama count, pero podemos llamarla como queramos, por ejemplo banana. Esta es una forma de “preservar” algunos valores entre las llamadas de la función - useState es una nueva forma de usar exactamente las mismas funciones que this.state nos da en una clase. Normalmente, las variables “desaparecen” cuando se sale de la función, pero las variables de estado son conservadas por React.</p>
+        <p>¿Qué pasamos a useState como argumento? El único argumento para el Hook useState() es el estado inicial. Al contrario que en las clases, el estado no tiene por qué ser un objeto. Podemos usar números o strings si es todo lo que necesitamos. En nuestro ejemplo, solamente queremos un número para contar el número de clicks del usuario, por eso pasamos 0 como estado inicial a nuestra variable. (Si queremos guardar dos valores distintos en el estado, llamaríamos a useState() dos veces).</p>
+        <p>¿Qué devuelve useState? Devuelve una pareja de valores: el estado actual y una función que lo actualiza. Por eso escribimos const [count, setCount] = useState(). Esto es similar a this.state.count y this.setState en una clase, excepto que se obtienen juntos.</p>
+        <p>Ahora que sabemos qué hace el Hook useState, nuestro ejemplo debería tener más sentido:</p>
+        <pre><code>
+            import React, { useState } from 'react';
+
+function Example() {
+  // Declaración de una variable de estado que llamaremos "count"
+  const [count, setCount] = useState(0);
+        </code></pre>
+        <p>Declaramos una variable de estado llamada count y le asignamos a 0. React recordará su valor actual entre re-renderizados, y devolverá el valor más reciente a nuestra función. Si se quiere actualizar el valor de count actual, podemos llamar a setCount</p>
+        <h2>Leyendo el estado</h2>
+        <p>En una función podemos usar count directamente:</p>
+        <code>&lt;p>You clicked {count} times&lt;/p></code>
+        <h2>Actualizando el estado</h2>
+        <p>En una función ya tenemos setCount y count como variables, así que no necesitamos this:</p>
+        <pre><code>
+            &lt;button onClick={() => setCount(count + 1)}>
+                Click me
+              &lt;/button>
+        </code></pre>
+        <h2>Resumen</h2>
+        <p>Ahora recapitularemos lo que hemos aprendido línea por línea y comprobaremos si lo hemos entendido.</p>
+        <pre><code>
+            1:  import React, { useState } from 'react';
+ 2:
+ 3:  function Example() {
+ 4:    const [count, setCount] = useState(0);
+ 5:
+ 6:    return (
+ 7:      &lt;div>
+ 8:        &lt;p>You clicked {count} times&lt;/p>
+ 9:        &lt;button onClick={() => setCount(count + 1)}>
+10:         Click me
+11:        &lt;/button>
+12:      &lt;/div>
+13:    );
+14:  }
+        </code></pre>
+        <ul>
+            <li>Línea 1: Importamos el Hook useState desde React que nos permite mantener un estado local en un componente de función.</li>
+            <li>Línea 4: Dentro del componente Example declaramos una nueva variable de estado llamando al Hook useState. Este nos devuelve un par de valores, a los que damos un nombre. Llamamos count a nuestra variable porque guarda el número de clicks en el botón. La inicializamos a cero pasando 0 como único argumento a useState. El segundo elemento retornado es una función que nos permite actualizar count, por lo que le llamamos setCount.</li>
+            <li>Línea 9: Cuando el usuario hace click, llamamos a setCount con un nuevo valor. React actualizará entonces el componente Example pasándole el nuevo valor de count.</li>
+        </ul>
+    </div>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Siglos de vida en classes</h1>
+    <pre><code>
+        class Clock extends React.Component {
+            constructor(props) {
+              super(props);
+              this.state = {date: new Date()};
+            }
+          
+            componentDidMount() {
+              this.timerID = setInterval(
+                () => this.tick(),
+                1000
+              );
+            }
+          
+            componentWillUnmount() {
+              clearInterval(this.timerID);
+            }
+          
+            tick() {
+              this.setState({
+                date: new Date()
+              });
+            }
+          
+            render() {
+              return (
+                &lt;div>
+                  &lt;h1>Hello, world!&lt;/h1>
+                  &lt;h2>It is {this.state.date.toLocaleTimeString()}.&lt;/h2>
+                &lt;/div>
+              );
+            }
+          }
+    </code></pre>
+    <h2>El ciclo de vida del componente</h2>
+    <p>Cada componente tiene varios “métodos de ciclo de vida” que puedes sobrescribir para ejecutar código en momentos particulares del proceso.</p>
+    <h3>Montaje</h3>
+    <p>Estos métodos se llaman cuando se crea una instancia de un componente y se inserta en el DOM:</p>
+    <ul>
+        <li>constructor()</li>
+        <li>render()</li>
+        <li>componentDidMount()</li>
+    </ul>
+    <h3>Actualización</h3>
+    <p>Una actualización puede ser causada por cambios en las props o el estado. Estos métodos se llaman en el siguiente orden cuando un componente se vuelve a renderizar:</p>
+    <ul>
+        <li>render()</li>
+        <li>componentDidUpdate()</li>
+    </ul>
+    <h3>Desmontaje</h3>
+    <p>Este método es llamado cuando un componente se elimina del DOM:</p>
+    <ul>
+        <li>componentWillUnmount()
+        </li>
+    </ul>
+    <h3>Manejo de errores</h3>
+    <p>Estos métodos se invocan cuando hay un error durante la renderización, en un método en el ciclo de vida o en el constructor de cualquier componente hijo.</p>
+    <ul>
+        <li>static getDerivedStateFromError()</li>
+        <li>componentDidCatch()
+        </li>
+    </ul>
+    <div>
+        <h2>Referencia</h2>
+        <h3>componentDidMount()</h3>
+        <code>componentDidMount()</code>
+        <p>componentDidMount() se invoca inmediatamente después de que un componente se monte (se inserte en el árbol). La inicialización que requiere nodos DOM debería ir aquí. Si necesita cargar datos desde un punto final remoto, este es un buen lugar para instanciar la solicitud de red.</p>
+        <p>Este método es un buen lugar para establecer cualquier suscripción. Si lo haces, no olvides darle de baja en componentWillUnmount().</p>
+        <p>Puedes llamar setState() inmediatamente en componentDidMount(). Se activará un renderizado extra, pero sucederá antes de que el navegador actualice la pantalla. Esto garantiza que, aunque en este caso se invocará dos veces el render(), el usuario no verá el estado intermedio. Utiliza este patrón con precaución porque a menudo causa problemas de rendimiento. En la mayoría de los casos, deberías ser capaz de asignar el estado inicial en el constructor() en su lugar. Sin embargo, puede ser necesario para casos como modales y tooltips cuando se necesita medir un nodo DOM antes de representar algo que depende de su tamaño o posición.</p>
+        <h3>componentDidUpdate()</h3>
+        <code>componentDidUpdate(prevProps, prevState, snapshot)</code>
+        <p>componentDidUpdate() se invoca inmediatamente después de que la actualización ocurra. Este método no es llamado para el renderizador inicial.</p>
+        <p>Use esto como una oportunidad para operar en DOM cuando el componente se haya actualizado. Este es también un buen lugar para hacer solicitudes de red siempre y cuando compare los accesorios actuales con los anteriores (por ejemplo, una solicitud de red puede no ser necesaria si las props no han cambiado).</p>
+        <pre><code>
+            componentDidUpdate(prevProps) {
+                // Uso tipico (no olvides de comparar las props):
+                if (this.props.userID !== prevProps.userID) {
+                  this.fetchData(this.props.userID);
+                }
+              }
+        </code></pre>
+        <p>Puedes llamar setState() inmediatamente en componentDidUpdate() pero ten en cuenta que debe ser envuelto en una condición como en el ejemplo anterior, o causará un bucle infinito. También causaría una renderización adicional que, aunque no sea visible para el usuario, puede afectar el rendimiento del componente. Si estás intentando crear un “espejo” desde un estado a una prop que viene desde arriba, considera usar la prop directamente en su lugar. </p>
+        <h3>componentWillUnmount()</h3>
+        <code>componentWillUnmount()</code>
+        <p>componentWillUnmount() se invoca inmediatamente antes de desmontar y destruir un componente. Realiza las tareas de limpieza necesarias en este método, como la invalidación de temporizadores, la cancelación de solicitudes de red o la eliminación de las suscripciones que se crearon en componentDidMount().</p>
+        <p>No debes llamar setState() en componentWillUnmount() porque el componente nunca será vuelto a renderizar. Una vez que una instancia de componente sea desmontada, nunca será montada de nuevo.</p>
+    </div>
+</body>
+</html>

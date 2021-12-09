@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Destructuracion/h1>
+ <div>
+        <p>La sintaxis de desestructuración es una expresión de JavaScript que permite desempacar valores de arreglos o propiedades de objetos en distintas variables.</p>
+        <h3>Descripcion</h3>
+        <p>Las expresiones de objetos y arreglos literales proporcionan una manera fácil de crear paquetes de datos ad hoc.</p>
+        <p>La desestructuración utiliza una sintaxis similar, pero en el lado izquierdo de la asignación para definir qué valores desempacar de la variable origen.</p>
+        <h3>Sintaxis</h3>
+        <pre><code>
+     et a, b, rest;
+     a, b] = [10, 20];
+     onsole.log(a); // 10
+     onsole.log(b); // 20
+     
+     a, b, ...rest] = [10, 20, 30, 40, 50];
+     onsole.log(a); // 10
+     onsole.log(b); // 20
+     onsole.log(rest); // [30, 40, 50]
+     
+     { a, b } = { a: 10, b: 20 });
+     onsole.log(a); // 10
+     onsole.log(b); // 20
+     
+     
+     / Propuesta de etapa 4 (terminada)
+     {a, b, ...rest} = {a: 10, b: 20, c: 30, d: 40});
+     onsole.log(a); // 10
+     onsole.log(b); // 20
+     onsole.log(rest); // {c: 30, d: 40}
+        </code></pre>
+ </div>
+    <div>
+        <h2>Destructuracion de Arrays</h2>
+        <h3>Asignación básica de variables</h3>
+        <pre><code>
+const foo = ['one', 'two', 'three'];
+
+const [red, yellow, green] = foo;
+console.log(red); // "one"
+console.log(yellow); // "two"
+console.log(green); // "three"
+        </code></pre>
+        <h3>
+            Asignación separada de la declaración
+        </h3>
+        <p>A una variable se le puede asignar su valor mediante una desestructuración separada de la declaración de la variable.</p>
+        <pre><code>
+let a, b;
+
+[a, b] = [1, 2];
+console.log(a); // 1
+console.log(b); // 2
+        </code></pre>
+        <h3>Valores predeterminados</h3>
+        <p>A una variable se le puede asignar un valor predeterminado, en el caso de que el valor desempacado del arreglo sea undefined.</p>
+        <pre><code>
+let a, b;
+
+[a=5, b=7] = [1];
+console.log(a); // 1
+console.log(b); // 7
+        </code></pre>
+        <h3>Intercambio de variables</h3>
+        <p>Los valores de dos variables se pueden intercambiar en una expresión de desestructuración.</p>
+<pre><code>
+let a = 1;
+let b = 3;
+
+[a, b] = [b, a];
+console.log(a); // 3
+console.log(b); // 1
+
+const arr = [1,2,3];
+[arr[2], arr[1]] = [arr[1], arr[2]];
+console.log(arr); // [1,3,2]
+</code></pre>
+<h3>Analizar un arreglo devuelto por una función</h3>
+<p>Siempre ha sido posible devolver un arreglo desde una función. La desestructuración puede hacer que trabajar con un valor de retorno de arreglo sea más conciso.</p>
+<p>En este ejemplo, f() devuelve los valores [1, 2] como su salida, que se puede procesar en una sola línea con desestructuración.</p>
+<pre><code>
+    function f() {
+        return [1, 2];
+      }
+      
+      let a, b;
+      [a, b] = f();
+      console.log(a); // 1
+      console.log(b); // 2
+</code></pre>
+<h3>Ignorar algunos valores devueltos</h3>
+<p>Puedes ignorar los valores de retorno que no te interesan:</p>
+<pre><code>
+    function f() {
+        return [1, 2, 3];
+      }
+      
+      const [a, , b] = f();
+      console.log(a); // 1
+      console.log(b); // 3
+      
+      const [c] = f();
+      console.log(c); // 1
+</code></pre>
+<p>También puedes ignorar todos los valores devueltos:</p>
+<code>[,,] = f();</code>
+<h3>Asignar el resto de un arreglo a una variable</h3>
+<p>Al desestructurar un arreglo, puedes desempacar y asignar la parte restante a una variable usando el patrón resto:</p>
+<pre><code>
+const [a, ...b] = [1, 2, 3];
+console.log(a); // 1
+console.log(b); // [2, 3]
+</code></pre>
+<p>Ten en cuenta que se lanzará un SyntaxError si se usa una coma final en el lado derecho con un elemento resto:</p>
+<pre><code>
+const [a, ...b,] = [1, 2, 3];
+
+// SyntaxError: el elemento rest no puede tener una coma al final
+// Siempre considera usar el operador rest como último elemento
+</code></pre>
+<h3>Desempacar valores coincidentes con una expresión regular</h3>
+<p>Cuando el método de expresión regular exec() encuentra una coincidencia, devuelve un arreglo que contiene primero toda la parte coincidente de la cadena y luego las partes de la cadena que coinciden con cada grupo entre paréntesis en la expresión regular. La desestructuración te permite desempacar fácilmente las partes de este arreglo, ignorando la coincidencia completa si no es necesaria.</p>
+<pre><code>
+    function parseProtocol(url) {
+        const parsedURL = /^(\w+)\:\/\/([^\/]+)\/(.*)$/.exec(url);
+        if (!parsedURL) {
+          return false;
+        }
+        console.log(parsedURL);
+        // ["https://developer.mozilla.org/es/Web/JavaScript",
+            "https", "developer.mozilla.org", "es/Web/JavaScript"]
+      
+        const [, protocol, fullhost, fullpath] = parsedURL;
+        return protocol;
+      }
+      
+      console.log(parseProtocol('https://developer.mozilla.org/es/Web/JavaScript'));
+      // "https"
+      
+</code></pre>
+    </div>
+<div>
+    <h2>Desestructuración de objetos</h2>
+    <h3>Asignación básica</h3>
+    <pre><code>
+        const user = {
+            id: 42,
+            is_verified: true
+        };
+        
+        const {id, is_verified} = user;
+        
+        console.log(id); // 42
+        console.log(is_verified); // true
+    </code></pre>
+    <h3>Asignación sin declaración</h3>
+    <p>A una variable se le puede asignar su valor con desestructuración separada de su declaración.</p>
+    <pre><code>
+        let a, b;
+
+({a, b} = {a: 1, b: 2});
+    </code></pre>
+<p>Notas: los paréntesis (...) alrededor de la declaración de asignación son obligatorios cuando se usa la desestructuración de un objeto literal sin una declaración.</p>
+<p>{a, b} = {a: 1, b: 2} no es una sintaxis independiente válida, debido a que {a, b} en el lado izquierdo se considera un bloque y no un objeto literal.</p>
+<p>Sin embargo, ({a, b} = {a: 1, b: 2}) es válido, al igual que const {a, b} = {a: 1, b: 2}</p>
+<p>tu expresión ( ... ) debe estar precedida por un punto y coma o se puede usar para ejecutar una función en la línea anterior.</p>
+<h3>Asignar a nuevos nombres de variable</h3>
+<p>Una propiedad se puede desempacar de un objeto y asignar a una variable con un nombre diferente al de la propiedad del objeto.</p>
+<pre><code>
+const o = {p: 42, q: true};
+const {p: foo, q: bar} = o;
+
+console.log(foo); // 42
+console.log(bar); // true
+</code></pre>
+<p>Aquí, por ejemplo, const {p: foo} = o toma del objeto o la propiedad llamada p y la asigna a una variable local llamada foo.</p>
+<h3>Valores predeterminados</h3>
+<p>A una variable se le puede asignar un valor predeterminado, en el caso de que el valor desempacado del objeto sea undefined.</p>
+<pre><code>
+const {a = 10, b = 5} = {a: 3};
+
+console.log(a); // 3
+console.log(b); // 5
+</code></pre>
+<h3>Asignar nombres a nuevas variables y proporcionar valores predeterminados</h3>
+<p>Una propiedad puede ser ambas</p>
+<ul>
+    <li>Desempacada de un objeto y asignada a una variable con un nombre diferente.</li>
+    <li>Se le asigna un valor predeterminado en caso de que el valor desempacado sea undefined.</li>
+</ul>
+<pre><code>
+const {a: aa = 10, b: bb = 5} = {a: 3};
+
+console.log(aa); // 3
+console.log(bb); // 5
+</code></pre>
+<h3>Desempacar campos de objetos pasados como parámetro de función</h3>
+<pre><code>
+    const user = {
+        id: 42,
+        displayName: 'jdoe',
+        fullName: {
+          firstName: 'John',
+          lastName: 'Doe'
+        }
+      };
+      
+      function userId({id}) {
+        return id;
+      }
+      
+      function whois({displayName, fullName: {firstName: name}}) {
+        return `${displayName} es ${name}`;
+      }
+      
+      console.log(userId(user)); // 42
+      console.log(whois(user));  // "jdoe es John"
+</code></pre>
+<p>doble objeto</p>
+<pre><code>
+    const users = {
+        id: 42,
+        displayName: 'jdoe',
+        fullName: {
+          firstName: 'John',
+          lastName: 'Doe'
+        }
+      };
+      
+      const nalga = {
+      name: "Jack Sparow"
+      }
+      function a({name},{id}) {
+      return name + id;
+      }
+      console.log(a(nalga,users));
+</code></pre>
+<h3>Establecer el valor predeterminado de un parámetro de función</h3>
+<pre><code>
+    function drawChart({size = 'big', coords = {x: 0, y: 0}, radius = 25} = {}) {
+        console.log(size, coords, radius);
+        // haz un dibujo de gráfico
+      }
+      
+      drawChart({
+        coords: {x: 18, y: 30},
+        radius: 30
+      });
+</code></pre>
+<p>En la firma de la función para drawChart anterior, el lado izquierdo desestructurado se asigna a un objeto literal vacío en el lado derecho: {size = 'big', coords = {x: 0, y: 0}, radius = 25} = {}. También podrías haber escrito la función sin la asignación del lado derecho. Sin embargo, si omites la asignación del lado derecho, la función buscará al menos un argumento para ser proporcionado cuando se invoca, mientras que en su forma actual, simplemente puedes llamar a drawChart() sin proporcionar ningún parámetro. El diseño actual es útil si deseas poder llamar a la función sin proporcionar ningún parámetro, el otro puede ser útil cuando deseas asegurarte de que se pase un objeto a la función.</p>
+<h3>Desestructuración de arreglos y objetos anidados</h3>
+<pre><code>
+    const metadata = {
+        title: 'Scratchpad',
+        translations: [
+          {
+            locale: 'de',
+            localization_tags: [],
+            last_edit: '2020-08-29T08:43:37',
+            url: '/de/docs/Tools/Scratchpad',
+            title: 'JavaScript-Umgebung'
+          }
+        ],
+        url: '/es/docs/Tools/Scratchpad'
+      };
+      
+      let {
+        title: englishTitle, // renombrar
+        translations: [
+          {
+             title: localeTitle, // renombrar
+          },
+        ],
+      } = metadata;
+      
+      console.log(englishTitle); // "Scratchpad"
+      console.log(localeTitle);  // "JavaScript-Umgebung"
+</code></pre>
+<h3>Iteración "for...of" y desestructuración</h3>
+<pre><code>
+    const people = [
+  {
+    name: 'Mike Smith',
+    family: {
+      mother: 'Jane Smith',
+      father: 'Harry Smith',
+      sister: 'Samantha Smith'
+    },
+    age: 35
+  },
+  {
+    name: 'Tom Jones',
+    family: {
+      mother: 'Norah Jones',
+      father: 'Richard Jones',
+      brother: 'Howard Jones'
+    },
+    age: 25
+  }
+];
+
+for (const {name: n, family: {father: f}} of people) {
+  console.log('Nombre: ' + n + ', Padre: ' + f);
+}
+
+// "Nombre: Mike Smith, Padre: Harry Smith"
+// "Nombre: Tom Jones, Padre: Richard Jones"
+</code></pre>
+<h3>Nombres de propiedades de objetos calculados y desestructuración</h3>
+<p>Los nombres de propiedad calculados, como en un Objeto literal (en-US), se pueden usar con la desestructuración.</p>
+<pre><code>
+let key = 'z';
+let {[key]: foo} = {z: 'bar'};
+
+console.log(foo); // "bar"
+</code></pre>
+<h3>Rest en la desestructuración de objetos</h3>
+<p>La propuesta Propiedades rest/propagación para ECMAScript (etapa 4) agrega la sintaxis rest para desestructurar. Las propiedades de rest recopilan las claves de propiedades enumerables restantes que aún no han sido seleccionadas por el patrón de desestructuración.</p>
+<pre><code>
+let {a, b, ...rest} = {a: 10, b: 20, c: 30, d: 40}
+a; // 10
+b; // 20
+rest; // { c: 30, d: 40 }
+</code></pre>
+<h3>Identificador de JavaScript no válido como nombre de propiedad</h3>
+<p>La desestructuración se puede utilizar con nombres de propiedad que no son identificadores válidos en JavaScript proporcionando un identificador alternativo que sea válido.</p>
+<pre><code>
+const foo = { 'fizz-buzz': true };
+const { 'fizz-buzz': fizzBuzz } = foo;
+
+console.log(fizzBuzz); // "true"
+</code></pre>
+<h3>Desestructuración combinada de arreglos y objetos</h3>
+<p>La desestructuración de arreglos y objetos se puede combinar. Supongamos que deseas manipular el tercer elemento del siguiente arreglo props, y luego deseas la propiedad name en el objeto, puedes hacer lo siguiente:</p>
+<pre><code>
+    const props = [
+  { id: 1, name: 'Fizz'},
+  { id: 2, name: 'Buzz'},
+  { id: 3, name: 'FizzBuzz'}
+];
+
+const [,, { name }] = props;
+
+console.log(name); // "FizzBuzz"
+</code></pre>
+<h3>Se busca la cadena de prototipos al desestructurar el objeto.</h3>
+<p>Al deconstruir un objeto, si no se accede a una propiedad en sí misma, continuará buscando a lo largo de la cadena de prototipos.</p>
+<pre><Code>
+    let obj = {self: '123'};
+obj.__proto__.prot = '456';
+const {self, prot} = obj;
+// self "123"
+// prot "456" (Acceso a la cadena de prototipos)
+</Code></pre>
+</div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Layouts</h1>
+    <h2>Crear un layout</h2>
+    <p>No se tiene que llamar necesariamente layout</p>
+    <pre><code>
+// components/layout.js
+
+import Navbar from './navbar'
+import Footer from './footer'
+
+export default function Layout({ children }) {
+  return (
+    &lt;>
+      &lt;Navbar />
+      &lt;main>{children}&lt;/main>
+      &lt;Footer />
+    &lt;/>
+  )
+}
+    </code></pre>
+<h2>Implementarlo en _app.js</h2>
+<p>De esta manera podras compartir el layout en toda la aplicacion, </p>
+<pre><code>
+    // pages/_app.js
+
+    import Layout from '../components/layout'
+    
+    export default function MyApp({ Component, pageProps }) {
+      return (
+        &lt;Layout>
+          &lt;Component {...pageProps} />
+        &lt;/Layout>
+      )
+    }
+</code></pre>
+<h2>Implementarlo individualmente</h2>
+<pre><code>
+    import Layout from "./../components/Layout";
+    export default function Home({ res }) {
+        return (
+          &lt;Layout title="" >
+            &lt;Content data-testid="content" res={res} />
+          &lt;/Layout>
+        );
+      }
+</code></pre>
+<p>o tambien puedes usarlo de esta manera</p>
+<pre><code>
+  // pages/index.js
+
+import Layout from '../components/layout'
+import NestedLayout from '../components/nested-layout'
+
+export default function Page() {
+  return {
+    /** Your content */
+  }
+}
+
+Page.getLayout = function getLayout(page) {
+  return (
+    &lt;Layout>
+      &lt;NestedLayout>{page}&lt;/NestedLayout>
+    &lt;/Layout>
+  )
+}
+</code></pre>
+</body>
+</html>

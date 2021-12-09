@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>State Class</h1>
+    <div>
+        <h2>Agregar estado local a una clase</h2>
+        <p>Los componentes de clase siempre deben invocar al constructor base con props.</p>
+        <p>Los estados pueden cambiar usando, los ciclos de vida o los eventos.</p>
+        <pre><code>
+            class Clock extends React.Component {
+                constructor(props) {
+                  super(props);
+                  this.state = {date: new Date()};
+                }
+              
+                render() {
+                  return (
+                    &lt;div>
+                      &lt;h1>Hello, world!&lt;/h1>
+                      &lt;h2>It is {this.state.date.toLocaleTimeString()}.&lt;/h2>
+                    &lt;/div>
+                  );
+                }
+              }
+        </code></pre>
+    </div>
+    <div>
+      <h2>Agregar métodos de ciclo de vida a una clase</h2>
+      <p>El método componentDidMount() se ejecuta después que la salida del componente ha sido renderizada en el DOM. Este es un buen lugar para configurar un temporizador:</p>
+      <p>Eliminaremos el temporizador en el método de ciclo de vida componentWillUnmount():</p>
+      <p>Finalmente, implementaremos un método llamado tick() que el componente Clock ejecutará cada segundo.</p>
+      <p>Utilizará this.setState() para programar actualizaciones al estado local del componente.</p>
+      <pre><code>
+        class Clock extends React.Component {
+          constructor(props) {
+            super(props);
+            this.state = {date: new Date()};
+          }
+        
+          componentDidMount() {
+            this.timerID = setInterval(
+              () => this.tick(),
+              1000
+            );
+          }
+        
+          componentWillUnmount() {
+            clearInterval(this.timerID);
+          }
+        
+          tick() {
+            this.setState({
+              date: new Date()
+            });
+          }
+        
+          render() {
+            return (
+              &lt;div>
+                &lt;h1>Hello, world!&lt;/h1>
+                &lt;h2>It is {this.state.date.toLocaleTimeString()}.&lt;/h2>
+              &lt;/div>
+            );
+          }
+        }
+      </code></pre>
+      <p>Repasemos rápidamente lo que está sucediendo y el orden en que se invocan los métodos:</p>
+      <ol>
+        <li>Cuando se pasa <Clock /> a ReactDOM.render(), React invoca al constructor del componente Clock. Ya que Clock necesita mostrar la hora actual, inicializa this.state con un objeto que incluye la hora actual. Luego actualizaremos este estado.</li>
+        <li>React invoca entonces al método render() del componente Clock. Así es como React sabe lo que se debe mostrar en pantalla. React entonces actualiza el DOM para que coincida con la salida del renderizado de Clock.</li>
+        <li>Cuando la salida de Clock se inserta en el DOM, React invoca al método de ciclo de vida componentDidMount(). Dentro de él, el componente Clock le pide al navegador que configure un temporizador para invocar al método tick() del componente una vez por segundo.</li>
+        <li>Cada segundo el navegador invoca al método tick(). Dentro de él, el componente Clock planifica una actualización de la interfaz de usuario al invocar a setState() con un objeto que contiene la hora actual. Gracias a la invocación a setState(), React sabe que el estado cambió e invoca de nuevo al método render() para saber qué debe estar en la pantalla. Esta vez, this.state.date en el método render() será diferente, por lo que el resultado del renderizado incluirá la hora actualizada. Conforme a eso React actualiza el DOM.</li>
+        <li>Si el componente Clock se elimina en algún momento del DOM, React invoca al método de ciclo de vida componentWillUnmount(), por lo que el temporizador se detiene.</li>
+      </ol>
+      <h2>Agregar state usando eventos</h2>
+      <pre><code>
+        import { Component } from "react";
+        export class Nalga extends Component {
+          constructor() {
+              super();
+              this.state = {
+                  counter: 0
+              }
+          }
+          render() {
+              return(
+                  &lt;div>
+                      &lt;button onClick={()=>{
+                          this.setState((counter) => {
+                              return {
+                                  counter: this.state.counter + 1
+                              }
+                          })
+                      }}>
+                          Counter
+                      &lt;/button>
+                      &lt;span>{this.state.counter}&lt;/span>
+                  &lt;/div>
+              )
+          }
+      }
+      </code></pre>
+      <div>
+        <h2>Usar el estado correctamente</h2>
+        <p>Hay tres cosas que debes saber sobre setState().</p>
+        <h3>No modifiques el estado directamente</h3>
+        <p>Por ejemplo, esto no volverá a renderizar un componente:</p>
+        <pre><code>
+          // Incorrecto
+this.state.comment = 'Hello';
+        </code></pre>
+        <p>En su lugar utiliza setState():</p>
+        <pre><code>
+          // Correcto
+this.setState({comment: 'Hello'});
+        </code></pre>
+        <p>El único lugar donde puedes asignar this.state es el constructor.        </p>
+      </div>
+      <div>
+        <h2>Las actualizaciones del estado pueden ser asíncronas</h2>
+        <p>React puede agrupar varias invocaciones a setState() en una sola actualización para mejorar el rendimiento.</p>
+        <p>Debido a que this.props y this.state pueden actualizarse de forma asincrónica, no debes confiar en sus valores para calcular el siguiente estado.</p>
+        <p>Por ejemplo, este código puede fallar en actualizar el contador:</p>
+        <pre><code>
+          // Incorrecto
+this.setState({
+  counter: this.state.counter + this.props.increment,
+});
+        </code></pre>
+        <p>Para arreglarlo, usa una segunda forma de setState() que acepta una función en lugar de un objeto. Esa función recibirá el estado previo como primer argumento, y las props en el momento en que se aplica la actualización como segundo argumento:</p>
+        <pre><code>
+          // Correcto
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+        </code></pre>
+        <p>Anteriormente usamos una función flecha, pero se podría haber hecho igualmente con funciones comunes:</p>
+        <pre><code>
+          // Correcto
+this.setState(function(state, props) {
+  return {
+    counter: state.counter + props.increment
+  };
+});
+        </code></pre>
+        <h3>Las actualizaciones de estado se fusionan</h3>
+        <p>Cuando invocas a setState(), React combina el objeto que proporcionaste con el estado actual.</p>
+        <p>Por ejemplo, tu estado puede contener varias variables independientes:</p>
+        <pre><code>
+          constructor(props) {
+            super(props);
+            this.state = {
+              posts: [],
+              comments: []
+            };
+          }
+        </code></pre>
+        <p>Luego puedes actualizarlas independientemente con invocaciones separadas a setState():</p>
+        <pre><code>
+          componentDidMount() {
+            fetchPosts().then(response => {
+              this.setState({
+                posts: response.posts
+              });
+            });
+        
+            fetchComments().then(response => {
+              this.setState({
+                comments: response.comments
+              });
+            });
+          }
+        </code></pre>
+        <p>La fusión es superficial, asi que this.setState({comments}) deja intacto a this.state.posts, pero reemplaza completamente this.state.comments.</p>
+        <h3>Los datos fluyen hacia abajo</h3>
+        <p>Ni los componentes padres o hijos pueden saber si un determinado componente tiene o no tiene estado y no les debería importar si se define como una función o una clase.</p>
+        <p>Por eso es que el estado a menudo se le denomina local o encapsulado. No es accesible desde otro componente excepto de aquel que lo posee y lo asigna.</p>
+        <p>Un componente puede elegir pasar su estado como props a sus componentes hijos:</p>
+        <code>&lt;FormattedDate date={this.state.date} /></code>
+        <p>El componente FormattedDate recibiría date en sus props y no sabría si vino del estado de Clock, de los props de Clock, o si se escribió manualmente:</p>
+        <pre><code>
+          function FormattedDate(props) {
+            return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
+          }
+        </code></pre>
+        <p>A esto comúnmente se le llama flujo de datos «descendente» o «unidireccional». Cualquier estado siempre es propiedad de algún componente específico, y cualquier dato o interfaz de usuario derivados de ese estado solo pueden afectar los componentes «debajo» de ellos en el árbol.</p>
+        <p>Si imaginas un árbol de componentes como una cascada de props, el estado de cada componente es como una fuente de agua adicional que se le une en un punto arbitrario, pero también fluye hacia abajo.</p>
+        <p>Para mostrar que todos los componentes están verdaderamente aislados, podemos crear un componente App que represente tres componentes &lt;Clock>:</p>
+        <pre><code>
+          function App() {
+            return (
+              &lt;div>
+                &lt;Clock />
+                &lt;Clock />
+                &lt;Clock />
+              &lt;/div>
+            );
+          }
+          
+          ReactDOM.render(
+            &lt;App />,
+            document.getElementById('root')
+          );
+        </code></pre>
+        <p>Cada Clock configura su propio temporizador y se actualiza de forma independiente.</p>
+        <p>En las aplicaciones de React, si un componente tiene o no estado se considera un detalle de implementación del componente que puede cambiar con el tiempo. Puedes usar componentes sin estado dentro de componentes con estado y viceversa.</p>
+      </div>
+    </div>
+</body>
+</html>

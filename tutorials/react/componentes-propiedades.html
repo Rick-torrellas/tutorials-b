@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Componentes y propiedades</h1>
+    <p>Los componentes permiten separar la interfaz de usuario en piezas independientes, reutilizables y pensar en cada pieza de forma aislada</p>
+    <p>Nota: Comienza siempre los nombres de componentes con una letra mayúscula.
+
+        React trata los componentes que empiezan con letras minúsculas como etiquetas del DOM. Por ejemplo, &lt;div /> representa una etiqueta div HTML pero &lt;Welcome /> representa un componente y requiere que Welcome esté definido.</p>
+    <div>
+        <h2>Componente funcionales</h2>
+        <pre><code>
+            function Welcome(props) {
+                return (
+                    &lt;h1>Hello, {props.name}&lt;/h1>;
+                )
+              }
+        </code></pre>
+    </div>
+    <div>
+        <h2>Componentes de clase</h2>
+        <pre><code>
+            class Welcome extends React.Component {
+                render() {
+                  return &lt;h1>Hello, {this.props.name}&lt;/h1>;
+                }
+              }
+        </code></pre>
+    </div>
+    <div>
+        <h2>Extracción de componentes</h2>
+        <p>No tengas miedo de dividir los componentes en otros más pequeños.</p>
+        <pre><code>
+            function Comment(props) {
+                return (
+                  &lt;div className="Comment">
+                    &lt;div className="UserInfo">
+                      &lt;img className="Avatar"
+                        src={props.author.avatarUrl}
+                        alt={props.author.name}
+                      />
+                      &lt;div className="UserInfo-name">
+                        {props.author.name}
+                      &lt;/div>
+                    &lt;/div>
+                    &lt;div className="Comment-text">
+                      {props.text}
+                    &lt;/div>
+                    &lt;div className="Comment-date">
+                      {formatDate(props.date)}
+                    &lt;/div>
+                  &lt;/div>
+                );
+              }
+        </code></pre>
+        <p>Primero, vamos a extraer Avatar:</p>
+        <pre><code>
+            function Avatar(props) {
+                return (
+                  &lt;img className="Avatar"
+                    src={props.user.avatarUrl}
+                    alt={props.user.name}
+                  />
+                );
+              }
+        </code></pre>
+        <p>Ahora podemos simplificar Comment un poquito:</p>
+        <pre><code>
+            function Comment(props) {
+                return (
+                  &lt;div className="Comment">
+                    &lt;div className="UserInfo">
+                      &lt;Avatar user={props.author} />
+                      &lt;div className="UserInfo-name">
+                        {props.author.name}
+                      &lt;/div>
+                    &lt;/div>
+                    &lt;div className="Comment-text">
+                      {props.text}
+                    &lt;/div>
+                    &lt;div className="Comment-date">
+                      {formatDate(props.date)}
+                    &lt;/div>
+                  &lt;/div>
+                );
+              }
+        </code></pre>
+    </div>
+    <div>
+        <h2>Las props son de solo lectura</h2>
+        <p>Ya sea que declares un componente como una función o como una clase, este nunca debe modificar sus props. </p>
+        <pre><code>
+            function sum(a, b) {
+                return a + b;
+              }
+        </code></pre>
+        <p>Tales funciones son llamadas “puras” porque no tratan de cambiar sus entradas, y siempre devuelven el mismo resultado para las mismas entradas.</p>
+        <p>En contraste, esta función es impura porque cambia su propia entrada:</p>
+        <pre><code>
+            function withdraw(account, amount) {
+                account.total -= amount;
+              }
+        </code></pre>
+        <p>Todos los componentes de React deben actuar como funciones puras con respecto a sus props.</p>
+    </div>
+</body>
+</html>
