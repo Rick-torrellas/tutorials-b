@@ -1,3 +1,0 @@
-Definir el valor de una variable dentro de los parametros de una funcion
-
- modal(numero += n);
