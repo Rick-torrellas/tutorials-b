@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Add favicon</h1>
+    <div>
+        <h2>_document.js</h2>
+        <ul>
+            <li>Add a custom _document.js</li>
+            <li>Add &lt;link rel="shortcut icon" href="/static/favicon.ico" /> to head.</li>
+        </ul>
+    </div>
+    <div>
+        <h2>root layout</h2>
+        <p>Another way is to do this is to import Head into your root layout and add the link there. Anything added to Head gets inserted into the document head tag.</p>
+        <pre><code>
+            import Head from 'next/head';
+
+const Page = (props) => (
+  &lt;div>
+    &lt;Head>
+      &lt;link rel="shortcut icon" href="/static/favicon.ico" />
+    &lt;/Head>
+    // Other layout/components
+  &lt;/div>
+);
+
+export default Page;
+        </code></pre>
+    </div>
+</body>
+</html>

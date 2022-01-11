@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>next/link</h1>
+    <p>Client-side transitions between routes can be enabled via the Link component exported by next/link.</p>
+    <p>For an example, consider a pages directory with the following files:</p>
+    <ul>
+        <li>pages/index.js</li>
+        <li>pages/about.js</li>
+        <li>pages/blog/[slug].js</li>
+    </ul>
+    <p>We can have a link to each of these pages like so:</p>
+    <pre><code>
+        import Link from 'next/link'
+
+function Home() {
+  return (
+    &lt;ul>
+      &lt;li>
+        &lt;Link href="/">
+          &lt;a>Home&lt;/a>
+        &lt;/Link>
+      &lt;/li>
+      &lt;li>
+        &lt;Link href="/about">
+          &lt;a>About Us&lt;/a>
+        &lt;/Link>
+      &lt;/li>
+      &lt;li>
+        &lt;Link href="/blog/hello-world">
+          &lt;a>Blog Post&lt;/a>
+        &lt;/Link>
+      &lt;/li>
+    &lt;/ul>
+  )
+}
+
+export default Home
+    </code></pre>
+    <p>Link accepts the following props:</p>
+    <ul>
+        <li>href - The path or URL to navigate to. This is the only required prop</li>
+        <li>as - Optional decorator for the path that will be shown in the browser URL bar. Before Next.js 9.5.3 this was used for dynamic routes, check our previous docs to see how it worked. Note: when this path differs from the one provided in href the previous href/as behavior is used as shown in the previous docs.</li>
+        <li>passHref - Forces Link to send the href property to its child. Defaults to false</li>
+        <li>prefetch - Prefetch the page in the background. Defaults to true. Any &lt;Link /> that is in the viewport (initially or through scroll) will be preloaded. Prefetch can be disabled by passing prefetch={false}. When prefetch is set to false, prefetching will still occur on hover. Pages using Static Generation will preload JSON files with the data for faster page transitions. Prefetching is only enabled in production.</li>
+        <li>replace - Replace the current history state instead of adding a new url into the stack. Defaults to false</li>
+        <li>scroll - Scroll to the top of the page after a navigation. Defaults to true</li>
+        <li>shallow - Update the path of the current page without rerunning</li>
+        <li>getStaticProps, getServerSideProps or getInitialProps. Defaults to false</li>
+        <li>locale - The active locale is automatically prepended. locale allows for providing a different locale. When false href has to include the locale as the default behavior is disabled.</li>
+    </ul>
+    <div>
+        <h2>If the route has dynamic segments</h2>
+        <p>There is nothing to do when linking to a dynamic route, including catch all routes, since Next.js 9.5.3 (for older versions check our previous docs). However, it can become quite common and handy to use interpolation or an URL Object to generate the link.</p>
+        <p>For example, the dynamic route pages/blog/[slug].js will match the following link:</p>
+        <pre><code>
+            import Link from 'next/link'
+
+function Posts({ posts }) {
+  return (
+    &lt;ul>
+      {posts.map((post) => (
+        &lt;li key={post.id}>
+          &lt;Link href={`/blog/${encodeURIComponent(post.slug)}`}>
+            &lt;a>{post.title}&lt;/a>
+          &lt;/Link>
+        &lt;/li>
+      ))}
+    &lt;/ul>
+  )
+}
+
+export default Posts
+        </code></pre>
+    </div>
+    <div>
+        <h2>If the child is a custom component that wraps an &lt;a> tag</h2>
+        <p>If the child of Link is a custom component that wraps an <a> tag, you must add passHref to Link. This is necessary if you’re using libraries like styled-components. Without this, the <a> tag will not have the href attribute, which hurts your site's accessibility and might affect SEO. If you're using ESLint, there is a built-in rule next/link-passhref to ensure correct usage of passHref.</p>
+            <pre><code>
+                import Link from 'next/link'
+import styled from 'styled-components'
+
+// This creates a custom component that wraps an <a> tag
+const RedLink = styled.a`
+  color: red;
+`
+
+function NavLink({ href, name }) {
+  // Must add passHref to Link
+  return (
+    &lt;Link href={href} passHref>
+      &lt;RedLink>{name}&lt;/RedLink>
+    &lt;/Link>
+  )
+}
+
+export default NavLink
+            </code></pre>
+      <ul>
+          <li>If you’re using emotion’s JSX pragma feature (@jsx jsx), you must use passHref even if you use an &lt;a> tag directly.</li>
+          <li>The component should support onClick property to trigger navigation correctly</li>
+      </ul>      
+    </div>
+    <div>
+        <h2>If the child is a functional component</h2>
+        <p>If the child of Link is a functional component, in addition to using passHref, you must wrap the component in React.forwardRef:</p>
+        <pre><code>
+            import Link from 'next/link'
+
+// `onClick`, `href`, and `ref` need to be passed to the DOM element
+// for proper handling
+const MyButton = React.forwardRef(({ onClick, href }, ref) => {
+  return (
+    &lt;a href={href} onClick={onClick} ref={ref}>
+      Click Me
+    &lt;/a>
+  )
+})
+
+function Home() {
+  return (
+    &lt;Link href="/about" passHref>
+      &lt;MyButton />
+    &lt;/Link>
+  )
+}
+
+export default Home
+        </code></pre>
+    </div>
+    <div>
+        <h2>With URL Object</h2>
+        <p>Link can also receive a URL object and it will automatically format it to create the URL string. Here's how to do it:</p>
+        <pre><code>
+            import Link from 'next/link'
+
+function Home() {
+  return (
+    &lt;ul>
+      &lt;li>
+        &lt;Link
+          href={{
+            pathname: '/about',
+            query: { name: 'test' },
+          }}
+        >
+          &lt;a>About us&lt;/a>
+        &lt;/Link>
+      &lt;/li>
+      &lt;li>
+        &lt;Link
+          href={{
+            pathname: '/blog/[slug]',
+            query: { slug: 'my-post' },
+          }}
+        >
+          &lt;a>Blog Post&lt;/a>
+        &lt;/Link>
+      &lt;/li>
+    &lt;/ul>
+  )
+}
+
+export default Home
+        </code></pre>
+        <p>The above example has a link to:</p>
+        <ul>
+            <li>A predefined route: /about?name=test</li>
+            <li>A dynamic route: /blog/my-post</li>
+        </ul>
+    </div>
+    <div>
+        <h2>Replace the URL instead of push</h2>
+        <p>The default behavior of the Link component is to push a new URL into the history stack. You can use the replace prop to prevent adding a new entry, as in the following example:</p>
+        <pre><code>
+            &lt;Link href="/about" replace>
+                &lt;a>About us&lt;/a>
+              &lt;/Link>
+        </code></pre>
+    </div>
+    <div>
+        <h2>Disable scrolling to the top of the page</h2>
+        <p>The default behavior of Link is to scroll to the top of the page. When there is a hash defined it will scroll to the specific id, like a normal &lt;a> tag. To prevent scrolling to the top / hash scroll={false} can be added to Link:</p>
+        <pre><code>
+            &lt;Link href="/#hashid" scroll={false}>
+                &lt;a>Disables scrolling to the top&lt;/a>
+              &lt;/Link>
+        </code></pre>
+    </div>
+</body>
+</html>

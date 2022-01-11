@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Ejemplo de acciones</h1>
+    <h4>Hacer un escaneo desde la consola</h4>
+    <pre><code>
+        docker run -it sundowndev/phoneinfoga scan -n cotrycode/number
+        docker run -it sundowndev/phoneinfoga scan -n +584241568747
+    </code></pre>
+    <h4>Ejecutarlo desde una GUI - interfas de usuario</h4>
+    <pre><code>
+        docker run -it -p 8080:8080 sundowndev/phoneinfoga serve -p 8080
+    </code></pre>
+    <p>Esto hara correr el comando en el puerto 80, usando una interfas de usuario</p>
+</body>
+</html>

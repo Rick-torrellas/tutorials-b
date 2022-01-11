@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Custom Document</h1>
+    <p>A custom Document is commonly used to augment your application's &lt;html> and &lt;body> tags. This is necessary because Next.js pages skip the definition of the surrounding document's markup.</p>
+        <p>To override the default Document, create the file ./pages/_document.js and extend the Document class as shown below:</p>
+    <pre><code>
+        import Document, { Html, Head, Main, NextScript } from 'next/document'
+
+class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const initialProps = await Document.getInitialProps(ctx)
+    return { ...initialProps }
+  }
+
+  render() {
+    return (
+     &lt;Html>
+       &lt;Head />
+       &lt;body>
+         &lt;Main />
+         &lt;NextScript />
+       &lt;/body>
+     &lt;/Html>
+    )
+  }
+}
+
+export default MyDocument
+    </code></pre>
+    <p>The code above is the default Document added by Next.js. Feel free to remove the getInitialProps or render function from MyDocument if you don't need to change them.</p>
+    <p>&lt;Html>, &lt;Head />, &lt;Main /> and &lt;NextScript /> are required for the page to be properly rendered.</p>
+    <p>Custom attributes are allowed as props, like lang:</p>
+    <code>&lt;Html lang="en"></code>
+    <p>The &lt;Head /> component used here is not the same one from next/head. The &lt;Head /> component used here should only be used for any &lt;head> code that is common for all pages. For all other cases, such as &lt;title> tags, we recommend using next/head in your pages or components.</p>
+    <p>The ctx object is equivalent to the one received in getInitialProps, with one addition:</p>
+    <ul>
+        <li>renderPage: Function - a callback that runs the actual React rendering logic (synchronously). It's useful to decorate this function in order to support server-rendering wrappers like Aphrodite's renderStatic</li>
+    </ul>
+    <div>
+        <h2>Caveats</h2>
+        <ul>
+            <li>Document is only rendered in the server, event handlers like onClick won't work.</li>
+            <li>React components outside of &lt;Main /> will not be initialized by the browser. Do not add application logic here or custom CSS (like styled-jsx). If you need shared components in all your pages (like a menu or a toolbar), take a look at the App component instead.</li>
+            <li>Document's getInitialProps function is not called during client-side transitions, nor when a page is statically optimized.</li>
+            <li>Document currently does not support Next.js Data Fetching methods like getStaticProps or getServerSideProps.</li>
+        </ul>
+    </div>
+    <div>
+        <h2>Customizing renderPage</h2>
+        <p>It should be noted that the only reason you should be customizing renderPage is for usage with css-in-js libraries that need to wrap the application to properly work with server-side rendering.</p>
+        <p>It takes as argument an options object for further customization:</p>
+        <pre><code>
+            import Document from 'next/document'
+
+class MyDocument extends Document {
+  static async getInitialProps(ctx) {
+    const originalRenderPage = ctx.renderPage
+
+    ctx.renderPage = () =>
+      originalRenderPage({
+        // useful for wrapping the whole react tree
+        enhanceApp: (App) => App,
+        // useful for wrapping in a per-page basis
+        enhanceComponent: (Component) => Component,
+      })
+
+    // Run the parent `getInitialProps`, it now includes the custom `renderPage`
+    const initialProps = await Document.getInitialProps(ctx)
+
+    return initialProps
+  }
+}
+
+export default MyDocument
+        </code></pre>
+    </div>
+    <div>
+        <h2>TypeScript</h2>
+        <p>You can use the built-in DocumentContext type and change the file name to ./pages/_document.tsx like so:</p>
+        <pre><code>
+            import Document, { DocumentContext } from 'next/document'
+
+class MyDocument extends Document {
+  static async getInitialProps(ctx: DocumentContext) {
+    const initialProps = await Document.getInitialProps(ctx)
+
+    return initialProps
+  }
+}
+
+export default MyDocument
+        </code></pre>
+    </div>
+</body>
+</html>
