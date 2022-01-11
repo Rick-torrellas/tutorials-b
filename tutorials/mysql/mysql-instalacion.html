@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Instalar mysql</h1>
+    <p><a href="ttps://dev.mysql.com/downloads/installer/">Web</a></p>
+    <h2>Pasos para instalacion</h2>
+    <ul>
+        <li>Developer default</li>
+        <li>Metodo de autentificacion: EL recomendado, despues lo tendremos que cambiar, por el de usuario y contrasena.</li>
+        <li>Crear una contrasena para el usuario root. (optional, crear otro usario)</li>
+        <li>Correr mysql como un servicio</li>
+        <li>Done</li>
+    </ul>
+    <h2>Cambiar la forma de autentificacion desde mysql</h2>
+    <p>Vamos a cambiar el metodo de autentificacion de mysql, a uno de contrasena y usuario. Por que es la manera mas optima.</p>
+    <ul>
+        <li><p>Verificar la forma de autentificacion</p>
+        <code>select user,plugin from mysql.user where user in ('root')</code>
+        <p>Para ver todos los usuarios</p>
+        <code>select user,plugin from mysql.user </code>
+    </li>
+        <li><p>cambiar el metodo de autentificacion</p>
+        <code>alter user 'root'@'localhost' indentified with mysql_native_password by 'contrasena'</code>
+        </li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+</body>
+</html>

@@ -1,7 +1,0 @@
-* https://dev.mysql.com/downloads/installer/
-
-* developer default
-
-* Autentificacion: password
-
--- done

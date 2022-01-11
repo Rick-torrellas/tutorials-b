@@ -72,6 +72,24 @@ function Example() {
                 Click me
               &lt;/button>
         </code></pre>
+        <h2>Tip: Usando múltiples variables de estado</h2>
+        <p>Declarando variables de estado como un par [something, setSomething] también es útil porque nos permite dar diferentes nombres a diferentes variables de estados si queremos usar más de una:</p>
+        <pre><code>
+            function ExampleWithManyStates() {
+                // Declare multiple state variables!
+                const [age, setAge] = useState(42);
+                const [fruit, setFruit] = useState('banana');
+                const [todos, setTodos] = useState([{ text: 'Learn Hooks' }]);
+        </code></pre>
+        <p>En el componente de arriba tenemos age, fruit, y todos como variables locales y los podemos actualizar de forma individual:</p>
+        <pre><code>
+            function handleOrangeClick() {
+                // Similar a this.setState({ fruit: 'orange' })
+                setFruit('orange');
+              }
+        </code></pre>
+        <p>No tienes que usar obligatoriamente tantas variables de estado: las variables de estado pueden contener objetos y arrays para que puedas agrupar la información relacionada. Sin embargo, al contrario que en una clase, actualizar una variable de estado siempre la reemplaza en lugar de combinarla.</p>
+        
         <h2>Resumen</h2>
         <p>Ahora recapitularemos lo que hemos aprendido línea por línea y comprobaremos si lo hemos entendido.</p>
         <pre><code>
@@ -95,6 +113,7 @@ function Example() {
             <li>Línea 4: Dentro del componente Example declaramos una nueva variable de estado llamando al Hook useState. Este nos devuelve un par de valores, a los que damos un nombre. Llamamos count a nuestra variable porque guarda el número de clicks en el botón. La inicializamos a cero pasando 0 como único argumento a useState. El segundo elemento retornado es una función que nos permite actualizar count, por lo que le llamamos setCount.</li>
             <li>Línea 9: Cuando el usuario hace click, llamamos a setCount con un nuevo valor. React actualizará entonces el componente Example pasándole el nuevo valor de count.</li>
         </ul>
+
     </div>
 </body>
 </html>
