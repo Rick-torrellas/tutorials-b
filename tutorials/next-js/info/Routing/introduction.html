@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Routing</h1>
+    <div>
+        <p>Next.js has a file-system based router built on the concept of pages.</p>
+        <p>When a file is added to the pages directory, it's automatically available as a route.</p>
+        <p>The files inside the pages directory can be used to define most common patterns.</p>
+        <div>
+            <h3>Index routes
+            </h3>
+            <p>The router will automatically route files named index to the root of the directory.</p>
+            <ul>
+                <li>pages/index.js → /</li>
+                <li>pages/blog/index.js → /blog</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Nested routes</h3>
+            <p>The router supports nested files. If you create a nested folder structure, files will automatically be routed in the same way still.</p>
+            <ul>
+                <li>pages/blog/first-post.js → /blog/first-post</li>
+                <li>pages/dashboard/settings/username.js → /dashboard/settings/username</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Dynamic route segments</h3>
+            <p>To match a dynamic segment, you can use the bracket syntax. This allows you to match named parameters.</p>
+            <ul>
+                <li>pages/blog/[slug].js → /blog/:slug (/blog/hello-world)</li>
+                <li>pages/[username]/settings.js → /:username/settings (/foo/settings)</li>
+                <li>pages/post/[...all].js → /post/* (/post/2020/id/title)</li>
+            </ul>
+            <p></p>
+        </div>
+    </div>
+    <div>
+        <h2>Linking between pages</h2>
+        <p>The Next.js router allows you to do client-side route transitions between pages, similar to a single-page application.</p>
+        <p>A React component called Link is provided to do this client-side route transition.</p>
+        <pre><code>
+            import Link from 'next/link'
+
+function Home() {
+  return (
+    &lt;ul>
+      &lt;li>
+        &lt;Link href="/">
+          &lt;a>Home&lt;/a>
+        &lt;/Link>
+      &lt;/li>
+      &lt;li>
+        &lt;Link href="/about">
+          &lt;a>About Us&lt;/a>
+        &lt;/Link>
+      &lt;/li>
+      &lt;li>
+        &lt;Link href="/blog/hello-world">
+          &lt;a>Blog Post&lt;/a>
+        &lt;/Link>
+      &lt;/li>
+    &lt;/ul>
+  )
+}
+
+export default Home
+        </code></pre>
+        <p>The example above uses multiple links. Each one maps a path (href) to a known page:</p>
+        <ul>
+            <li>/ → pages/index.js</li>
+            <li>/about → pages/about.js</li>
+            <li>/blog/hello-world → pages/blog/[slug].js</li>
+        </ul>
+        <p>Any &lt;Link /> in the viewport (initially or through scroll) will be prefetched by default (including the corresponding data) for pages using Static Generation. The corresponding data for server-rendered routes is not prefetched.</p>
+    </div>
+    <div>
+        <h2>Linking to dynamic paths</h2>
+        <p>You can also use interpolation to create the path, which comes in handy for dynamic route segments. For example, to show a list of posts which have been passed to the component as a prop:</p>
+        <pre><code>
+            import Link from 'next/link'
+
+function Posts({ posts }) {
+  return (
+    &lt;ul>
+      {posts.map((post) => (
+        &lt;li key={post.id}>
+          &lt;Link href={`/blog/${encodeURIComponent(post.slug)}`}>
+            &lt;a>{post.title}&lt;/a>
+          &lt;/Link>
+        &lt;/li>
+      ))}
+    &lt;/ul>
+  )
+}
+
+export default Posts
+        </code></pre>
+        <p>encodeURIComponent is used in the example to keep the path utf-8 compatible.</p>
+        <p>Alternatively, using a URL Object:</p>
+        <pre><code>
+            import Link from 'next/link'
+
+function Posts({ posts }) {
+  return (
+    &lt;ul>
+      {posts.map((post) => (
+        &lt;li key={post.id}>
+          &lt;Link
+            href={{
+              pathname: '/blog/[slug]',
+              query: { slug: post.slug },
+            }}
+          >
+            &lt;a>{post.title}&lt;/a>
+          &lt;/Link>
+        &lt;/li>
+      ))}
+    &lt;/ul>
+  )
+}
+
+export default Posts
+        </code></pre>
+        <p>Now, instead of using interpolation to create the path, we use a URL object in href where:</p>
+        <div>
+            <h3>pathname</h3>
+            <p>is the name of the page in the pages directory. /blog/[slug] in this case.</p>
+        </div>
+        <div>
+            <h3>query</h3>
+            <p> is an object with the dynamic segment. slug in this case.</p>
+        </div>
+    </div>
+    <div>
+        <h2>
+            Injecting the router
+        </h2>
+        <p>To access the router object in a React component you can use useRouter or withRouter.</p>
+        <p>In general we recommend using useRouter.</p>
+    </div>
+</body>
+</html>

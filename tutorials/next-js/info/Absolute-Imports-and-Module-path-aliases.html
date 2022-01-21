@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Absolute Imports and Module path aliases</h1>
+    <div>
+        <p>Next.js automatically supports the tsconfig.json and jsconfig.json "paths" and "baseUrl" options since Next.js 9.4.</p>
+        <p>Note: jsconfig.json can be used when you don't use TypeScript</p>
+        <p>Note: you need to restart dev server to reflect modifications done in tsconfig.json / jsconfig.json</p>
+        <p>These options allow you to configure module aliases, for example a common pattern is aliasing certain directories to use absolute paths.</p>
+        <p>One useful feature of these options is that they integrate automatically into certain editors, for example vscode.</p>
+        <p>The baseUrl configuration option allows you to import directly from the root of the project.</p>
+        <p>An example of this configuration:</p>
+        <pre><code>
+            // tsconfig.json or jsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": "."
+  }
+}
+        </code></pre>
+        <pre><code>
+            // components/button.js
+export default function Button() {
+  return &lt;button>Click me&lt;/button>
+}
+        </code></pre>
+        <pre><code>
+            // pages/index.js
+import Button from 'components/button'
+
+export default function HomePage() {
+  return (
+    <>
+      &lt;h1>Hello World&lt;/h1>
+      &lt;Button />
+    </>
+  )
+}
+        </code></pre>
+        <p>While baseUrl is useful you might want to add other aliases that don't match 1 on 1. For this TypeScript has the "paths" option.</p>
+        <p>Using "paths" allows you to configure module aliases. For example @/components/* to components/*.</p>
+        <p>An example of this configuration:</p>
+        <pre><code>
+            // tsconfig.json or jsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/components/*": ["components/*"]
+    }
+  }
+}
+        </code></pre>
+        <pre><code>
+            // components/button.js
+export default function Button() {
+  return &lt;button>Click me&lt;/button>
+}
+        </code></pre>
+        <pre><code>
+            // pages/index.js
+import Button from '@/components/button'
+
+export default function HomePage() {
+  return (
+    <>
+      &lt;h1>Hello World&lt;/h1>
+      &lt;Button />
+    </>
+  )
+}
+        </code></pre>
+        
+    </div>
+</body>
+</html>
