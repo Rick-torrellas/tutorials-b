@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Formas de crear propiedades a objetos</h1>
+    <div>
+        <pre><code>
+            var myObj = new Object(),
+        str = 'myString',
+        rand = Math.random(),
+        obj = {};
+        
+        j.type                 = 'Sintaxis de puntos';
+        j['fecha de creación'] = 'Cadena con espacios';
+        j[str]                 = 'Valor de cadena';
+        j[rand]                = 'Número aleatorio';
+        j[obj]                 = 'Object';
+        j['']                  = 'Incluso una cadena vacía';
+        
+        ole.log(myObj);
+        </code></pre>
+    </div>
+    <div>
+        <h2>Uso de iniciadores de objeto</h2>
+        <pre><code>
+            var obj = { property_1:   value_1,   // property_# puede ser un identificador...
+                2:            value_2,   // o un número...
+                // ...,
+                'property n': value_n }; // o una cadena
+        </code></pre>
+    </div>
+</body>
+</html>

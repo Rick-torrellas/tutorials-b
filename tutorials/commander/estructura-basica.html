@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Estructura basica del cli</h1>
+    <pre><code>
+        #!/usr/bin/env node
+const program = require('commander');
+const {version} = require('./../package.json');
+program.version(version);
+program
+.command('init')
+.description('Para agregar los scripts al package.json')
+.option('-d, --debug', 'Ejecuta un depurador del codigo')
+/* .option('-d, --debug', 'Ejecuta un depurador del codigo') */
+.action((cmdObj) => {
+    if (cmdObj.debug) {
+        //TODO: Ejecucion debug
+    }
+    //CODE HERE
+}
+)
+program.parse(process.argv);
+    </code></pre>
+</body>
+</html>

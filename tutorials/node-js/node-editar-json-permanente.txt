@@ -1,5 +1,4 @@
  const file = './package.json';
-/*   const fileRead = require(file); */
   const fileRead = fs.readFileSync(file);
   const data = JSON.parse(fileRead);
   data.author = 'pepe';

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Como referenciar el valor de una opcion en un comando</h1>
+    <pre><code>
+        .command('init')
+.description('Para agregar los scripts al package.json')
+.option('-d, --debug', 'Ejecuta un depurador del codigo')
+/* .option('-d, --debug', 'Ejecuta un depurador del codigo') */
+.action((cmdObj) => {
+    if (cmdObj.debug) {
+        //TODO: Ejecucion debug
+    }
+    console.log(cmdObj.debug);
+    package.packageInit();
+}
+)
+    </code></pre>
+    <p>Si no usas la opcion debug, dara <b>undefined</b>, si la usas dara true</p>
+</body>
+</html>
